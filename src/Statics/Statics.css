@@ -1,0 +1,27 @@
+#content{
+    margin-top: 5%;
+}
+
+#header{
+    position: absolute;
+    height: 5%;
+    left:0;
+    top:0;
+    right:0;
+    background-color: #fab162;
+}
+
+#footer{
+    position: absolute;
+    height: 5%;
+    left:0;
+    bottom:0;
+    right:0;
+    background-color: #fab162;
+}
+
+#title1{
+    width:500px;
+    margin: 0 auto;
+    text-align: center;
+}
