@@ -6,7 +6,7 @@ import 'primeflex/primeflex.css';
 import { Button } from 'primereact/button';
 import Header from'../Statics/Header.js'; // import headera 
 import Footer from'../Statics/Footer.js'; // import footera
-import 'E:/Vulama/Education/projekti/Projekt/posudba-alata-frontend/src/Statics/Statics.css'
+import '../Statics/Statics.css'
 
 class Login extends Component{
 
@@ -56,7 +56,6 @@ class Login extends Component{
     )
   }
 }
-
 
 
 export default Login;
