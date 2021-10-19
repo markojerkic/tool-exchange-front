@@ -1,8 +1,8 @@
-#content{
+.content{
     margin-top: 15%;
 }
 
-#header{
+.header{
     position: absolute;
     height: 5%;
     left:0;
@@ -11,7 +11,7 @@
     background-color: #fab162;
 }
 
-#footer{
+.footer{
     position: absolute;
     height: 5%;
     left:0;
@@ -20,7 +20,7 @@
     background-color: var(--blue-500);
 }
 
-#title1{
+.title1{
     width:500px;
     font-size: medium;
     margin: 0 auto;

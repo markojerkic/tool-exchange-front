@@ -19,7 +19,7 @@ class Login extends Component{
   render(){
     
     return(
-      <div id="content">
+      <div className="content">
         <div className="p-d-flex p-jc-center">
           <h2>Dobrodošli!</h2>
         </div>
