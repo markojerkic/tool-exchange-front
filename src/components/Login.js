@@ -4,9 +4,6 @@ import {Password} from 'primereact/password';
 import { Component } from 'react';
 import 'primeflex/primeflex.css';
 import { Button } from 'primereact/button';
-import Header from'../Statics/Header.js'; // import headera 
-import Footer from'../Statics/Footer.js'; // import footera
-import '../Statics/Statics.css'
 
 class Login extends Component{
 
@@ -23,10 +20,10 @@ class Login extends Component{
     
     return(
       <div id="content">
-        <Header /> {/* Header pozivanje */}
         <div className="p-d-flex p-jc-center">
           <h2>Dobrodošli!</h2>
         </div>
+        <br />
         <div className="p-d-flex p-jc-center">
           <div>
             <span className="p-float-label">
@@ -36,6 +33,7 @@ class Login extends Component{
           </div>
         </div>
 
+        <br />
         <br />
 
         <div className="p-d-flex p-jc-center">
@@ -51,7 +49,6 @@ class Login extends Component{
           <Button label="Login" className="p-button-raised p-button-rounded" />
         </div>
 
-        <Footer /> {/* Footer pozivanje */}
         </div>
     )
   }

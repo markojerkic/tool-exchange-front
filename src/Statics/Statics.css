@@ -1,5 +1,5 @@
 #content{
-    margin-top: 5%;
+    margin-top: 15%;
 }
 
 #header{
@@ -17,11 +17,13 @@
     left:0;
     bottom:0;
     right:0;
-    background-color: #fab162;
+    background-color: var(--blue-500);
 }
 
 #title1{
     width:500px;
+    font-size: medium;
     margin: 0 auto;
     text-align: center;
+    padding-top: 1%;
 }
