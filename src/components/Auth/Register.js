@@ -7,6 +7,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import { Dropdown } from 'primereact/dropdown';
 import { useForm, Controller } from 'react-hook-form';
 import {classNames} from 'primereact/utils'
+import { Link, useHistory } from 'react-router-dom';
 
 const Register = () => {
 
@@ -25,12 +26,13 @@ const Register = () => {
     }
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
+    const history = useHistory();
 
     const onSubmit = (data) => {
         setFormData(data);
         setShowMessage(true);
-
         reset();
+        history.push('/')        
     };
 
     const getFormErrorMessage = (name) => {
