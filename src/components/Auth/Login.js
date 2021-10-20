@@ -47,6 +47,10 @@ class Login extends Component{
           <Button label="Prijavi se" className="p-button-raised p-button-rounded" onClick={() => this.props.history.push('/')} />
         </div>
 
+        <div className="p-d-flex p-jc-center">
+          <a href="/register" style={{fontSize: "85%", marginTop: "0.5%"}}>Nemas račun? Registriraj se!</a>
+        </div>
+
         </div>
     )
   }
