@@ -6,8 +6,8 @@ import Footer from './Statics/Footer'; // import footera
 const App = () => (
     <div>
       <Main />
-      <Footer />
-
+      {//<Footer />
+      }
 
     </div>
 

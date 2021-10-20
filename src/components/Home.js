@@ -27,7 +27,7 @@ class Home extends Component{
     render(){
 
         const start = <img alt="logo" src="../../favicon.ico" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="p-mr-2"></img>;
-        const end = <span><Button label="Signup" className="p-button-raised p-button-rounded p-button-danger" onClick={() => this.props.history.push('/register')} /> <Button label="Login" className="p-button-raised p-button-rounded" onClick={() => this.props.history.push('/login')} /></span>
+        const end = <div> <Button label="Prijava" className="p-button-raised p-button-rounded" onClick={() => this.props.history.push('/login')} style={{marginLeft:"25%"}} /><br /><a href="/register" style={{fontSize: "75%"}}>Nemas račun? Registriraj se!</a></div>
 
         return (
             <div>
