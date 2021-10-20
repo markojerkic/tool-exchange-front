@@ -44,7 +44,7 @@ class Login extends Component{
         </div>
 
         <div className="p-d-flex p-jc-center">
-          <Button label="Prijavi se" className="p-button-raised p-button-rounded" onClick={() => this.props.history.push('/')} />
+          <Button label="Prijavi se" className="p-mt-2" onClick={() => this.props.history.push('/')} />
         </div>
 
         <div className="p-d-flex p-jc-center">
