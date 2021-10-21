@@ -4,7 +4,7 @@ import PrimeReact from 'primereact/api';
 import { Button } from 'primereact/button';
 import { Menubar } from 'primereact/menubar';
 import 'primereact/resources/primereact.min.css';
-import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/themes/arya-blue/theme.css';
 import React from 'react';
 import { useHistory } from 'react-router';
 import './App.css';
