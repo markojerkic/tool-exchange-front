@@ -36,9 +36,7 @@ const App = () => {
     height="40" className="p-mr-2"
     onClick={() => history.push('/')} ></img>;
   const end = <span>
-    <Button label="Prijava" className="p-button-raised p-button-rounded p-button-danger" 
-      onClick={() => history.push('/register')} /> 
-    <Button label="Registracija" className="p-button-raised p-button-rounded" onClick={() => history.push('/login')} />
+    <Button label="Registracija" className="p-button-raised p-button-danger p-button-rounded" onClick={() => history.push('/register')} /> <Button label="Prijava" className="p-button-raised p-button-rounded " onClick={() => history.push('/login')} /> 
   </span>
 
   
