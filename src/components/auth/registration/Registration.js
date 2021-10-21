@@ -1,3 +1,4 @@
+
 import 'primeflex/primeflex.css';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
@@ -9,8 +10,7 @@ import { classNames } from 'primereact/utils';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import '../containers.css'
-import 'bootstrap/dist/css/bootstrap.css';
+import '../containers.css';
 
 const Registration = () => {
 
