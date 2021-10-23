@@ -6,11 +6,13 @@ import {InputText} from 'primereact/inputtext';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {Password} from 'primereact/password';
 import {classNames} from 'primereact/utils';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useHistory} from 'react-router-dom';
 import AuthService from "../../../service/auth/auth.service";
 import '../containers.css';
+import {ToastContext} from "../../../common/toast.context";
+import { InputMask } from 'primereact/inputmask';
 
 const Registration = () => {
 
@@ -27,6 +29,8 @@ const Registration = () => {
     ];
 
     const [cities] = useState(initalCities);
+    const [loading, setLoading] = useState(false);
+
     const [, setFormData] = useState({});
     const defaultValues = {
         firstName: '',
@@ -40,18 +44,29 @@ const Registration = () => {
         city: null
     }
 
-    const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
+    const { control, formState: { errors }, handleSubmit, setError, reset } = useForm({ defaultValues });
     const history = useHistory();
+    const toastRef = useContext(ToastContext);
 
     const onSubmit = (data) => {
         setFormData(data);
-        console.log(data);
+        setLoading(true);
         AuthService.register(data).then((response) => {
             reset();
+            setLoading(false);
             history.push('/login');
-            console.log('usoješna registracija');
         }, (error) => {
-            console.log(error);
+            setLoading(false);
+            if (error.response.status !== 400) {
+                toastRef.current.show({severity:'error', summary: 'Greška', detail:error.response.data.message});
+            } else {
+                if (error.response.data.reason === 'email') {
+                    setError("email", {type: "manual", message: "Email adresa se već koristi"});
+                } else if (error.response.data.reason === 'username') {
+                    setError("username", {type: "manual", message: "Korisničko ime se već koristi"});
+                }
+            }
+
         });
     };
 
@@ -85,11 +100,11 @@ const Registration = () => {
                             </span>
                             {getFormErrorMessage('lastName')}
                         </div>
-                    
-                    <div className="p-field p-col-12">
+
+                    <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                         <span className="p-float-label">
                             <Controller name="address" control={control} render={({ field }) => (
-                                <InputTextarea id={field.name} {...field} type="text" rows="4" />
+                              <InputText id={field.name} {...field} type="text" />
                             )}/>
                                 <label htmlFor="address">Adresa</label>
                         </span>
@@ -112,7 +127,15 @@ const Registration = () => {
                             <label htmlFor="zip">Poštanski broj</label>
                         </span>
                     </div>
-                    
+
+                    <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+                        <span className="p-float-label">
+                            <Controller name="phonenumber" control={control} render={({ field }) => (
+                              <InputMask id={field.name} mask="999 999 9999"/>
+                            )} />
+                            <label htmlFor="phonenumber">Broj telefona</label>
+                        </span>
+                    </div>
                     
                     <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                         <span className="p-float-label">    
@@ -135,15 +158,6 @@ const Registration = () => {
                         </span>
                         {getFormErrorMessage('password')}
                     </div>
-                    
-                    <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
-                        <span className="p-float-label">
-                            <Controller name="phonenumber" control={control} render={({ field }) => (
-                                <InputText id={field.name} type="number"/>
-                                )} />
-                            <label htmlFor="phonenumber">Broj telefona</label>
-                        </span>
-                    </div>
 
                     <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                             <span className="p-float-label">
@@ -159,7 +173,8 @@ const Registration = () => {
 
                     <div className="p-col-12 p-d-flex p-jc-start">
                         <div>
-                            <Button type="submit" label="Registriraj se" className="p-mt-2"/>
+                            <Button type="submit" label="Registriraj se" className="p-mt-2"
+                                loading={loading}/>
                         </div>
                     </div>
                 </form>
