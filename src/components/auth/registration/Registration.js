@@ -10,6 +10,7 @@ import { classNames } from 'primereact/utils';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import AuthService from "../../../service/auth/auth.service";
 import '../containers.css';
 
 const Registration = () => {
@@ -29,12 +30,14 @@ const Registration = () => {
     const [cities, setCities] = useState(initalCities);
     const [formData, setFormData] = useState({});
     const defaultValues = {
-        name: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
+        username: '',
         phonenumber: '',
         zip: '',
+        address: '',
         city: null
     }
 
@@ -43,8 +46,14 @@ const Registration = () => {
 
     const onSubmit = (data) => {
         setFormData(data);
-        reset();
-        history.push('/');
+        console.log(data);
+        AuthService.register(data).then((response) => {
+            reset();
+            history.push('/login');
+            console.log('usoješna registracija');
+        }, (error) => {
+            console.log(error);
+        });
     };
 
     const getFormErrorMessage = (name) => {
@@ -59,23 +68,23 @@ const Registration = () => {
 
                         <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                             <span className="p-float-label">
-                                <Controller name="name" control={control} rules={{ required: 'Ime je obavezno.' }} render={({ field, fieldState }) => (
+                                <Controller name="firstName" control={control} rules={{ required: 'Ime je obavezno.' }} render={({ field, fieldState }) => (
                                     <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
                                     )}/>
-                                <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Ime*</label>
+                                <label htmlFor="firstName" className={classNames({ 'p-error': errors.firstName })}>Ime*</label>
                             </span>
-                            {getFormErrorMessage('name')}
+                            {getFormErrorMessage('firstName')}
                         </div>
                         <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                             <span className="p-float-label">
-                                <Controller name="lastname" control={control}
+                                <Controller name="lastName" control={control}
                                     rules={{ required: 'Prezime je obavezno.'}}
                                     render={({ field, fieldState }) => (
                                         <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
                                 )} />
-                                <label htmlFor="lastname" className={classNames({ 'p-error': errors.lastname })}>Prezime*</label>
+                                <label htmlFor="lastName" className={classNames({ 'p-error': errors.lastName })}>Prezime*</label>
                             </span>
-                            {getFormErrorMessage('lastname')}
+                            {getFormErrorMessage('lastName')}
                         </div>
                     
                     <div className="p-field p-col-12">
@@ -135,6 +144,18 @@ const Registration = () => {
                                 )} />
                             <label htmlFor="phonenumber">Broj telefona</label>
                         </span>
+                    </div>
+
+                    <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+                            <span className="p-float-label">
+                                <Controller name="username" control={control}
+                                            rules={{ required: 'Korisničko ime je obavezno.'}}
+                                            render={({ field, fieldState }) => (
+                                                <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                                            )} />
+                                <label htmlFor="username" className={classNames({ 'p-error': errors.username })}>Korisničko ime*</label>
+                            </span>
+                        {getFormErrorMessage('username')}
                     </div>
 
                     <div className="p-col-12 p-d-flex p-jc-start">
