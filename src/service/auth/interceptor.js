@@ -36,7 +36,6 @@ instance.interceptors.response.use(
 
                 try {
                     const rs = await instance.get("/auth/refreshToken?token="+TokenService.getLocalRefreshToken());
-                    console.log(rs);
                     if (rs.data.accessToken) {
                         TokenService.setUser(rs.data);
                     }

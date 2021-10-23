@@ -1,4 +1,3 @@
-import React, {createContext} from 'react';
-import AuthService from '../service/auth/auth.service';
+import {createContext} from 'react';
 
 export const AuthContext = createContext({});

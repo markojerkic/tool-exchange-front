@@ -1,15 +1,14 @@
-
 import 'primeflex/primeflex.css';
-import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
-import { Dropdown } from 'primereact/dropdown';
-import { InputText } from 'primereact/inputtext';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { Password } from 'primereact/password';
-import { classNames } from 'primereact/utils';
-import React, { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import {Button} from 'primereact/button';
+import {Card} from 'primereact/card';
+import {Dropdown} from 'primereact/dropdown';
+import {InputText} from 'primereact/inputtext';
+import {InputTextarea} from 'primereact/inputtextarea';
+import {Password} from 'primereact/password';
+import {classNames} from 'primereact/utils';
+import React, {useState} from 'react';
+import {Controller, useForm} from 'react-hook-form';
+import {useHistory} from 'react-router-dom';
 import AuthService from "../../../service/auth/auth.service";
 import '../containers.css';
 
@@ -27,8 +26,8 @@ const Registration = () => {
         {name: 'Dubrovnik', code: 'Dubrovnik'},
     ];
 
-    const [cities, setCities] = useState(initalCities);
-    const [formData, setFormData] = useState({});
+    const [cities] = useState(initalCities);
+    const [, setFormData] = useState({});
     const defaultValues = {
         firstName: '',
         lastName: '',
