@@ -3,7 +3,6 @@ import {Button} from 'primereact/button';
 import {Card} from 'primereact/card';
 import {Dropdown} from 'primereact/dropdown';
 import {InputText} from 'primereact/inputtext';
-import {InputTextarea} from 'primereact/inputtextarea';
 import {Password} from 'primereact/password';
 import {classNames} from 'primereact/utils';
 import React, {useContext, useState} from 'react';
@@ -12,7 +11,7 @@ import {useHistory} from 'react-router-dom';
 import AuthService from "../../../service/auth/auth.service";
 import '../containers.css';
 import {ToastContext} from "../../../common/toast.context";
-import { InputMask } from 'primereact/inputmask';
+import {InputMask} from 'primereact/inputmask';
 
 const Registration = () => {
 
