@@ -1,16 +1,17 @@
-
 import 'primeflex/primeflex.css';
-import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
-import { Dropdown } from 'primereact/dropdown';
-import { InputText } from 'primereact/inputtext';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { Password } from 'primereact/password';
-import { classNames } from 'primereact/utils';
-import React, { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import {Button} from 'primereact/button';
+import {Card} from 'primereact/card';
+import {Dropdown} from 'primereact/dropdown';
+import {InputText} from 'primereact/inputtext';
+import {Password} from 'primereact/password';
+import {classNames} from 'primereact/utils';
+import React, {useContext, useState} from 'react';
+import {Controller, useForm} from 'react-hook-form';
+import {useHistory} from 'react-router-dom';
+import AuthService from "../../../service/auth/auth.service";
 import '../containers.css';
+import {ToastContext} from "../../../common/toast.context";
+import {InputMask} from 'primereact/inputmask';
 
 const Registration = () => {
 
@@ -26,25 +27,46 @@ const Registration = () => {
         {name: 'Dubrovnik', code: 'Dubrovnik'},
     ];
 
-    const [cities, setCities] = useState(initalCities);
-    const [formData, setFormData] = useState({});
+    const [cities] = useState(initalCities);
+    const [loading, setLoading] = useState(false);
+
+    const [, setFormData] = useState({});
     const defaultValues = {
-        name: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
+        username: '',
         phonenumber: '',
         zip: '',
+        address: '',
         city: null
     }
 
-    const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
+    const { control, formState: { errors }, handleSubmit, setError, reset } = useForm({ defaultValues });
     const history = useHistory();
+    const toastRef = useContext(ToastContext);
 
     const onSubmit = (data) => {
         setFormData(data);
-        reset();
-        history.push('/');
+        setLoading(true);
+        AuthService.register(data).then((response) => {
+            reset();
+            setLoading(false);
+            history.push('/login');
+        }, (error) => {
+            setLoading(false);
+            if (error.response.status !== 400) {
+                toastRef.current.show({severity:'error', summary: 'Greška', detail:error.response.data.message});
+            } else {
+                if (error.response.data.reason === 'email') {
+                    setError("email", {type: "manual", message: "Email adresa se već koristi"});
+                } else if (error.response.data.reason === 'username') {
+                    setError("username", {type: "manual", message: "Korisničko ime se već koristi"});
+                }
+            }
+
+        });
     };
 
     const getFormErrorMessage = (name) => {
@@ -59,29 +81,29 @@ const Registration = () => {
 
                         <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                             <span className="p-float-label">
-                                <Controller name="name" control={control} rules={{ required: 'Ime je obavezno.' }} render={({ field, fieldState }) => (
+                                <Controller name="firstName" control={control} rules={{ required: 'Ime je obavezno.' }} render={({ field, fieldState }) => (
                                     <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
                                     )}/>
-                                <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Ime*</label>
+                                <label htmlFor="firstName" className={classNames({ 'p-error': errors.firstName })}>Ime*</label>
                             </span>
-                            {getFormErrorMessage('name')}
+                            {getFormErrorMessage('firstName')}
                         </div>
                         <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                             <span className="p-float-label">
-                                <Controller name="lastname" control={control}
+                                <Controller name="lastName" control={control}
                                     rules={{ required: 'Prezime je obavezno.'}}
                                     render={({ field, fieldState }) => (
                                         <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
                                 )} />
-                                <label htmlFor="lastname" className={classNames({ 'p-error': errors.lastname })}>Prezime*</label>
+                                <label htmlFor="lastName" className={classNames({ 'p-error': errors.lastName })}>Prezime*</label>
                             </span>
-                            {getFormErrorMessage('lastname')}
+                            {getFormErrorMessage('lastName')}
                         </div>
-                    
-                    <div className="p-field p-col-12">
+
+                    <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                         <span className="p-float-label">
                             <Controller name="address" control={control} render={({ field }) => (
-                                <InputTextarea id={field.name} {...field} type="text" rows="4" />
+                              <InputText id={field.name} {...field} type="text" />
                             )}/>
                                 <label htmlFor="address">Adresa</label>
                         </span>
@@ -104,7 +126,15 @@ const Registration = () => {
                             <label htmlFor="zip">Poštanski broj</label>
                         </span>
                     </div>
-                    
+
+                    <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+                        <span className="p-float-label">
+                            <Controller name="phonenumber" control={control} render={({ field }) => (
+                              <InputMask id={field.name} mask="999 999 9999"/>
+                            )} />
+                            <label htmlFor="phonenumber">Broj telefona</label>
+                        </span>
+                    </div>
                     
                     <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                         <span className="p-float-label">    
@@ -127,19 +157,23 @@ const Registration = () => {
                         </span>
                         {getFormErrorMessage('password')}
                     </div>
-                    
+
                     <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
-                        <span className="p-float-label">
-                            <Controller name="phonenumber" control={control} render={({ field }) => (
-                                <InputText id={field.name} type="number"/>
-                                )} />
-                            <label htmlFor="phonenumber">Broj telefona</label>
-                        </span>
+                            <span className="p-float-label">
+                                <Controller name="username" control={control}
+                                            rules={{ required: 'Korisničko ime je obavezno.'}}
+                                            render={({ field, fieldState }) => (
+                                                <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                                            )} />
+                                <label htmlFor="username" className={classNames({ 'p-error': errors.username })}>Korisničko ime*</label>
+                            </span>
+                        {getFormErrorMessage('username')}
                     </div>
 
                     <div className="p-col-12 p-d-flex p-jc-start">
                         <div>
-                            <Button type="submit" label="Registriraj se" className="p-mt-2"/>
+                            <Button type="submit" label="Registriraj se" className="p-mt-2"
+                                loading={loading}/>
                         </div>
                     </div>
                 </form>
