@@ -44,7 +44,7 @@ const App = () => {
     onClick={() => history.push('/')} >
   </img>;
   const end = <span>
-    <Button label="Registracija" className="p-button-raised p-button-danger p-button-rounded" onClick={() => history.push('/register')} />
+    <Button label="Registracija" className="p-button-raised p-button-danger p-button-rounded" onClick={() => history.push('/register')}/> <nbsp /> 
     <Button label="Prijava" className="p-button-raised p-button-rounded " onClick={() => history.push('/login')} />
   </span>
   const logout = <span>
