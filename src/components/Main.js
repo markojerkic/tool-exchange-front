@@ -6,6 +6,7 @@ import Login from "./auth/login/Login";
 import Registration from "./auth/registration/Registration.js";
 import Home from "./Home";
 import UserInfo from "./UserInfo";
+import Error404 from "./error/Error404";
 
 
 const Main = () => {
@@ -16,10 +17,10 @@ const Main = () => {
                 <PublicRoute restricted={false} exact path="/login" component={Login} />
                 <PublicRoute restricted={false} exact path="/register" component={Registration} />
                 <PrivateRoute exact path="/user" component={UserInfo} />
+                <PublicRoute component={Error404} />
             </Switch>
         </main>
     )
-
 }
 
 export default Main;
