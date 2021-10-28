@@ -80,7 +80,7 @@ const Login = () => {
                       <Button type="submit" label="Prijavi se" className="p-mt-2"
                         loading={loading}/>
                   </div>
-              </div>
+            </div>
         </form>
       </Card>
     </div>
