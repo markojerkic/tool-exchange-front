@@ -43,11 +43,12 @@ const App = () => {
     height="40" className="p-mr-2"
     onClick={() => history.push('/')} >
   </img>;
-  const end = <span>
+  const login = <span>
     <Button label="Registracija" className="p-button-raised p-button-danger p-button-rounded" onClick={() => history.push('/register')}/> <nbsp /> 
     <Button label="Prijava" className="p-button-raised p-button-rounded " onClick={() => history.push('/login')} />
   </span>
   const logout = <span>
+    <Button label="Profil" className="p-button-raised p-button-rounded " onClick={() => history.push('/user')} /> <nbsp />
     <Button label="Odjavi se" className="p-button-raised p-button-rounded" onClick={() => {
       AuthService.logout(setUser);
         setUser({});
@@ -61,7 +62,7 @@ const App = () => {
       <ToastContext.Provider value={toast}>
           <Toast ref={toast} />
           <div className="p-m-2">
-            <Menubar model={menuItems} start={start} end={user.username? logout: end}/>
+            <Menubar model={menuItems} start={start} end={user.username ? logout : login}/>
             <Main />
           </div>
       </ToastContext.Provider>
