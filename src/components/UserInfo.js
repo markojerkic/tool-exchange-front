@@ -13,8 +13,6 @@ const UserInfo = () => {
         getData();
     }, []);
 
-    console.log(userData);
-
     return(
         <div>
             <h1 className="stdText">Info</h1>
