@@ -34,20 +34,21 @@ const App = () => {
     }
   ];
 
-  const [user, setUser] = useState(AuthService.getCurrentUser());
+  const [user, setUser] = useState(AuthService.getCurrentUserToken());
 
-  const toast = useRef(null);
+  const toastRef = useRef(null);
 
   const start = <img alt="logo" src="../../favicon.ico"
     onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}
     height="40" className="p-mr-2"
     onClick={() => history.push('/')} >
   </img>;
-  const end = <span>
-    <Button label="Registracija" className="p-button-raised p-button-danger p-button-rounded" onClick={() => history.push('/register')}/> <nbsp /> 
+  const login = <span>
+    <Button label="Registracija" className="p-button-raised p-button-danger p-button-rounded p-mr-1" onClick={() => history.push('/register')}/>
     <Button label="Prijava" className="p-button-raised p-button-rounded " onClick={() => history.push('/login')} />
   </span>
   const logout = <span>
+    <Button label="Profil" className="p-button-raised p-button-rounded p-mr-1" onClick={() => history.push('/user')} />
     <Button label="Odjavi se" className="p-button-raised p-button-rounded" onClick={() => {
       AuthService.logout(setUser);
         setUser({});
@@ -58,10 +59,10 @@ const App = () => {
   PrimeReact.ripple = true;
   return(
     <AuthContext.Provider value={{user, setUser}}>
-      <ToastContext.Provider value={toast}>
-          <Toast ref={toast} />
+      <ToastContext.Provider value={{toastRef}}>
+          <Toast ref={toastRef} />
           <div className="p-m-2">
-            <Menubar model={menuItems} start={start} end={user.username? logout: end}/>
+            <Menubar model={menuItems} start={start} end={user.username ? logout : login}/>
             <Main />
           </div>
       </ToastContext.Provider>

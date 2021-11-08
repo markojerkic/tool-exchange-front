@@ -14,7 +14,7 @@ import {ToastContext} from "../../../common/toast.context";
 
 const Login = () => {
   const {setUser} = useContext(AuthContext);
-  const toastRef = useContext(ToastContext);
+  const {toastRef} = useContext(ToastContext);
   const [loading, setLoading] = useState(false);
 
   const [, setFormData] = useState({});
@@ -30,7 +30,7 @@ const Login = () => {
     setFormData(data);
     AuthService.login(data, setUser).then(() => {
       reset();
-      history.push('/');
+      history.push('/user');
       setLoading(false);
     }, (error) => {
         setLoading(false);

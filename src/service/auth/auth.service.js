@@ -22,8 +22,14 @@ const AuthService = {
         setUser({});
     },
 
-    getCurrentUser: function() {
+    getCurrentUserToken: function() {
         return JSON.parse(localStorage.getItem("user")) | {};
+    },
+
+    getCurrentLoggedInUser: function() {
+        return instance.get("auth").then((response) => {
+            return response.data;
+        });
     }
 };
 
