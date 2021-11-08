@@ -1,16 +1,13 @@
-import React, {useContext} from "react";
-import {AuthContext} from "../common/auth.context";
-import UserService from "../service/user/user.service";
+import React, {useEffect} from "react";
+import AuthService from "../service/auth/auth.service";
 
 const UserInfo = () => {
-    const {user} = useContext(AuthContext);
     const [userData, setUserData] = React.useState();
-    React.useEffect(() => {
-        const getData = async () => {
-            const response =  await UserService.getUserByUsername(user.username);
-            setUserData(response.data);
-        };
-        getData();
+
+    useEffect(() => {
+        AuthService.getCurrentLoggedInUser().then((user) => {
+            setUserData(user);
+        })
     }, []);
 
     return(
