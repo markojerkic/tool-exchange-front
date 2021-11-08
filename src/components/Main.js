@@ -4,15 +4,17 @@ import Login from "./auth/login/Login";
 import Registration from "./auth/registration/Registration.js";
 import Home from "./Home";
 import UserInfo from "./UserInfo";
+import PrivateRoute from "../routes/PrivateRoute";
+import PublicRoute from "../routes/PublicRoute";
 
 
 const Main = () => (
     <main>
         <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Registration} />
-            <Route exact path="/user" component={UserInfo} />
+            <PublicRoute restricted={false} exact path="/" component={Home} />
+            <PublicRoute restricted={false} exact path="/login" component={Login} />
+            <PublicRoute restricted={false} exact path="/register" component={Registration} />
+            <PrivateRoute exact path="/user" component={UserInfo} />
         </Switch>
     </main>
 
