@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  tool-exchange-front:
+    image: markojerkic/tool-exchange-front
+    container_name: tool-exchange-front
+    build:
+      context: .
+    ports:
+      - 80:80
+      - 443:80
+    networks:
+      - tool-exchange-network
+networks:
+  tool-exchange-network:
+    name: tool-exchange-network
+    external: true
