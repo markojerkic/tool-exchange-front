@@ -1,19 +1,24 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import UserService from "../service/user/user.service";
-import TokenService from "../service/auth/auth.service";
+import React, { useContext } from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import { AuthContext } from '../common/auth.context';
+import {ToastContext} from '../common/toast.context';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
+    const {user} = useContext(AuthContext);
+    const toastRef = useContext(ToastContext);
+
+    if(!user.username) {
+        toastRef.current.show({severity:'error', summary: 'Greška', detail: "Za pristup toj komponenti trebate se prijaviti"});
+    }
+
     return (
 
         // Show the component only when the user is logged in
         // Otherwise, redirect the user to /signin page
         <Route {...rest} render={props => (
-            UserService.isLoggedIn() ?
+            user.username ?
                 <Component {...props} />
-            : <Redirect to={{pathname: "/login",
-            state: {message: "Za pristup traženoj stranici se morate prijaviti!"} 
-            }}/>
+            : <Redirect to="/login"/>
         )} />
     );
 };

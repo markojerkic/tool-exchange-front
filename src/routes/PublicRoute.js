@@ -1,15 +1,12 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import UserService from "../service/user/user.service";
+import { Redirect, Route } from 'react-router-dom';
 
 const PublicRoute = ({component: Component, restricted, ...rest}) => {
     return (
         // restricted = false meaning public route
         // restricted = true meaning restricted route
         <Route {...rest} render={props => (
-            UserService.isLoggedIn() && restricted ?
-                <Redirect to="/" />
-            : <Component {...props} />
+            restricted ? <Redirect to="/" />: <Component {...props} />
         )} />
     );
 };

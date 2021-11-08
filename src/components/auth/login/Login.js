@@ -12,7 +12,7 @@ import AuthService from "../../../service/auth/auth.service";
 import {AuthContext} from "../../../common/auth.context";
 import {ToastContext} from "../../../common/toast.context";
 
-const Login = (props) => {
+const Login = () => {
   const {setUser} = useContext(AuthContext);
   const toastRef = useContext(ToastContext);
   const [loading, setLoading] = useState(false);
@@ -25,14 +25,12 @@ const Login = (props) => {
   const { control, formState: { errors }, handleSubmit, setError, reset } = useForm({ defaultValues });
   const history = useHistory();
 
-  const [message, setMessage] = useState();
-
   const onSubmit = (data) => {
     setLoading(true);
     setFormData(data);
     AuthService.login(data, setUser).then(() => {
       reset();
-      history.push('/');
+      history.push('/user');
       setLoading(false);
     }, (error) => {
         setLoading(false);
@@ -47,10 +45,6 @@ const Login = (props) => {
   const getFormErrorMessage = (name) => {
     return errors[name] && <small className="p-error">{errors[name].message}</small>
   };
-
-  if(props.location.state){
-    toastRef.current.show({severity:'error', summary: 'Greška', detail:props.location.state.message});
-  }
 
   return(
     <div className="p-d-flex p-jc-center p-m-4">

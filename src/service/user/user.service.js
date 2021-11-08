@@ -1,7 +1,5 @@
-import instance from "../auth/interceptor";
-import TokenService from "../auth/token.service";
 import AuthService from "../auth/auth.service";
-import React, {useState} from 'react';
+import instance from "../auth/interceptor";
 
 
 const UserService = {
@@ -10,7 +8,7 @@ const UserService = {
     },
 
     isLoggedIn: function(){
-        return AuthService.getCurrentUser();
+        return AuthService.getCurrentUser() !== {};
     }
 };
 
