@@ -93,7 +93,7 @@ const Registration = () => {
                             <Controller name="lastName" control={control}
                                 rules={{ required: 'Prezime je obavezno.'}}
                                 render={({ field, fieldState }) => (
-                                    <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                                    <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
                             )} />
                             <label htmlFor="lastName" className={classNames({ 'p-error': errors.lastName })}>Prezime*</label>
                         </span>
@@ -163,7 +163,7 @@ const Registration = () => {
                                 <Controller name="username" control={control}
                                             rules={{ required: 'Korisničko ime je obavezno.'}}
                                             render={({ field, fieldState }) => (
-                                                <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                                                <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
                                             )} />
                                 <label htmlFor="username" className={classNames({ 'p-error': errors.username })}>Korisničko ime*</label>
                             </span>
