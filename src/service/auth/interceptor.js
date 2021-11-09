@@ -3,7 +3,7 @@ import TokenService from "./token.service";
 
 
 const instance = axios.create({
-    baseURL: "http://localhost:8080/api",
+    baseURL: `http://${process.env.REACT_APP_BACKEND_HOST}/api`,
     headers: {
         "Content-Type": "application/json",
     },
