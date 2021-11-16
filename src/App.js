@@ -51,7 +51,7 @@ const App = () => {
     <Button label="Profil" className="p-button-raised p-button-rounded p-mr-1" onClick={() => history.push('/user')} />
     <Button label="Odjavi se" className="p-button-raised p-button-rounded" onClick={() => {
       AuthService.logout(setUser);
-        setUser({});
+        setUser();
       }
     } />
   </span>
@@ -62,7 +62,7 @@ const App = () => {
       <ToastContext.Provider value={{toastRef}}>
           <Toast ref={toastRef} />
           <div className="p-m-2">
-            <Menubar model={menuItems} start={start} end={user.username ? logout : login}/>
+            <Menubar model={menuItems} start={start} end={!!user ? logout : login}/>
             <Main />
           </div>
       </ToastContext.Provider>

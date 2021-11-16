@@ -8,17 +8,17 @@ const PrivateRoute = ({component: Component, ...rest}) => {
     const {toastRef} = useContext(ToastContext);
 
     useEffect(() => {
-        if(!user.username) {
+        if(!user) {
             toastRef.current.show({severity:'error', summary: 'Greška', detail: "Za pristup toj komponenti trebate se prijaviti"});
         }
-    }, [toastRef, user.username]);
+    }, [toastRef, user]);
 
     return (
 
         // Show the component only when the user is logged in
         // Otherwise, redirect the user to /signin page
         <Route {...rest} render={props => (
-            user.username ?
+            !!user?
                 <Component {...props} />
             : <Redirect to="/login"/>
         )} />

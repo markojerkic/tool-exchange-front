@@ -23,7 +23,7 @@ const AuthService = {
     },
 
     getCurrentUserToken: function() {
-        return JSON.parse(localStorage.getItem("user")) | {};
+        return JSON.parse(localStorage.getItem("user"));
     },
 
     getCurrentLoggedInUser: function() {

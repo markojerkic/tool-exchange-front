@@ -34,8 +34,8 @@ const Login = () => {
       setLoading(false);
     }, (error) => {
         setLoading(false);
-        if (error.response.data.status !== 400) {
-          toastRef.current.show({severity:'error', summary: 'Greška', detail:error.response.data.message});
+        if (error.response.status !== 400) {
+          toastRef.current.show({severity:'error', summary: 'Greška', detail: 'Došlo je do greške pri prijavi'});
         } else {
           setError("username", {type: "manual", message: "Korisničko ime možda nije ispravno"});
           setError("password", {type: "manual", message: "Zaporka možda nije ispravna"});

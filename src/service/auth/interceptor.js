@@ -1,4 +1,5 @@
 import axios from "axios";
+import AuthService from "./auth.service";
 import TokenService from "./token.service";
 
 
@@ -28,14 +29,17 @@ instance.interceptors.response.use(
     },
     async (err) => {
         const originalConfig = err.config;
-
-        if (originalConfig.url !== "/auth/login" && err.response) {
+        if (AuthService.getCurrentUserToken() && originalConfig.url !== "/auth/login" && err.response) {
             // Access Token was expired
             if (err.response.status === 401 && !originalConfig._retry) {
                 originalConfig._retry = true;
 
                 try {
-                    const rs = await instance.get("/auth/refreshToken?token="+TokenService.getLocalRefreshToken());
+                    const token = TokenService.getLocalRefreshToken();
+                    if (!token) {
+                        return;
+                    }
+                    const rs = await instance.get("/auth/refreshToken?token="+token);
                     if (rs.data.accessToken) {
                         TokenService.setUser(rs.data);
                     }
