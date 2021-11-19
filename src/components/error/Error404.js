@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
 
@@ -9,7 +10,7 @@ const Home = () => {
             <h4 className="p-text-center" style={{ fontSize: "2.5rem", marginTop: "0", marginBottom: "2%" }}>Ups! Nešto se dogodilo.</h4>
             <p className="p-text-center" style={{ fontSize: "1.3rem", marginTop: "2%" }} > Pokušavate pristupiti stranici {window.location.pathname} koja nije
                 pronađena na serveru. <br />
-                Možete se vratiti nazad ili posjetiti početnu stranicu.
+                Možete se vratiti nazad ili posjetiti <Link to="/"> početnu stranicu</Link>.
             </p>
         </div>
     )
