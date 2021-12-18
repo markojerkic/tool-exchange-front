@@ -9,7 +9,7 @@ import {classNames} from 'primereact/utils';
 import { InputTextarea } from 'primereact/inputtextarea';
 import {Button} from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
-import './NewTool.css';
+import './fade-animation.css';
 import Stepper from '../stepper/Stepper'
 
 
@@ -31,7 +31,7 @@ const NewTool = () => {
 
     const { control, formState: { errors }, handleSubmit, setError, reset } = useForm({ defaultValues });
     const history = useHistory();
-    const toastRef = useContext(ToastContext);
+    const {toastRef} = useContext(ToastContext);
 
 
     const getFormErrorMessage = (name) => {
@@ -41,62 +41,64 @@ const NewTool = () => {
     const onSubmit = (data) => {
         setFormData(data);
         setLoading(true);
+        toastRef.current.show({severity:'success', summary: 'Uspijeh', detail: 'Zahtjev predan'});
+        console.log(data);
     }
 
     const onUpload = () => {
-        this.toast.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
+        toastRef.current.show({severity:'success', summary: 'Uspijeh', detail: 'Slika prenešena'});
     }
 
     const header = <span>
-        <Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-ad')} />
-        <Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/')} style={{float:"right"}} />
-        </span>
+            <Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-ad')} />
+            <Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/')} style={{float:"right"}} />
+        </span>;
     return(
         <div>
             <Stepper stepId={1} category={"request"} />
             
-        <div className="p-d-flex p-jc-center p-m-6">
-            
-            <Card className="card-container" title="Dodavanje novog oglasa za zahtjev" header={header} style={{ width: '50rem' }} >
+            <div className="p-d-flex p-jc-center p-m-6">
 
-            <form onSubmit={handleSubmit(onSubmit)} className="p-grid p-fluid p-formgrid form-layout">
+                <Card className="card-container" title="Dodavanje novog oglasa za zahtjev" header={header} style={{ width: '50rem' }} >
 
-                <div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
-                    <span className="p-float-label">
-                        <Controller name="title" control={control} rules={{ required: 'Naslov je obavezan.' }} render={({ field, fieldState }) => (
-                            <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                <form onSubmit={handleSubmit(onSubmit)} className="p-grid p-fluid p-formgrid form-layout">
+
+                    <div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
+                        <span className="p-float-label">
+                            <Controller name="title" control={control} rules={{ required: 'Naslov je obavezan.' }} render={({ field, fieldState }) => (
+                                <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                                )}/>
+                            <label htmlFor="title" className={classNames({ 'p-error': errors.title })}>Naslov *</label>
+                        </span>
+                        {getFormErrorMessage('title')}
+                    </div>
+
+                    <div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
+                        <span className="p-float-label">
+                            <Controller name="description" control={control} rules={{ required: 'Opis je obavezan.' }} render={({ field }) => (
+                                <InputTextarea id={field.name} {...field} type="text" rows={5} cols={30} autoResize/>
                             )}/>
-                        <label htmlFor="title" className={classNames({ 'p-error': errors.title })}>Naslov*</label>
-                    </span>
-                    {getFormErrorMessage('title')}
-                </div>
+                                <label htmlFor="description" className={classNames({ 'p-error': errors.description })}>Opis *</label>
+                        </span>
+                        {getFormErrorMessage('description')}
+                    </div>
 
-                <div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
-                    <span className="p-float-label">
-                        <Controller name="description" control={control} rules={{ required: 'Opis je obavezan.' }} render={({ field }) => (
-                            <InputTextarea id={field.name} {...field} type="text" rows={5} cols={30} autoResize/>
-                        )}/>
-                            <label htmlFor="description" className={classNames({ 'p-error': errors.description })}>Opis*</label>
-                    </span>
-                    {getFormErrorMessage('description')}
-                </div>
+                    <div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
+                        <FileUpload name="images[]" url="https://primefaces.org/primereact/showcase/upload.php" chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000}
+                        emptyTemplate={<p className="p-m-0">Ovdje povucite i ispustite slike koje želite prenijeti.</p>} />
+                    </div>
 
-                <div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
-                    <FileUpload name="images[]" url="https://primefaces.org/primereact/showcase/upload.php" chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000}
-                    emptyTemplate={<p className="p-m-0">Ovdje povucite i ispustite slike koje želite prenijeti.</p>} />
-                </div>
+                    <div className="p-col-12 p-d-flex p-jc-center">
+                      <div>
+                          <Button type="submit" label="Predaj oglas" className="p-mt-2"
+                            loading={loading}/>
+                      </div>
+                    </div>
 
-                <div className="p-col-12 p-d-flex p-jc-center">
-                  <div>
-                      <Button type="submit" label="Predaj oglas" className="p-mt-2"
-                        loading={loading}/>
-                  </div>
-                </div>
+                </form>
 
-            </form>
-                
-            </Card>
-        </div>
+                </Card>
+            </div>
         </div>
     )
 

@@ -19,10 +19,9 @@ const Main = () => {
                 <PublicRoute restricted={false} exact path="/login" component={Login} />
                 <PublicRoute restricted={false} exact path="/register" component={Registration} />
                 <PrivateRoute exact path="/user" component={UserInfo} />
-                <PublicRoute exact path="/new-ad" component={Category} />
-                <PublicRoute exact path="/new-ad/tool" component={NewAd} /> {//public su rute dok se ne provjeri jel to to kaj mi hocemo
-                }
-                <PublicRoute exact path="/new-ad/request" component={NewRequest} />
+                <PrivateRoute exact path="/new-ad" component={Category} />
+                <PrivateRoute exact path="/new-ad/tool" component={NewAd} />
+                <PrivateRoute exact path="/new-ad/request" component={NewRequest} />
                 <PublicRoute component={Error404} />
             </Switch>
         </main>
