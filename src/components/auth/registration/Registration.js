@@ -79,26 +79,26 @@ const Registration = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="p-grid p-fluid p-formgrid form-layout">
 
-                        <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
-                            <span className="p-float-label">
-                                <Controller name="firstName" control={control} rules={{ required: 'Ime je obavezno.' }} render={({ field, fieldState }) => (
-                                    <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
-                                    )}/>
-                                <label htmlFor="firstName" className={classNames({ 'p-error': errors.firstName })}>Ime*</label>
-                            </span>
-                            {getFormErrorMessage('firstName')}
-                        </div>
-                        <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
-                            <span className="p-float-label">
-                                <Controller name="lastName" control={control}
-                                    rules={{ required: 'Prezime je obavezno.'}}
-                                    render={({ field, fieldState }) => (
-                                        <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
-                                )} />
-                                <label htmlFor="lastName" className={classNames({ 'p-error': errors.lastName })}>Prezime*</label>
-                            </span>
-                            {getFormErrorMessage('lastName')}
-                        </div>
+                    <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+                        <span className="p-float-label">
+                            <Controller name="firstName" control={control} rules={{ required: 'Ime je obavezno.' }} render={({ field, fieldState }) => (
+                                <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                                )}/>
+                            <label htmlFor="firstName" className={classNames({ 'p-error': errors.firstName })}>Ime*</label>
+                        </span>
+                        {getFormErrorMessage('firstName')}
+                    </div>
+                    <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+                        <span className="p-float-label">
+                            <Controller name="lastName" control={control}
+                                rules={{ required: 'Prezime je obavezno.'}}
+                                render={({ field, fieldState }) => (
+                                    <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                            )} />
+                            <label htmlFor="lastName" className={classNames({ 'p-error': errors.lastName })}>Prezime*</label>
+                        </span>
+                        {getFormErrorMessage('lastName')}
+                    </div>
 
                     <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                         <span className="p-float-label">
@@ -163,7 +163,7 @@ const Registration = () => {
                                 <Controller name="username" control={control}
                                             rules={{ required: 'Korisničko ime je obavezno.'}}
                                             render={({ field, fieldState }) => (
-                                                <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                                                <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
                                             )} />
                                 <label htmlFor="username" className={classNames({ 'p-error': errors.username })}>Korisničko ime*</label>
                             </span>

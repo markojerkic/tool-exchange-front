@@ -17,6 +17,11 @@ import {Toast} from "primereact/toast";
 const App = () => {
   const history = useHistory();
 
+  const navigateToPage = (path) => {
+		console.log('Navigate to path ' + path);
+		history.push('/new-ad')
+	}
+
   const menuItems = [
     {
       label: 'Oglasi',
@@ -24,7 +29,8 @@ const App = () => {
       items: [
         {
           label: 'Dodaj novi oglas',
-          icon: 'pi pi-plus'
+          icon: 'pi pi-plus',
+          command:()=>{ navigateToPage('/new-ad')}
         },
         {
           label: 'Pregledaj oglase',
