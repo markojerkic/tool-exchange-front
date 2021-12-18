@@ -1,10 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Steps } from 'primereact/steps';
 import './StepsDemo.css';
 
 const Stepper = props => {
     const [activeIndex, setActiveIndex] = useState(props.stepId);
-    const toast = useRef(null);
     const items = [
         {
             label: 'Odabir Kategorije',

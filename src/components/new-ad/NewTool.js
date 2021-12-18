@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import { Card } from "primereact/card";
 import 'primeflex/primeflex.css'
 import {Controller, useForm} from 'react-hook-form';
@@ -22,10 +22,10 @@ const NewTool = () => {
     const [loading, setLoading] = useState(false);
 
     const [, setFormData] = useState({});
-    const [value2, setValue2] = useState('Ne');
-    const [value3, setValue3] = useState();
+    const [elektrican, setElektrican] = useState('Ne');
+    const [power, setPower] = useState();
     const options = ['Da', 'Ne']
-    const [checked1, setChecked1] = useState(false);
+    const [battery, setBattery] = useState(false);
 
     const chooseOptions = {label: 'Odaberi', icon: 'pi pi-fw pi-plus'};
     const uploadOptions = {label: 'Prenesi', icon: 'pi pi-upload', className: 'p-button-success'};
@@ -39,11 +39,8 @@ const NewTool = () => {
     const defaultValues = {
         title: '',
         description: '',
-        price: null,
         condition: null,
-        phonenumber: null,
-        power: null,
-
+        phonenumber: null
     }
 
     const initialConditions = [
@@ -94,22 +91,22 @@ const NewTool = () => {
 
                 <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-6">
                     <label htmlFor="electric">Električan</label>
-                        <SelectButton value={value2} options={options} onChange={(e) => setValue2(e.value)} />
+                        <SelectButton value={elektrican} options={options} onChange={(e) => setElektrican(e.value)} />
                 </div>   
 
-                { value2=='Da' && 
+                { elektrican==='Da' && 
                 
                     <div className="p-field p-col-12 p-md-8 p-lg-8 p-sm-8" id="animDiv">
                         <span className="p-float-label">
                             <Controller name="power" control={control} render={({ field, fieldState }) => (
-                                <InputNumber id={field.name} {...field} value = {value3} className={classNames({ 'p-invalid': fieldState.invalid })} onValueChange={(e) => setValue3(e.value)}/>
+                                <InputNumber id={field.name} {...field} value = {power} className={classNames({ 'p-invalid': fieldState.invalid })} onValueChange={(e) => setPower(e.value)}/>
                                 )}/>
                             <label htmlFor="power">Snaga (W)*</label>
                         </span>
                         <br /> 
                         <label htmlFor="electric">Ima bateriju:</label>
                         <br /> 
-                        <InputSwitch checked={checked1} onChange={(e) => setChecked1(e.value)} />
+                        <InputSwitch checked={battery} onChange={(e) => setBattery(e.value)} />
                     </div>
                     
                 }

@@ -26,11 +26,6 @@ const NewTool = () => {
     const defaultValues = {
         title: '',
         description: '',
-        price: null,
-        condition: null,
-        phonenumber: null,
-        power: null,
-
     }
 
 

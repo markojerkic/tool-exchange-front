@@ -7,10 +7,8 @@ import Stepper from '../stepper/Stepper'
 
 const Category = () => {
 
-    const [loading, setLoading] = useState(false);
-
     const [, setFormData] = useState({});
-    const [value2, setValue2] = useState();
+    const [category, setCategory] = useState();
     const options = [
         {label: 'Alat', value:'tool'},
         {label: 'Zahtjev', value:'request'}]
@@ -27,7 +25,7 @@ const Category = () => {
 
 
                 <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-6">
-                    <SelectButton value={value2} options={options} onChange={(e) => window.location.replace(`/new-ad/${e.value}`)} />
+                    <SelectButton value={category} options={options} onChange={(e) => window.location.replace(`/new-ad/${e.value}`)} />
                 </div>   
 
             </form>
