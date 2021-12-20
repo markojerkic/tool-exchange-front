@@ -1,4 +1,4 @@
-import instance from "./interceptor";
+import instance from "../interceptor";
 import TokenService from "./token.service";
 
 

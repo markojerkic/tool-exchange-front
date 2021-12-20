@@ -11,6 +11,7 @@ import {Button} from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import './fade-animation.css';
 import Stepper from '../stepper/Stepper'
+import AdService from "../../service/ads/ad.service";
 
 
 const NewTool = () => {
@@ -25,7 +26,7 @@ const NewTool = () => {
 
     const defaultValues = {
         title: '',
-        description: '',
+        details: '',
     }
 
 
@@ -41,12 +42,17 @@ const NewTool = () => {
     const onSubmit = (data) => {
         setFormData(data);
         setLoading(true);
-        toastRef.current.show({severity:'success', summary: 'Uspijeh', detail: 'Zahtjev predan'});
+        AdService.addNewAd(data).then(() => {
+            reset();
+            history.push('/user');
+            setLoading(false);
+          });
+        toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Zahtjev predan'});
         console.log(data);
     }
 
     const onUpload = () => {
-        toastRef.current.show({severity:'success', summary: 'Uspijeh', detail: 'Slika prenešena'});
+        toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Slika prenešena'});
     }
 
     const header = <span>
@@ -75,12 +81,12 @@ const NewTool = () => {
 
                     <div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
                         <span className="p-float-label">
-                            <Controller name="description" control={control} rules={{ required: 'Opis je obavezan.' }} render={({ field }) => (
+                            <Controller name="details" control={control} rules={{ required: 'Opis je obavezan.' }} render={({ field }) => (
                                 <InputTextarea id={field.name} {...field} type="text" rows={5} cols={30} autoResize/>
                             )}/>
-                                <label htmlFor="description" className={classNames({ 'p-error': errors.description })}>Opis *</label>
+                                <label htmlFor="details" className={classNames({ 'p-error': errors.description })}>Opis *</label>
                         </span>
-                        {getFormErrorMessage('description')}
+                        {getFormErrorMessage('details')}
                     </div>
 
                     <div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">

@@ -14,6 +14,8 @@ import {FileUpload} from 'primereact/fileupload';
 import {InputSwitch} from 'primereact/inputswitch';
 import './fade-animation.css';
 import Stepper from '../stepper/Stepper'
+import AdService from "../../service/ads/ad.service";
+import { InputMask } from "primereact/inputmask";
 
 
 const NewTool = () => {
@@ -35,6 +37,7 @@ const NewTool = () => {
     const defaultValues = {
         title: '',
         description: '',
+        toolName: '',
         condition: null,
         phonenumber: null,
         power: 0,
@@ -43,9 +46,9 @@ const NewTool = () => {
     }
 
     const initialConditions = [
-        {label: 'Novo', value: 'n'},
-        {label: 'Rabljeno', value: 'u'},
-        {label: 'Neispravno/Oštećeno', value: 'b'}
+        {label: 'Novo', value: 'NEW'},
+        {label: 'Rabljeno', value: 'USED'},
+        {label: 'Neispravno/Oštećeno', value: 'DAMAGED'}
     ];
 
     const [conditions] = useState(initialConditions);
@@ -60,10 +63,39 @@ const NewTool = () => {
     };
 
     const onSubmit = (data) => {
-        setFormData(data);
-        toastRef.current.show({severity:'success', summary: 'Uspijeh', detail: 'Zahtjev predan'});
-        //setLoading(true);
-        console.log(data);
+        setLoading(true);
+        let Tool;
+        if(data.isElectric === true){
+            Tool = {
+                name:  data.toolName,
+                isElectric: data.isElectric,
+                hasBattery: data.hasBattery,
+                power: data.power,
+                toolState: data.condition    
+            }
+        }else{
+            Tool = {
+                name:  data.toolName,
+                isElectric: data.isElectric,
+                hasBattery: null,
+                power: null,
+                toolState: data.condition    
+            }
+        }
+        let podatci = {
+            title: data.title,
+            details: data.description,
+            tool: Tool
+        }
+        setFormData(podatci);
+        AdService.addNewAd(data).then(() => {
+            reset();
+            history.push('/user');
+            setLoading(false);
+          });
+        toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Zahtjev predan'});
+        
+        console.log(podatci);
     }
 
     const onUpload = () => {
@@ -89,7 +121,17 @@ const NewTool = () => {
                             {getFormErrorMessage('title')}
                         </div>
 
-                        <div className="p-field p-grid p-dir-col p-col-12 p-md-6 p-lg-6 p-sm-6 p-ml-1">
+                        <div className="p-field p-col-12 p-md-8 p-lg-8 p-sm-8">
+                            <span className="p-float-label">
+                                <Controller name="toolName" control={control} rules={{ required: 'Naziv alata je obavezan.' }} render={({ field, fieldState }) => (
+                                    <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                                    )}/>
+                                <label htmlFor="toolName" className={classNames({ 'p-error': errors.title })}>Naziv alata*</label>
+                            </span>
+                            {getFormErrorMessage('toolName')}
+                        </div>
+
+                        <div className="p-field p-grid p-dir-col p-col-12 p-md-4 p-lg-4 p-sm-4 p-ml-1">
                             <Controller name="isElectric" control={control}
                                         render={({ field, fieldState }) => (
                                             <InputSwitch id={field.name} inputId={field.name}
@@ -106,7 +148,7 @@ const NewTool = () => {
                         { isElectric &&
 
                             <div className="p-grid p-dir-col p-col-12 p-md-8 p-lg-8 p-sm-8" id="animDiv">
-                                <div className='p-field'>
+                                <div className='p-field p-grid p-dir-col p-ml-2'>
                                     <span className="p-float-label">
                                         <Controller name="power" control={control}  rules={{ required: 'Snaga je obavezna.' }}
                                                     render={({ field, fieldState }) => (
@@ -117,7 +159,7 @@ const NewTool = () => {
                                         <label htmlFor="power">Snaga (W) *</label>
                                     </span>
                                 </div>
-                                <div className='p-field p-grid p-dir-col p-ml-1'>
+                                <div className='p-field p-grid p-dir-col p-ml-2'>
                                     <Controller name="hasBattery" control={control} className='p-col'
                                                 render={({ field, fieldState }) => (
                                                     <InputSwitch id={field.name} inputId={field.name}
@@ -127,7 +169,6 @@ const NewTool = () => {
                                                 )}/>
                                     <label className='p-col' htmlFor="hasBattery">Ima bateriju</label>
                                 </div>
-
                             </div>
 
                         }
@@ -155,7 +196,7 @@ const NewTool = () => {
                         <div className = "p-field p-col-12 p-md-4 p-lg-4 p-sm-4">
                             <span className="p-float-label">
                                 <Controller name="phonenumber" control={control} rules={{ required: 'Broj mobitela je obavezan.' }} render={({ field }) => (
-                                    <InputNumber id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)}/>
+                                    <InputMask id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} mask="999 999 9999"/>
                                 )}/>
                                 <label htmlFor="condition" className={classNames({ 'p-error': errors.condition })}>Broj mobitela*</label>
                             </span>
