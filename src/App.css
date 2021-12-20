@@ -25,9 +25,7 @@ html{
     background-color: var(--blue-500);
 }
 
-.title1{
-    width:500px;
-    font-size: medium;
+.title{
     margin: 0 auto;
     text-align: center;
     padding-top: 1%;
@@ -36,3 +34,87 @@ html{
 .stdText{
     color: var(--text-color);
 }
+
+.grid-child-element { 
+    margin: 1.5em;
+    height: fit-content;
+}
+
+.shape{
+    padding: 0.5rem;
+    color: rgba(255, 255, 255, 0.87);
+    border-radius: 5px;
+}
+
+.grid-parent{
+    display: grid; 
+    grid-template-columns: 3fr 8fr; 
+}
+
+.mainView{
+    margin: 1em auto;
+    width: 90%;
+    background: var(--surface-a);
+    min-height: 90vh;
+}
+
+.adView{
+    background: var(--surface-b);
+}
+
+.home-tag{
+    border: 1px solid var(--blue-900);
+    margin: 1em auto;
+    width: 70%;
+    
+}
+
+
+.singleAdvert{
+    border-radius: 3px;
+    background-color: var(--surface-d);
+    margin: 1.5em;
+    border-color: black;
+    height: fit-content;
+    position: relative;
+}
+
+.adverElement{
+    padding: 0px;
+    margin: 0px;
+}
+.advertLocation{
+    margin: 0px;
+    padding: 0px;
+    float: right;
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    
+}
+
+.advertTitle{
+    font-size: larger;
+    color: var(--blue-300);;
+}
+
+.advertPicture{
+    border-radius: 2px;
+    max-width: 20em;
+}
+
+.advertDate{
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    bottom: 10%;
+}
+.desc{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}
+
