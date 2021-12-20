@@ -12,6 +12,7 @@ import Category from "./new-ad/Category"
 import NewRequest from "./new-ad/NewRequest";
 import AdView from "./AdView";
 import ReqView from "./ReqView";
+import UserList from "./UserList";
 
 const Main = () => {
     return (
@@ -26,6 +27,7 @@ const Main = () => {
                 <PrivateRoute exact path="/new-ad/request" component={NewRequest} />
                 <PrivateRoute exact path="/ad/:id" component={AdView} />
                 <PublicRoute restricted={false} exact path="/req/:id" component={ReqView} />
+                <PublicRoute restricted={false} exact path="/user/all" component={UserList} />
                 <PublicRoute component={Error404} />
             </Switch>
         </main>
