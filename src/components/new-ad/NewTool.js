@@ -87,15 +87,15 @@ const NewTool = () => {
             details: data.description,
             tool: Tool
         }
-        setFormData(podatci);
-        AdService.addNewAd(data).then(() => {
+        AdService.addNewAd(podatci).then(() => {
             reset();
             history.push('/user');
             setLoading(false);
-          });
-        toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Zahtjev predan'});
-        
-        console.log(podatci);
+            toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Oglsan napravljen'});
+          }, () => {
+            setLoading(false);
+            toastRef.current.show({severity:'error', summary: 'Greška', detail: 'Greška prilikom spremanja oglasa'});
+        });
     }
 
     const onUpload = () => {

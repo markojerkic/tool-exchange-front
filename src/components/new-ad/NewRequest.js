@@ -40,15 +40,16 @@ const NewTool = () => {
     };
 
     const onSubmit = (data) => {
-        setFormData(data);
         setLoading(true);
         AdService.addNewAd(data).then(() => {
             reset();
             history.push('/user');
             setLoading(false);
-          });
-        toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Zahtjev predan'});
-        console.log(data);
+            toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Zahtjev spremljen'});
+          }, () => {
+            setLoading(false);
+            toastRef.current.show({severity:'error', summary: 'Greška', detail: 'Greška prilikom spremanja zahtjeva'});
+        });
     }
 
     const onUpload = () => {
