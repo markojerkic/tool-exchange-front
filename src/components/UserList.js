@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import UserService from "../service/user.service";
 
+
 const UserList = () => {
     const [usersData, setUsersData] = React.useState();
 
@@ -10,9 +11,13 @@ const UserList = () => {
         })
     }, []);
 
+    function test(){ //implementirati nekako da pokaaze/sakrije detaljne informacije klikom
+        console.log("radi!!");
+    }
+
     const makeList = usersData => usersData.map((user,i) => (
-        <div>
-            <h2 className="stdText">User {i}</h2>
+        <div onClick={() => test()}>
+            <h2>User {i+1}</h2>
             <p>Username = {user.username}</p>
             <p>Email = {user.email}</p>
         </div>

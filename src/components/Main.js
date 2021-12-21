@@ -22,12 +22,12 @@ const Main = () => {
                 <PublicRoute restricted={false} exact path="/login" component={Login} />
                 <PublicRoute restricted={false} exact path="/register" component={Registration} />
                 <PrivateRoute exact path="/user" component={UserInfo} />
+                <PrivateRoute exact path="/users" component={UserList} />
                 <PrivateRoute exact path="/new-ad" component={Category} />
                 <PrivateRoute exact path="/new-ad/tool" component={NewAd} />
                 <PrivateRoute exact path="/new-ad/request" component={NewRequest} />
                 <PrivateRoute exact path="/ad/:id" component={AdView} />
                 <PublicRoute restricted={false} exact path="/req/:id" component={ReqView} />
-                <PublicRoute restricted={false} exact path="/user/all" component={UserList} />
                 <PublicRoute component={Error404} />
             </Switch>
         </main>
