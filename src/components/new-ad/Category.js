@@ -21,8 +21,8 @@ const Category = () => {
             
                 <Card className="card-container" title="Odabir kategorije" style={{ width: '50rem' }}>
 
-                    <form className="p-grid p-fluid p-formgrid form-layout">
-                        <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-6">
+                    <form className="p-grid p-fluid p-formgrid form-layout p-jc-center">
+                        <div className="p-field p-col-12 p-md-6 p-lg-8 p-sm-6">
                             <SelectButton value={category} options={options} onChange={(e) => history.push(`/new-ad/${e.value}`)} />
                         </div>
                     </form>

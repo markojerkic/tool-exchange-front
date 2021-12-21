@@ -34,10 +34,11 @@ const AdView = () => {
             <div className="p-d-flex p-jc-center p-m-6">
                 <Card className="card-container" title={advertData?.title} subTitle={shortRep} header={header} footer={footer} style={{ width: '50rem' }} >
                     <Card title="Detalji">
+                        <p><b>{advertData?.details}</b></p>
                         {/*<p>Alat dostupan od: <b>{Advert.from}</b> do <b>{Advert.to}</b></p>*/}
                         {/*<p>Lokacija: <b>{Advert.location}</b></p>*/}
                         <p>Šifra oglasa: <b>{advertData?.id}</b></p>
-                        </Card>
+                    </Card>
                 </Card>
             </div>
         </div>

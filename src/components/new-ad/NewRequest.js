@@ -11,7 +11,7 @@ import {Button} from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import './fade-animation.css';
 import Stepper from '../stepper/Stepper'
-import AdService from "../../service/ads/ad.service";
+import RequestService from "../../service/ads/request.service";
 
 
 const NewTool = () => {
@@ -41,9 +41,9 @@ const NewTool = () => {
 
     const onSubmit = (data) => {
         setLoading(true);
-        AdService.addNewAd(data).then(() => {
+        RequestService.addNewRequest(data).then((response) => {
             reset();
-            history.push('/user');
+            history.push('/req/'+ response.data.id);
             setLoading(false);
             toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Zahtjev spremljen'});
           }, () => {
