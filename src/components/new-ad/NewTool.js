@@ -85,13 +85,14 @@ const NewTool = () => {
         let podatci = {
             title: data.title,
             details: data.description,
-            tool: Tool
+            tool: Tool,
+            phoneNumber: data.phonenumber
         }
         AdService.addNewAd(podatci).then(() => {
             reset();
-            history.push('/user');
+            history.push('/');
             setLoading(false);
-            toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Oglsan napravljen'});
+            toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Oglas napravljen'});
           }, () => {
             setLoading(false);
             toastRef.current.show({severity:'error', summary: 'Greška', detail: 'Greška prilikom spremanja oglasa'});
@@ -99,7 +100,7 @@ const NewTool = () => {
     }
 
     const onUpload = () => {
-        toastRef.current.show({severity:'success', summary: 'Uspijeh', detail: 'Slika prenešena'});
+        toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Slika prenešena'});
     }
 
     return(
