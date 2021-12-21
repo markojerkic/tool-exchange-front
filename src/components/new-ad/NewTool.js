@@ -88,9 +88,9 @@ const NewTool = () => {
             tool: Tool,
             phoneNumber: data.phonenumber
         }
-        AdService.addNewAd(podatci).then(() => {
+        AdService.addNewAd(podatci).then((response) => {
             reset();
-            history.push('/');
+            history.push('/ad/'+ response.data.id);
             setLoading(false);
             toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Oglas napravljen'});
           }, () => {

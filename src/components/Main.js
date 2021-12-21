@@ -24,7 +24,7 @@ const Main = () => {
                 <PrivateRoute exact path="/new-ad" component={Category} />
                 <PrivateRoute exact path="/new-ad/tool" component={NewAd} />
                 <PrivateRoute exact path="/new-ad/request" component={NewRequest} />
-                <PrivateRoute exact path="/ad/:id" component={AdView} />
+                <PublicRoute exact path="/ad/:id" component={AdView} />
                 <PublicRoute restricted={false} exact path="/req/:id" component={ReqView} />
                 <PublicRoute component={Error404} />
             </Switch>
