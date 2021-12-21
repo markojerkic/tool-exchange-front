@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
+import { useHistory } from 'react-router';
 
 const Advert = props => {
+    const history = useHistory();
     const [advert] = useState(props.ad);
     console.log(advert)
 
     return(
 
-        <div className="singleAdvert grid-parent">
+        <div className="singleAdvert grid-parent" onClick={() => history.push(`/ad/${advert.id}`)}>
             <div className="grid-child-element">
             <img src="default_picture.jpg" className="advertPicture" />
             </div>
