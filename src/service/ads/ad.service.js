@@ -7,7 +7,9 @@ const AdService = {
     },
 
     getAdById: function(id){
-        return instance.get(`ad/${id}`);
+        return instance.get(`ad/${id}`).then((response) => {
+            return response.data;
+        });
     },
 
 
