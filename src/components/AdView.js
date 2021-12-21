@@ -4,6 +4,7 @@ import 'primeflex/primeflex.css'
 import {useHistory} from 'react-router-dom';
 import {Button} from 'primereact/button';
 import AdService from '../service/ads/ad.service'
+import Moment from "moment";
 
 const AdView = () => {
     const id = window.location.pathname.substring(4)
@@ -12,6 +13,8 @@ const AdView = () => {
 
     useEffect(() => {
         AdService.getAdById(id).then((data) => {
+            Moment.locale('hr');
+            data.lastModified = new Date(data.lastModified);
             setAdvertData(data);
         })
     }, []);
@@ -21,7 +24,7 @@ const AdView = () => {
             <Button label="Povratak na listu oglasa" icon="pi pi-angle-left" onClick={() => history.push("/")} />
         </span>;
     const footer = <span>
-            <label>Datum objave: {advertData?.lastModified}</label>
+            <label>Datum objave: {Moment(advertData?.lastModified.toString()).format('DD.MM.yyyy.')}</label>
             <Button label="Pošalji poruku" style={{float:"right"}} />
         </span>; 
     const shortRep = `Objavljuje ${advertData?.creator.username}`
