@@ -56,10 +56,10 @@ const NewTool = () => {
         toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Slika prenešena'});
     }
 
-    const header = <span>
+    const header = <div className="divButtonTop">
             <Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-ad')} />
             <Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/')} style={{float:"right"}} />
-        </span>;
+        </div>;
     return(
         <div>
             <Stepper stepId={1} category={"request"} />

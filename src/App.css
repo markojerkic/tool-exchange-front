@@ -94,7 +94,7 @@ html{
 
 .advertTitle{
     font-size: larger;
-    color: var(--blue-300);;
+    color: var(--blue-300);
 }
 
 .advertPicture{
@@ -115,5 +115,23 @@ html{
     -webkit-line-clamp: 4; /* number of lines to show */
             line-clamp: 2; 
     -webkit-box-orient: vertical;
+}
+
+h2{
+    margin-left: 5%;
+    color: var(--blue-200);
+}
+
+.divButtonTop{
+    margin: 2%;
+}
+
+.generalButton{
+    margin-bottom: 1%;
+    margin-top: -2.5%;
+}
+
+.generalDate{
+    margin: 1%;
 }
 

@@ -22,13 +22,13 @@ const ReqView = () => {
     }, []);
 
     const history = useHistory();
-    const header = <span>
-            <Button label="Povratak na listu zahtjeva" icon="pi pi-angle-left" onClick={() => history.push('/')} />
-        </span>;
-    const footer = <span>
-            <label>Datum objave: {Moment(requestData?.lastModified.toString()).format('DD.MM.yyyy.')}</label>
-            <Button label="Pošalji poruku" style={{float:"right"}} />
-        </span>; 
+    const header = <div className="divButtonTop">
+            <Button  label="Povratak na listu zahtjeva" icon="pi pi-angle-left" onClick={() => history.push('/')} />
+        </div>;
+    const footer = <div>
+            <label className="generalDate">Datum objave: {Moment(requestData?.lastModified.toString()).format('DD.MM.yyyy.')}</label>
+            <Button className="generalButton" label="Pošalji poruku" style={{float:"right"}} />
+        </div>; 
     const shortRep = `Objavljuje ${requestData?.creator.username}`
     
     return (

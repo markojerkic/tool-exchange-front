@@ -20,13 +20,13 @@ const AdView = () => {
     }, []);
 
     const history = useHistory();
-    const header = <span>
+    const header = <div className="divButtonTop">
             <Button label="Povratak na listu oglasa" icon="pi pi-angle-left" onClick={() => history.push("/")} />
-        </span>;
-    const footer = <span>
-            <label>Datum objave: {Moment(advertData?.lastModified.toString()).format('DD.MM.yyyy.')}</label>
-            <Button label="Pošalji poruku" style={{float:"right"}} />
-        </span>; 
+        </div>;
+    const footer = <div>
+            <label className="generalDate">Datum objave: {Moment(advertData?.lastModified.toString()).format('DD.MM.yyyy.')}</label>
+            <Button className="generalButton" label="Pošalji poruku" style={{float:"right"}} />
+        </div>; 
     const shortRep = `Objavljuje ${advertData?.creator.username}`
 
     return (

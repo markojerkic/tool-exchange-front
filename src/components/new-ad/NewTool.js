@@ -29,10 +29,10 @@ const NewTool = () => {
     const uploadOptions = {label: 'Prenesi', icon: 'pi pi-upload', className: 'p-button-success'};
     const cancelOptions = {label: 'Otkaži', icon: 'pi pi-times', className: 'p-button-danger'};
 
-    const header = <span>
+    const header = <div className="divButtonTop">
         <Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-ad')} />
         <Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/')} style={{float:"right"}} />
-    </span>;
+    </div>;
 
     const defaultValues = {
         title: '',
