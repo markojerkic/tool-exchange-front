@@ -21,7 +21,7 @@ const Advert = props => {
             </div>
             <div>
                 <p className="advertElement advertTitle">{advert?.title}</p>
-                <p>Opis: <b>{advert?.details}</b></p>
+                <p className="advertElement desc">{advert?.details}</p>
                 {!!advert?.tool &&
                     <div>
                         <p>Alat: <b>{advert?.tool.name}</b></p>
