@@ -46,8 +46,6 @@ instance.interceptors.response.use(
 
                     return instance(originalConfig);
                 } catch (_error) {
-                    //history.push('/login');
-                    //window.location.reload();
                     TokenService.removeUser();
                     return Promise.reject(_error);
                 }

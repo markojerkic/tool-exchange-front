@@ -5,21 +5,37 @@ import Moment from 'moment';
 const Advert = props => {
     const history = useHistory();
     const [advert] = useState(props.ad);
-    console.log(advert)
     Moment.locale('hr')
     const date = new Date(advert.lastModified);
+    const conditions = {
+        'NEW': 'Novo',
+        'USED': 'Korišteno',
+        'DAMAGED': 'Neispravno/Oštećeno'
+    };
 
     return(
 
         <div className="singleAdvert grid-parent" onClick={() => history.push(`/ad/${advert.id}`)}>
             <div className="grid-child-element">
-            <img src="default_picture.jpg" className="advertPicture" />
+                <img src="default_picture.jpg" className="advertPicture" alt="Slika"/>
             </div>
-            <div className="grid-child-element">
-                <p className="advertElement advertTitle">{advert.title}</p>
-                <p className="advertElement desc">{advert.details}</p>
-                <span className="advertDate">Datum objave: {Moment(date.toString()).format('DD.MM.yyyy.')}</span>
+            <div>
+                <p className="advertElement advertTitle">{advert?.title}</p>
+                <p className="advertElement desc">{advert?.details}</p>
+                <p>Šifra oglasa: <b>{advert?.id}</b></p>
+                <p>Opis: <b>{advert?.details}</b></p>
+                {!!advert?.tool &&
+                    <div>
+                        <p>Alat: <b>{advert?.tool.name}</b></p>
+                        <p>Stanje alata: <b>{conditions[advert?.tool.toolState]}</b></p>
+                        <p>Alat je električan: <b>{advert?.tool.electric? 'Da': 'Ne'}</b></p>
+                        {!advert?.electric &&
+                            <p>Snaga alata: <b>{advert?.tool.power} W</b></p>
+                        }
+                    </div>
+                }
             </div>
+            <p className="advertDate p-ml-2">Datum objave: {Moment(date).format('DD.MM.yyyy.')}</p>
         </div>
     );
 }

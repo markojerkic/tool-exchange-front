@@ -10,6 +10,11 @@ const AdView = () => {
     const id = window.location.pathname.substring(4)
 
     const [advertData, setAdvertData] = useState();
+    const conditions = {
+        'NEW': 'Novo',
+        'USED': 'Korišteno',
+        'DAMAGED': 'Neispravno/Oštećeno'
+    };
 
     useEffect(() => {
         AdService.getAdById(id).then((data) => {
@@ -33,12 +38,14 @@ const AdView = () => {
         <div>
             <div className="p-d-flex p-jc-center p-m-6">
                 <Card className="card-container" title={advertData?.title} subTitle={shortRep} header={header} footer={footer} style={{ width: '50rem' }} >
-                    <Card title="Detalji">
-                        <p><b>{advertData?.details}</b></p>
-                        {/*<p>Alat dostupan od: <b>{Advert.from}</b> do <b>{Advert.to}</b></p>*/}
-                        {/*<p>Lokacija: <b>{Advert.location}</b></p>*/}
-                        <p>Šifra oglasa: <b>{advertData?.id}</b></p>
-                    </Card>
+                    <p>Opis: <b>{advertData?.details}</b></p>
+                    <p>Alat: <b>{advertData?.tool.name}</b></p>
+                    <p>Stanje alata: <b>{conditions[advertData?.tool.toolState]}</b></p>
+                    <p>Alat je električan: <b>{advertData?.tool.electric? 'Da': 'Ne'}</b></p>
+                    {!advertData?.electric &&
+                        <p>Snaga alata: <b>{advertData?.tool.power} W</b></p>
+                    }
+                    <p>Šifra oglasa: <b>{advertData?.id}</b></p>
                 </Card>
             </div>
         </div>

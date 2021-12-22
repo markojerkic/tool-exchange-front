@@ -22,8 +22,7 @@ const NewTool = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const [, setFormData] = useState({});
-    const [isElectric, setElectric] = useState(false);
+    const [electric, setElectric] = useState(false);
 
     const chooseOptions = {label: 'Odaberi', icon: 'pi pi-fw pi-plus'};
     const uploadOptions = {label: 'Prenesi', icon: 'pi pi-upload', className: 'p-button-success'};
@@ -41,7 +40,7 @@ const NewTool = () => {
         condition: null,
         phonenumber: null,
         power: 0,
-        isElectric: false,
+        electric: false,
         hasBattery: false
     }
 
@@ -53,7 +52,7 @@ const NewTool = () => {
 
     const [conditions] = useState(initialConditions);
 
-    const { control, formState: { errors }, handleSubmit, setError, reset, getValues } = useForm({ defaultValues });
+    const { control, formState: { errors }, handleSubmit, reset} = useForm({ defaultValues });
     const history = useHistory();
     const {toastRef} = useContext(ToastContext);
 
@@ -65,10 +64,10 @@ const NewTool = () => {
     const onSubmit = (data) => {
         setLoading(true);
         let Tool;
-        if(data.isElectric === true){
+        if(data.electric === true){
             Tool = {
                 name:  data.toolName,
-                isElectric: data.isElectric,
+                electric: data.electric,
                 hasBattery: data.hasBattery,
                 power: data.power,
                 toolState: data.condition    
@@ -76,7 +75,7 @@ const NewTool = () => {
         }else{
             Tool = {
                 name:  data.toolName,
-                isElectric: data.isElectric,
+                electric: data.electric,
                 hasBattery: null,
                 power: null,
                 toolState: data.condition    
@@ -133,7 +132,7 @@ const NewTool = () => {
                         </div>
 
                         <div className="p-field p-grid p-dir-col p-col-12 p-md-4 p-lg-4 p-sm-4 p-ml-1">
-                            <Controller name="isElectric" control={control}
+                            <Controller name="electric" control={control}
                                         render={({ field, fieldState }) => (
                                             <InputSwitch id={field.name} inputId={field.name}
                                                 onChange={(e) => {
@@ -143,10 +142,10 @@ const NewTool = () => {
                                                 checked={field.value}
                                                 className={classNames({'p-invalid': fieldState.invalid})} />
                                         )}/>
-                            <label className='p-col' htmlFor="isElectric">Električan</label>
+                            <label className='p-col' htmlFor="electric">Električan</label>
                         </div>
 
-                        { isElectric &&
+                        { electric &&
 
                             <div className="p-grid p-dir-col p-col-12 p-md-8 p-lg-8 p-sm-8" id="animDiv">
                                 <div className='p-field p-grid p-dir-col p-ml-2'>

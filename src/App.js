@@ -18,9 +18,8 @@ const App = () => {
   const history = useHistory();
 
   const navigateToPage = (path) => {
-		console.log('Navigate to path ' + path);
-		history.push('/new-ad')
-	}
+		history.push(path);
+  }
 
   const menuItems = [
     {
@@ -34,7 +33,8 @@ const App = () => {
         },
         {
           label: 'Pregledaj oglase',
-          icon: 'pi pi-list'
+          icon: 'pi pi-list',
+          command:()=>{ navigateToPage('')}
         }
       ]
     }

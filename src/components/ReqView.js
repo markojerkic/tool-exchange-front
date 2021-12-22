@@ -1,15 +1,13 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Card} from "primereact/card";
 import 'primeflex/primeflex.css'
-import {AuthContext} from "../common/auth.context";
 import {useHistory} from 'react-router-dom';
 import {Button} from 'primereact/button';
 import RequestService from "../service/ads/request.service";
 import Moment from 'moment';
 
 const ReqView = () => {
-    const id = window.location.pathname.substring(5)
-    const {user} = useContext(AuthContext);
+    const id = window.location.pathname.substring(5);
 
     const [requestData, setRequestData] = useState();
 
@@ -35,12 +33,8 @@ const ReqView = () => {
         <div>
             <div className="p-d-flex p-jc-center p-m-6">
                 <Card className="card-container" title={requestData?.title} subTitle={shortRep} header={header} footer={footer} style={{ width: '50rem' }} >
-                    <Card title="Detalji">
-                        <p><b>{requestData?.details}</b></p>
-                        {/*<p>Kategorija alata: <b>{ToolCategory.nameToolCategory}</b></p>*/}
-                        {/*<p>Lokacija: <b>{ToolRequest.locationToolRequest}</b></p>*/}
-                        <p>Šifra zahtjeva: <b>{requestData?.id}</b></p>
-                    </Card>
+                    <p>Opis: <b>{requestData?.details}</b></p>
+                    <p>Šifra zahtjeva: <b>{requestData?.id}</b></p>
                 </Card>
             </div>
         </div>

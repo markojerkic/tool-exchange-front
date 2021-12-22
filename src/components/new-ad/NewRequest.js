@@ -14,11 +14,9 @@ import Stepper from '../stepper/Stepper'
 import RequestService from "../../service/ads/request.service";
 
 
-const NewTool = () => {
+const NewRequest = () => {
 
     const [loading, setLoading] = useState(false);
-
-    const [, setFormData] = useState({});
 
     const chooseOptions = {label: 'Odaberi', icon: 'pi pi-fw pi-plus'};
     const uploadOptions = {label: 'Prenesi', icon: 'pi pi-upload', className: 'p-button-success'};
@@ -30,7 +28,7 @@ const NewTool = () => {
     }
 
 
-    const { control, formState: { errors }, handleSubmit, setError, reset } = useForm({ defaultValues });
+    const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
     const history = useHistory();
     const {toastRef} = useContext(ToastContext);
 
@@ -111,4 +109,4 @@ const NewTool = () => {
 
 }
 
-export default NewTool;
+export default NewRequest;
