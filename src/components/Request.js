@@ -16,7 +16,6 @@ const Request = props => {
             </div>
             <div className="grid-child-element">
                 <p className="advertElement advertTitle">{request?.title}</p>
-                <p className="advertElement desc">{request?.details}</p>
                 <p>Šifra zahtjeva: <b>{request?.id}</b></p>
                 <p>Opis: <b>{request?.details}</b></p>
                 <p className="advertDate">Datum objave: {Moment(date).format('DD.MM.yyyy.')}</p>

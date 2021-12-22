@@ -21,17 +21,11 @@ const Advert = props => {
             </div>
             <div>
                 <p className="advertElement advertTitle">{advert?.title}</p>
-                <p className="advertElement desc">{advert?.details}</p>
-                <p>Šifra oglasa: <b>{advert?.id}</b></p>
                 <p>Opis: <b>{advert?.details}</b></p>
                 {!!advert?.tool &&
                     <div>
                         <p>Alat: <b>{advert?.tool.name}</b></p>
                         <p>Stanje alata: <b>{conditions[advert?.tool.toolState]}</b></p>
-                        <p>Alat je električan: <b>{advert?.tool.electric? 'Da': 'Ne'}</b></p>
-                        {!advert?.electric &&
-                            <p>Snaga alata: <b>{advert?.tool.power} W</b></p>
-                        }
                     </div>
                 }
             </div>
