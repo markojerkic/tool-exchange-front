@@ -19,14 +19,14 @@ const Advert = props => {
             <div className="grid-child-element">
                 <img src="default_picture.jpg" className="advertPicture" alt="Slika"/>
             </div>
-            <div>
+            <div className="grid-child-element">
                 <p className="advertElement advertTitle">{advert?.title}</p>
                 <p className="advertElement desc">{advert?.details}</p>
                 {!!advert?.tool &&
-                    <div>
+                    <>
                         <p>Alat: <b>{advert?.tool.name}</b></p>
                         <p>Stanje alata: <b>{conditions[advert?.tool.toolState]}</b></p>
-                    </div>
+                    </>
                 }
                 <p className="advertDate">Datum objave: {Moment(date).format('DD.MM.yyyy.')}</p>
             </div>
