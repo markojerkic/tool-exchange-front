@@ -28,7 +28,7 @@ const Advert = props => {
                         <p>Stanje alata: <b>{conditions[advert?.tool.toolState]}</b></p>
                     </div>
                 }
-                <p className="advertDate p-ml-2">Datum objave: {Moment(date).format('DD.MM.yyyy.')}</p>
+                <p className="advertDate">Datum objave: {Moment(date).format('DD.MM.yyyy.')}</p>
             </div>
         </div>
     );
