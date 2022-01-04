@@ -26,7 +26,6 @@ const AdView = () => {
 			data.lastModified = new Date(data.lastModified);
 			setAdvertData(data);
 			ImageService.getImagesByAdvertId(data.id).then((images) => {
-				console.log(imageUrls);
 				setImageUrls(images);
 			});
 		})
