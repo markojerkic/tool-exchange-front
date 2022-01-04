@@ -12,6 +12,11 @@ const ImageService = {
 
 	getImageByUUID: function (uuid) {
 		return `${this.baseUrl}/${uuid}`;
+	},
+
+	getImagesByAdvertId(advertId) {
+		return instance.get(`image/by-advert/${advertId}`).then((response) => response.data);
+
 	}
 
 }

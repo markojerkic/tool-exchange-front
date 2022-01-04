@@ -18,6 +18,5 @@ const AdService = {
 			return response.data;
 		});
 	}
-
 }
 export default AdService;
