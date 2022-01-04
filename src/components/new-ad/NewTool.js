@@ -94,7 +94,7 @@ const NewTool = () => {
 			details: data.description,
 			tool: Tool,
 			phoneNumber: data.phonenumber,
-			images: []
+			images: data.images
 		}
 		AdService.addNewAd(podatci).then((response) => {
 			reset();
@@ -118,7 +118,7 @@ const NewTool = () => {
 				toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: 'Slike prenijete'});
 		}).then((images) => {
 			savedImages.push(...images);
-			setSavedImages(savedImages);
+			setSavedImages([...savedImages]);
 			setValue('images', savedImages);
 			console.log(savedImages)
 		});
@@ -265,7 +265,14 @@ const NewTool = () => {
 					</form>
 
 					{savedImages.map((image) => {
-						return <p id={image.uuid}>{image.uuid}</p>
+						return <div className='p-grid p-flex p-jc-between p-ai-center'
+									id={`image-div-${image.uuid}`}>
+							<img id={image.uuid} style={{width: '10rem'}}
+									alt={image.uuid} className='p-col-4'
+									src={ImageService.getImageByUUID(image.uuid)}/>
+							<h4 id={`h4-${image.uuid}`} className='p-col-4'>{image.uuid}</h4>
+							<Button id={`button-${image.uuid}`} className='p-col-4' label='Ukloni sliku' icon='pi pi-times' />
+						</div>
 					})}
 
 				</Card>

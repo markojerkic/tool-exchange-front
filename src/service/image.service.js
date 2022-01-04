@@ -2,6 +2,8 @@ import instance from './interceptor.js'
 
 const ImageService = {
 
+	baseUrl: `http://${process.env.REACT_APP_BACKEND_HOST}/api/image`,
+
 	uploadImage: function (images) {
 		const formData = new FormData();
 		images.forEach(image => formData.append('images', image));
@@ -9,7 +11,7 @@ const ImageService = {
 	},
 
 	getImageByUUID: function (uuid) {
-		return instance.get(`image/${uuid}`).then((response) => response.data);
+		return `${this.baseUrl}/${uuid}`;
 	}
 
 }
