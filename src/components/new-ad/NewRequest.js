@@ -22,9 +22,10 @@ const NewRequest = () => {
     const uploadOptions = {label: 'Prenesi', icon: 'pi pi-upload', className: 'p-button-success'};
     const cancelOptions = {label: 'Otkaži', icon: 'pi pi-times', className: 'p-button-danger'};
 
+
     const defaultValues = {
         title: '',
-        details: '',
+        details: ''
     }
 
 
@@ -70,8 +71,10 @@ const NewRequest = () => {
 
                     <div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
                         <span className="p-float-label">
-                            <Controller name="title" control={control} rules={{ required: 'Naslov je obavezan.' }} render={({ field, fieldState }) => (
-                                <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                            <Controller name="title" control={control} rules={{ required: 'Naslov je obavezan.' }}
+                                        render={({ field, fieldState }) => (
+                                <InputText id={field.name} {...field} autoFocus
+                                           className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
                                 )}/>
                             <label htmlFor="title" className={classNames({ 'p-error': errors.title })}>Naslov *</label>
                         </span>
@@ -80,10 +83,13 @@ const NewRequest = () => {
 
                     <div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
                         <span className="p-float-label">
-                            <Controller name="details" control={control} rules={{ required: 'Opis je obavezan.' }} render={({ field }) => (
+                            <Controller name="details" control={control}
+                                        rules={{ required: 'Opis je obavezan.' }}
+                                        render={({ field }) => (
                                 <InputTextarea id={field.name} {...field} type="text" rows={5} cols={30} autoResize/>
                             )}/>
-                                <label htmlFor="details" className={classNames({ 'p-error': errors.description })}>Opis *</label>
+                                <label htmlFor="details" className={
+                                    classNames({ 'p-error': errors.description })}>Opis *</label>
                         </span>
                         {getFormErrorMessage('details')}
                     </div>

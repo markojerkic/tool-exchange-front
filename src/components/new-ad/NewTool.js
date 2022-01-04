@@ -38,10 +38,11 @@ const NewTool = () => {
         description: '',
         toolName: '',
         condition: null,
-        phonenumber: null,
+        phonenumber: '',
         power: 0,
         electric: false,
-        hasBattery: false
+        hasBattery: false,
+        images: []
     }
 
     const initialConditions = [
@@ -76,7 +77,7 @@ const NewTool = () => {
             Tool = {
                 name:  data.toolName,
                 electric: data.electric,
-                hasBattery: null,
+                hasBattery: false,
                 power: null,
                 toolState: data.condition    
             }
@@ -85,11 +86,12 @@ const NewTool = () => {
             title: data.title,
             details: data.description,
             tool: Tool,
-            phoneNumber: data.phonenumber
+            phoneNumber: data.phonenumber,
+            images: []
         }
         AdService.addNewAd(podatci).then((response) => {
             reset();
-            history.push('/ad/'+ response.data.id);
+            history.push('/advert/'+ response.data.id);
             setLoading(false);
             toastRef.current.show({severity:'success', summary: 'Uspjeh', detail: 'Oglas napravljen'});
           }, () => {

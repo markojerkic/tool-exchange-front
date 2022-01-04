@@ -43,7 +43,7 @@ const AdView = () => {
                     <p>Alat: <b>{advertData?.tool.name}</b></p>
                     <p>Stanje alata: <b>{conditions[advertData?.tool.toolState]}</b></p>
                     <p>Alat je električan: <b>{advertData?.tool.electric? 'Da': 'Ne'}</b></p>
-                    {!advertData?.electric &&
+                    {advertData?.electric &&
                         <p>Snaga alata: <b>{advertData?.tool.power} W</b></p>
                     }
                     <p>Šifra oglasa: <b>{advertData?.id}</b></p>

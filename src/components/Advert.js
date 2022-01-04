@@ -15,7 +15,7 @@ const Advert = props => {
 
     return(
 
-        <div className="singleAdvert grid-parent" onClick={() => history.push(`/ad/${advert.id}`)}>
+        <div className="singleAdvert grid-parent" onClick={() => history.push(`/advert/${advert.id}`)}>
             <div className="grid-child-element">
                 <img src="default_picture.jpg" className="advertPicture" alt="Slika"/>
             </div>
