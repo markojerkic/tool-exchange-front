@@ -1,76 +1,76 @@
-html{
-    background-color:var(--primary-color-text);
+html {
+    background-color: var(--primary-color-text);
     color: white;
 }
 
-.content{
+.content {
     margin-top: 15%;
 }
 
-.header{
+.header {
     position: absolute;
     height: 5%;
-    left:0;
-    top:0;
-    right:0;
+    left: 0;
+    top: 0;
+    right: 0;
     background-color: #fab162;
 }
 
-.footer{
+.footer {
     position: absolute;
     height: 5%;
-    left:0;
-    bottom:0;
-    right:0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     background-color: var(--blue-500);
 }
 
-.title{
+.title {
     margin: 0 auto;
     text-align: center;
     padding-top: 1%;
 }
 
-.stdText{
+.stdText {
     color: var(--text-color);
 }
 
-.grid-child-element { 
+.grid-child-element {
     margin: 1.5em;
     height: fit-content;
 }
 
-.shape{
+.shape {
     padding: 0.5rem;
     color: rgba(255, 255, 255, 0.87);
     border-radius: 5px;
 }
 
-.grid-parent{
-    display: grid; 
-    grid-template-columns: 3fr 8fr; 
+.grid-parent {
+    display: grid;
+    grid-template-columns: 3fr 8fr;
 }
 
-.mainView{
+.mainView {
     margin: 1em auto;
     width: 90%;
     background: var(--surface-a);
     min-height: 90vh;
 }
 
-.adView{
+.adView {
     background: var(--surface-b);
 }
 
-.home-tag{
+.home-tag {
     border: 1px solid var(--blue-900);
     margin: 1em auto;
     width: 70%;
-    
+
 }
 
 
-.singleAdvert{
+.singleAdvert {
     border-radius: 3px;
     background-color: var(--surface-d);
     margin: 1.5em;
@@ -79,59 +79,61 @@ html{
     position: relative;
 }
 
-.adverElement{
+.adverElement {
     padding: 0px;
     margin: 0px;
 }
-.advertLocation{
+
+.advertLocation {
     margin: 0px;
     padding: 0px;
     float: right;
     position: absolute;
     bottom: 10%;
-    right: 5%;   
+    right: 5%;
 }
 
-.advertTitle{
+.advertTitle {
     font-size: larger;
     color: var(--blue-300);
 }
 
-.advertPicture{
+.advertPicture {
     border-radius: 2px;
     max-width: 20em;
 }
 
-.advertDate{
+.advertDate {
     margin: 0px;
     padding: 0px;
     position: absolute;
     bottom: 10%;
 }
-.desc{
+
+.desc {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 4; /* number of lines to show */
-            line-clamp: 2; 
+    line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
-h2{
+h2 {
     margin-left: 5%;
     color: var(--blue-200);
 }
 
-.divButtonTop{
+.divButtonTop {
     margin: 2%;
 }
 
-.generalButton{
+.generalButton {
     margin-bottom: 1%;
     margin-top: -2.5%;
 }
 
-.generalDate{
+.generalDate {
     margin: 1%;
 }
 

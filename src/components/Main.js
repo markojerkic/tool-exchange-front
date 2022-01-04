@@ -14,22 +14,22 @@ import AdView from "./AdView";
 import ReqView from "./ReqView";
 
 const Main = () => {
-    return (
-        <main>
-            <Switch>
-                <PublicRoute restricted={false} exact path="/" component={Home} />
-                <PublicRoute restricted={false} exact path="/login" component={Login} />
-                <PublicRoute restricted={false} exact path="/register" component={Registration} />
-                <PrivateRoute exact path="/user" component={UserInfo} />
-                <PrivateRoute exact path="/new-ad" component={Category} />
-                <PrivateRoute exact path="/new-ad/tool" component={NewAd} />
-                <PrivateRoute exact path="/new-ad/request" component={NewRequest} />
-                <PublicRoute exact path="/advert/:id" component={AdView} />
-                <PublicRoute restricted={false} exact path="/req/:id" component={ReqView} />
-                <PublicRoute component={Error404} />
-            </Switch>
-        </main>
-    )
+	return (
+		<main>
+			<Switch>
+				<PublicRoute restricted={false} exact path="/" component={Home}/>
+				<PublicRoute restricted={false} exact path="/login" component={Login}/>
+				<PublicRoute restricted={false} exact path="/register" component={Registration}/>
+				<PrivateRoute exact path="/user" component={UserInfo}/>
+				<PrivateRoute exact path="/new-ad" component={Category}/>
+				<PrivateRoute exact path="/new-ad/tool" component={NewAd}/>
+				<PrivateRoute exact path="/new-ad/request" component={NewRequest}/>
+				<PublicRoute exact path="/advert/:id" component={AdView}/>
+				<PublicRoute restricted={false} exact path="/req/:id" component={ReqView}/>
+				<PublicRoute component={Error404}/>
+			</Switch>
+		</main>
+	)
 }
 
 export default Main;
