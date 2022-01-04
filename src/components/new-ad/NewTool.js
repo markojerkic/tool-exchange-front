@@ -120,7 +120,6 @@ const NewTool = () => {
 			savedImages.push(...images);
 			setSavedImages([...savedImages]);
 			setValue('images', savedImages);
-			console.log(savedImages)
 		});
 
 	}
@@ -266,12 +265,12 @@ const NewTool = () => {
 
 					{savedImages.map((image) => {
 						return <div className='p-grid p-flex p-jc-between p-ai-center'
-									id={`image-div-${image.uuid}`}>
-							<img id={image.uuid} style={{width: '10rem'}}
+									key={`image-div-${image.uuid}`}>
+							<img key={image.uuid} style={{width: '10rem'}}
 									alt={image.uuid} className='p-col-4'
 									src={ImageService.getImageByUUID(image.uuid)}/>
-							<h4 id={`h4-${image.uuid}`} className='p-col-4'>{image.uuid}</h4>
-							<Button id={`button-${image.uuid}`} className='p-col-4' label='Ukloni sliku' icon='pi pi-times' />
+							<h4 key={`h4-${image.uuid}`} className='p-col-4'>{image.uuid}</h4>
+							<Button key={`button-${image.uuid}`} className='p-col-4' label='Ukloni sliku' icon='pi pi-times' />
 						</div>
 					})}
 

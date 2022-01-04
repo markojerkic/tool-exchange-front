@@ -21,7 +21,7 @@ const Advert = props => {
 	const getFirstImage = (advertId) => {
 		ImageService.getImagesByAdvertId(advertId).then((images) => {
 			if (images.length > 0) {
-				setImageUrl(ImageService.getImageByUUID(images[0].uuid));
+				setImageUrl(images[0]);
 			}
 		});
 	}

@@ -15,8 +15,8 @@ const ImageService = {
 	},
 
 	getImagesByAdvertId(advertId) {
-		return instance.get(`image/by-advert/${advertId}`).then((response) => response.data);
-
+		return instance.get(`image/by-advert/${advertId}`).then((response) =>
+			response.data.map(image => this.getImageByUUID(image.uuid)));
 	}
 
 }
