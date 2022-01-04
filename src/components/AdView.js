@@ -5,9 +5,10 @@ import {useHistory} from 'react-router-dom';
 import {Button} from 'primereact/button';
 import AdService from '../service/ads/ad.service'
 import Moment from "moment";
+import {useParams} from "react-router";
 
 const AdView = () => {
-    const id = window.location.pathname.substring(4)
+    const {id} = useParams();
 
     const [advertData, setAdvertData] = useState();
     const conditions = {
@@ -22,7 +23,7 @@ const AdView = () => {
             data.lastModified = new Date(data.lastModified);
             setAdvertData(data);
         })
-    }, []);
+    }, [id]);
 
     const history = useHistory();
     const header = <div className="divButtonTop">

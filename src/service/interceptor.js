@@ -37,7 +37,8 @@ instance.interceptors.response.use(
                 try {
                     const token = TokenService.getLocalRefreshToken();
                     if (!token) {
-                        return;
+                        TokenService.removeUser();
+                        return Promise.reject();
                     }
                     const rs = await instance.get("/auth/refreshToken?token="+token);
                     if (rs.data.accessToken) {

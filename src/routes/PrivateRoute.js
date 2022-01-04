@@ -9,7 +9,8 @@ const PrivateRoute = ({component: Component, ...rest}) => {
 
     useEffect(() => {
         if(!user) {
-            toastRef.current.show({severity:'error', summary: 'Greška', detail: "Za pristup toj komponenti trebate se prijaviti"});
+            toastRef.current.show({severity:'info', summary: 'Potrebna prijava',
+                detail: "Za pristup toj komponenti trebate se prijaviti"});
         }
     }, [toastRef, user]);
 

@@ -5,9 +5,10 @@ import {useHistory} from 'react-router-dom';
 import {Button} from 'primereact/button';
 import RequestService from "../service/ads/request.service";
 import Moment from 'moment';
+import {useParams} from "react-router";
 
 const ReqView = () => {
-    const id = window.location.pathname.substring(5);
+    const {id} = useParams();
 
     const [requestData, setRequestData] = useState();
 
@@ -17,7 +18,7 @@ const ReqView = () => {
             data.lastModified = new Date(data.lastModified);
             setRequestData(data);
         })
-    }, []);
+    }, [id]);
 
     const history = useHistory();
     const header = <div className="divButtonTop">

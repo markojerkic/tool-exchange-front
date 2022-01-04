@@ -1,7 +1,6 @@
 import 'primeflex/primeflex.css';
 import {Button} from 'primereact/button';
 import {Card} from 'primereact/card';
-import {Dropdown} from 'primereact/dropdown';
 import {InputText} from 'primereact/inputtext';
 import {Password} from 'primereact/password';
 import {classNames} from 'primereact/utils';
@@ -12,23 +11,15 @@ import AuthService from "../../../service/auth/auth.service";
 import '../containers.css';
 import {ToastContext} from "../../../common/toast.context";
 import {InputMask} from 'primereact/inputmask';
+import {Dialog} from "primereact/dialog";
+import LocationSearch from "../LocationSearch";
 
 const Registration = () => {
 
-    const initalCities = [
-        {name: 'Zagreb', code: 'Zagreb'},
-        {name: 'Split', code: 'Split'},
-        {name: 'Rijeka', code: 'Rijeka'},
-        {name: 'Osijek', code: 'Osijek'},
-        {name: 'Velika Gorica', code: 'Velika Gorica'},
-        {name: 'Zadar', code: 'Zadar'},
-        {name: 'Slavonski Brod', code: 'Slavonski Brod'},
-        {name: 'Pula', code: 'Pula'},
-        {name: 'Dubrovnik', code: 'Dubrovnik'},
-    ];
+    const [showLocationDialog, setShowLocationDialog] = useState(false);
 
-    const [cities] = useState(initalCities);
     const [loading, setLoading] = useState(false);
+    const [locationSelected, setLocationSelected] = useState();
 
     const [, setFormData] = useState({});
     const defaultValues = {
@@ -39,23 +30,40 @@ const Registration = () => {
         username: '',
         phonenumber: '',
         zip: '',
-        address: '',
+        formattedAddress: '',
+        lat: null,
+        lng: null,
         city: null
     }
 
-    const { control, formState: { errors }, handleSubmit, setError, reset } = useForm({ defaultValues });
+    const { control, formState: { errors }, handleSubmit, setError, reset, setValue, setFocus } = useForm({ defaultValues });
     const history = useHistory();
     const toastRef = useContext(ToastContext);
+
+    const onLocationChanged = (location) => {
+        setLocationSelected(location.value);
+        setValue('formattedAddress', location.value.formatted_address);
+        setFocus('formattedAddress');
+        setShowLocationDialog(false);
+    }
 
     const onSubmit = (data) => {
         setFormData(data);
         setLoading(true);
-        AuthService.register(data).then((response) => {
-            reset();
-            setLoading(false);
-            history.push('/login');
-        }, (error) => {
-            setLoading(false);
+        data.locationSearchResult = locationSelected;
+
+        const user = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            username: data.username,
+            password: data.password,
+            locationSearchResult: locationSelected,
+        }
+
+        console.log(user);
+        AuthService.register(user).finally(() => setLoading(false)).catch((error) => {
+            console.log(error);
             if (error.response.status !== 400) {
                 toastRef.current.show({severity:'error', summary: 'Greška', detail:error.response.data.message});
             } else {
@@ -65,7 +73,9 @@ const Registration = () => {
                     setError("username", {type: "manual", message: "Korisničko ime se već koristi"});
                 }
             }
-
+        }).then(() => {
+            reset();
+            history.push('/login');
         });
     };
 
@@ -81,8 +91,11 @@ const Registration = () => {
 
                     <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                         <span className="p-float-label">
-                            <Controller name="firstName" control={control} rules={{ required: 'Ime je obavezno.' }} render={({ field, fieldState }) => (
-                                <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                            <Controller name="firstName" control={control} rules={{ required: 'Ime je obavezno.' }}
+                                        render={({ field, fieldState }) => (
+                                <InputText id={field.name} {...field} autoFocus
+                                           className={classNames({ 'p-invalid': fieldState.invalid })}
+                                           type="text" />
                                 )}/>
                             <label htmlFor="firstName" className={classNames({ 'p-error': errors.firstName })}>Ime*</label>
                         </span>
@@ -93,7 +106,8 @@ const Registration = () => {
                             <Controller name="lastName" control={control}
                                 rules={{ required: 'Prezime je obavezno.'}}
                                 render={({ field, fieldState }) => (
-                                    <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} type="text" />
+                                    <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })}
+                                               type="text" />
                             )} />
                             <label htmlFor="lastName" className={classNames({ 'p-error': errors.lastName })}>Prezime*</label>
                         </span>
@@ -102,28 +116,18 @@ const Registration = () => {
 
                     <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                         <span className="p-float-label">
-                            <Controller name="address" control={control} render={({ field }) => (
-                              <InputText id={field.name} {...field} type="text" />
+                            <Controller name="formattedAddress" control={control}
+                                        rules={{ required: 'Adresa je obavezna.'}}
+                                        render={({ field, fieldState }) => (
+                                <div className="p-inputgroup">
+                                    <InputText  id={field.name} {...field} type="text" readOnly={true}
+                                                placeholder='Adresa'
+                                                className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    <Button icon="pi pi-search" className="p-button-warning" type="button"
+                                            tooltip='Pretražite lokacije'
+                                            onClick={() => setShowLocationDialog(true)}/>
+                                </div>
                             )}/>
-                                <label htmlFor="address">Adresa</label>
-                        </span>
-                    </div>
-                
-                    
-                    <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
-                        <span className="p-float-label">
-                            <Controller name="country" control={control} render={({ field }) => (
-                                <Dropdown id={field.name} value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name"/>
-                            )}/>
-                            <label htmlFor="city">Grad</label>
-                        </span>
-                    </div>
-                    <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
-                        <span className="p-float-label">
-                            <Controller name="zip" control={control} render={({ field }) => (
-                                <InputText id={field.name} type="text" />
-                            )}/>
-                            <label htmlFor="zip">Poštanski broj</label>
                         </span>
                     </div>
 
@@ -139,9 +143,12 @@ const Registration = () => {
                     <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                         <span className="p-float-label">    
                             <Controller name="email" control={control}
-                                rules={{ required: 'E-mail je obavezan.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' }}}
+                                rules={{ required: 'E-mail je obavezan.',
+                                    pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                        message: 'Invalid email formattedAddress. E.g. example@email.com' }}}
                                 render={({ field, fieldState }) => (
-                                    <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} type="email"/>
+                                    <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })}
+                                               type="email"/>
                             )} />
                             <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>E-mail*</label>
                         </span>
@@ -150,7 +157,8 @@ const Registration = () => {
                     
                     <div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
                         <span className="p-float-label">
-                            <Controller name="password" control={control} rules={{ required: 'Password je obavezan.' }} render={({ field, fieldState }) => (
+                            <Controller name="password" control={control} rules={{ required: 'Password je obavezan.' }}
+                                        render={({ field, fieldState }) => (
                                 <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })}/>
                             )} />
                             <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Password*</label>
@@ -177,6 +185,12 @@ const Registration = () => {
                         </div>
                     </div>
                 </form>
+
+                <Dialog header="Odaberite svoju lokaciju" visible={showLocationDialog}
+                        style={{maxWidth: '90vw', minWidth: '50vw'}} draggable={false}
+                        onHide={() => setShowLocationDialog(false)} >
+                    <LocationSearch onValueChanged={onLocationChanged} />
+                </Dialog>
 
             </Card>
         </div>
