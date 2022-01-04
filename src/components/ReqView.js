@@ -26,7 +26,7 @@ const ReqView = () => {
 	</div>;
 	const footer = <div>
 		<label className="generalDate">Datum
-			objave: {Moment(requestData?.lastModified.toString()).format('DD.MM.yyyy.')}</label>
+			objave: {Moment(requestData?.lastModified).format('DD.MM.yyyy.')}</label>
 		<Button className="generalButton" label="Pošalji poruku" style={{float: "right"}}/>
 	</div>;
 	const shortRep = `Objavljuje ${requestData?.creator.username}`

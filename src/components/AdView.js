@@ -37,7 +37,7 @@ const AdView = () => {
 	</div>;
 	const footer = <div>
 		<label className="generalDate">Datum
-			objave: {Moment(advertData?.lastModified.toString()).format('DD.MM.yyyy.')}</label>
+			objave: {Moment(advertData?.lastModified).format('DD.MM.yyyy.')}</label>
 		<Button className="generalButton" label="Pošalji poruku" style={{float: "right"}}/>
 	</div>;
 	const shortRep = `Objavljuje ${advertData?.creator.username}`
