@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useRef, useState} from "react";
 import {Card} from "primereact/card";
 import 'primeflex/primeflex.css'
 import {Controller, useForm} from 'react-hook-form';
@@ -16,6 +16,7 @@ import './fade-animation.css';
 import Stepper from '../stepper/Stepper'
 import AdService from "../../service/ads/ad.service";
 import {InputMask} from "primereact/inputmask";
+import ImageService from "../../service/image.service";
 
 
 const NewTool = () => {
@@ -23,6 +24,9 @@ const NewTool = () => {
 	const [loading, setLoading] = useState(false);
 
 	const [electric, setElectric] = useState(false);
+
+	const fileUploadRef = useRef(null);
+	const [filesAreUploading, setFilesAreUploading] = useState(false);
 
 	const chooseOptions = {label: 'Odaberi', icon: 'pi pi-fw pi-plus'};
 	const uploadOptions = {label: 'Prenesi', icon: 'pi pi-upload', className: 'p-button-success'};
@@ -54,9 +58,11 @@ const NewTool = () => {
 
 	const [conditions] = useState(initialConditions);
 
-	const {control, formState: {errors}, handleSubmit, reset} = useForm({defaultValues});
+	const {control, formState: {errors}, handleSubmit, reset, setValue} = useForm({defaultValues});
 	const history = useHistory();
 	const {toastRef} = useContext(ToastContext);
+
+	const [savedImages, setSavedImages] = useState([]);
 
 
 	const getFormErrorMessage = (name) => {
@@ -101,8 +107,22 @@ const NewTool = () => {
 		});
 	}
 
-	const onUpload = () => {
-		toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: 'Slika prenešena'});
+	const onUpload = (images) => {
+		setFilesAreUploading(true);
+		ImageService.uploadImage(images.files)
+			.catch(() => {
+				toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom prijenosa slika'});
+			}).finally(() => {
+				setFilesAreUploading(false);
+				fileUploadRef.current.clear();
+				toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: 'Slike prenijete'});
+		}).then((images) => {
+			savedImages.push(...images);
+			setSavedImages(savedImages);
+			setValue('images', savedImages);
+			console.log(savedImages)
+		});
+
 	}
 
 	return (
@@ -227,9 +247,10 @@ const NewTool = () => {
 
 						<div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
 							<FileUpload name="images[]" url="https://primefaces.org/primereact/showcase/upload.php"
+										ref={fileUploadRef} disabled={filesAreUploading}
 										chooseOptions={chooseOptions} uploadOptions={uploadOptions}
-										cancelOptions={cancelOptions} onUpload={onUpload} multiple accept="image/*"
-										maxFileSize={1000000}
+										cancelOptions={cancelOptions} uploadHandler={onUpload} multiple accept="image/*"
+										maxFileSize={2000000} customUpload
 										emptyTemplate={<p className="p-m-0">Ovdje povucite i ispustite slike koje želite
 											prenijeti.</p>}/>
 						</div>
@@ -242,6 +263,10 @@ const NewTool = () => {
 						</div>
 
 					</form>
+
+					{savedImages.map((image) => {
+						return <p id={image.uuid}>{image.uuid}</p>
+					})}
 
 				</Card>
 			</div>
