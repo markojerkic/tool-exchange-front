@@ -30,7 +30,7 @@ const App = () => {
 					label: 'Dodaj novi oglas',
 					icon: 'pi pi-plus',
 					command: () => {
-						navigateToPage('/new-ad')
+						navigateToPage('/new-entry')
 					}
 				},
 				{

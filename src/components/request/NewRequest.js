@@ -9,7 +9,7 @@ import {classNames} from 'primereact/utils';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {Button} from 'primereact/button';
 import {FileUpload} from 'primereact/fileupload';
-import './fade-animation.css';
+import '../new-entry/fade-animation.css';
 import Stepper from '../stepper/Stepper'
 import RequestService from "../../service/ads/request.service";
 
@@ -56,7 +56,7 @@ const NewRequest = () => {
 	}
 
 	const header = <div className="divButtonTop">
-		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-ad')}/>
+		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-entry')}/>
 		<Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/')}
 				style={{float: "right"}}/>
 	</div>;

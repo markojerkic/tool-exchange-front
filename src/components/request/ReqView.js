@@ -3,7 +3,7 @@ import {Card} from "primereact/card";
 import 'primeflex/primeflex.css'
 import {useHistory} from 'react-router-dom';
 import {Button} from 'primereact/button';
-import RequestService from "../service/ads/request.service";
+import RequestService from "../../service/ads/request.service";
 import Moment from 'moment';
 import {useParams} from "react-router";
 

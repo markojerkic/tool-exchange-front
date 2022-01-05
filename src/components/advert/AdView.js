@@ -3,11 +3,11 @@ import {Card} from "primereact/card";
 import 'primeflex/primeflex.css'
 import {useHistory} from 'react-router-dom';
 import {Button} from 'primereact/button';
-import AdService from '../service/ads/ad.service'
+import AdService from '../../service/ads/ad.service'
 import Moment from "moment";
 import {useParams} from "react-router";
 import {Galleria} from "primereact/galleria";
-import ImageService from "../service/image.service";
+import ImageService from "../../service/image.service";
 
 const AdView = () => {
 	const {id} = useParams();

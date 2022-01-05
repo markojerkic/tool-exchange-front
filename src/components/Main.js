@@ -7,11 +7,11 @@ import Registration from "./auth/registration/Registration.js";
 import Home from "./Home";
 import UserInfo from "./UserInfo";
 import Error404 from "./error/Error404";
-import NewAd from "./new-ad/NewTool";
-import Category from "./new-ad/Category"
-import NewRequest from "./new-ad/NewRequest";
-import AdView from "./AdView";
-import ReqView from "./ReqView";
+import NewAd from "./advert/NewAdvert";
+import Category from "./new-entry/Category"
+import NewRequest from "./request/NewRequest";
+import AdView from "./advert/AdView";
+import ReqView from "./request/ReqView";
 
 const Main = () => {
 	return (

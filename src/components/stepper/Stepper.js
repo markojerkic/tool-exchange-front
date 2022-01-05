@@ -8,7 +8,7 @@ const Stepper = props => {
 		{
 			label: 'Odabir Kategorije',
 			command: (e) => {
-				window.location.replace("/new-ad")
+				window.location.replace("/new-entry")
 			}
 		},
 		{

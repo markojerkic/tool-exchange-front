@@ -12,14 +12,14 @@ import {InputNumber} from 'primereact/inputnumber'
 import {Dropdown} from "primereact/dropdown";
 import {FileUpload} from 'primereact/fileupload';
 import {InputSwitch} from 'primereact/inputswitch';
-import './fade-animation.css';
+import '../new-entry/fade-animation.css';
 import Stepper from '../stepper/Stepper'
 import AdService from "../../service/ads/ad.service";
 import {InputMask} from "primereact/inputmask";
 import ImageService from "../../service/image.service";
 
 
-const NewTool = () => {
+const NewAdvert = () => {
 
 	const [loading, setLoading] = useState(false);
 
@@ -33,7 +33,7 @@ const NewTool = () => {
 	const cancelOptions = {label: 'Otkaži', icon: 'pi pi-times', className: 'p-button-danger'};
 
 	const header = <div className="divButtonTop">
-		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-ad')}/>
+		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-entry')}/>
 		<Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/')}
 				style={{float: "right"}}/>
 	</div>;
@@ -281,4 +281,4 @@ const NewTool = () => {
 
 }
 
-export default NewTool;
+export default NewAdvert;
