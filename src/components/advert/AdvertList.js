@@ -9,7 +9,7 @@ const AdvertList = () => {
 	const [offset, setOffset] = useState(0);
 	const [ads, setAds] = useState([]);
 
-	const [rows] = useState(2);
+	const [rows] = useState(10);
 
 	useEffect(() => {
 		AdService.getAds(offset / rows, rows).then((data) => {
