@@ -8,7 +8,6 @@ import {ToastContext} from "../../common/toast.context";
 import {classNames} from 'primereact/utils';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {Button} from 'primereact/button';
-import {FileUpload} from 'primereact/fileupload';
 import '../new-entry/fade-animation.css';
 import Stepper from '../stepper/Stepper'
 import RequestService from "../../service/ads/request.service";
@@ -18,16 +17,10 @@ const NewRequest = () => {
 
 	const [loading, setLoading] = useState(false);
 
-	const chooseOptions = {label: 'Odaberi', icon: 'pi pi-fw pi-plus'};
-	const uploadOptions = {label: 'Prenesi', icon: 'pi pi-upload', className: 'p-button-success'};
-	const cancelOptions = {label: 'Otkaži', icon: 'pi pi-times', className: 'p-button-danger'};
-
-
 	const defaultValues = {
 		title: '',
 		details: ''
-	}
-
+	};
 
 	const {control, formState: {errors}, handleSubmit, reset} = useForm({defaultValues});
 	const history = useHistory();
@@ -50,11 +43,6 @@ const NewRequest = () => {
 			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom spremanja zahtjeva'});
 		});
 	}
-
-	const onUpload = () => {
-		toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: 'Slika prenešena'});
-	}
-
 	const header = <div className="divButtonTop">
 		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-entry')}/>
 		<Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/')}
@@ -98,15 +86,6 @@ const NewRequest = () => {
 							{getFormErrorMessage('details')}
 						</div>
 
-						<div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
-							<FileUpload name="images[]" url="https://primefaces.org/primereact/showcase/upload.php"
-										chooseOptions={chooseOptions} uploadOptions={uploadOptions}
-										cancelOptions={cancelOptions} onUpload={onUpload} multiple accept="image/*"
-										maxFileSize={1000000}
-										emptyTemplate={<p className="p-m-0">Ovdje povucite i ispustite slike koje želite
-											prenijeti.</p>}/>
-						</div>
-
 						<div className="p-col-12 p-d-flex p-jc-center">
 							<div>
 								<Button type="submit" label="Predaj oglas" className="p-mt-2"
@@ -119,7 +98,7 @@ const NewRequest = () => {
 				</Card>
 			</div>
 		</div>
-	)
+	);
 
 }
 

@@ -22,6 +22,7 @@ import ImageService from "../../service/image.service";
 const NewAdvert = () => {
 
 	const [loading, setLoading] = useState(false);
+	const [imageIsDeleting, setImageIsDeleting] = useState({});
 
 	const [electric, setElectric] = useState(false);
 
@@ -122,6 +123,16 @@ const NewAdvert = () => {
 			setValue('images', savedImages);
 		});
 
+	}
+
+	function deleteImage(uuid) {
+		setImageIsDeleting({[uuid]: true, ...imageIsDeleting});
+		ImageService.deleteImage(uuid).then(() => {
+			setImageIsDeleting({[uuid]: false, ...imageIsDeleting});
+			const filteredImages = savedImages.filter((image) => image.uuid !== uuid);
+			setSavedImages(filteredImages);
+			setValue('images', filteredImages);
+		});
 	}
 
 	return (
@@ -270,7 +281,10 @@ const NewAdvert = () => {
 									alt={image.uuid} className='p-col-4'
 									src={ImageService.getImageByUUID(image.uuid)}/>
 							<h4 key={`h4-${image.uuid}`} className='p-col-4'>{image.uuid}</h4>
-							<Button key={`button-${image.uuid}`} className='p-col-4' label='Ukloni sliku' icon='pi pi-times' />
+							<Button key={`button-${image.uuid}`} className='p-col-4'
+									label='Ukloni sliku' onClick={() => deleteImage(image.uuid)}
+									icon={imageIsDeleting[image.uuid]? 'pi pi-spinner pi-spin': 'pi pi-times'}
+									disabled={imageIsDeleting[image.uuid]} />
 						</div>
 					})}
 

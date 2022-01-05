@@ -17,7 +17,10 @@ const ImageService = {
 	getImagesByAdvertId(advertId) {
 		return instance.get(`image/by-advert/${advertId}`).then((response) =>
 			response.data.map(image => this.getImageByUUID(image.uuid)));
-	}
+	},
 
+	deleteImage(uuid) {
+		return instance.delete(`image/${uuid}`);
+	}
 }
 export default ImageService;
