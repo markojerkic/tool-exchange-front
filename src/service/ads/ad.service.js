@@ -12,7 +12,6 @@ const AdService = {
 		});
 	},
 
-
 	getAds: function (page, size) {
 		return instance.get('advert', { params: { page: page, size: size } })
 			.then((response) => {

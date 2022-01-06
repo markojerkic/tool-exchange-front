@@ -12,11 +12,11 @@ const RequestService = {
 		});
 	},
 
-
-	getReqs: function () {
-		return instance.get("request").then((response) => {
-			return response.data;
-		});
+	getRequests: function (page, size) {
+		return instance.get('request', { params: { page: page, size: size } })
+			.then((response) => {
+				return response.data;
+			});
 	}
 
 }

@@ -76,7 +76,6 @@ html {
     margin: 1.5em;
     border-color: black;
     height: fit-content;
-    position: relative;
 }
 
 .adverElement {
@@ -85,8 +84,8 @@ html {
 }
 
 .advertLocation {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     float: right;
     position: absolute;
     bottom: 10%;
@@ -95,6 +94,7 @@ html {
 
 .advertTitle {
     font-size: larger;
+    font-weight: bold;
     color: var(--blue-300);
 }
 
@@ -104,8 +104,8 @@ html {
 }
 
 .advertDate {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     position: absolute;
     bottom: 10%;
 }

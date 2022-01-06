@@ -1,17 +1,8 @@
-import React, {useEffect, useState} from "react";
-import RequestService from "../service/ads/request.service";
-import Request from "./request/Request";
+import React from "react";
 import AdvertList from "./advert/AdvertList";
+import RequestList from "./request/RequestList";
 
 const Home = () => {
-	const [reqs, setReqs] = useState([]);
-
-	useEffect(() => {
-		RequestService.getReqs().then((data1) => {
-			setReqs(data1);
-		})
-	}, []);
-
 	return (
 		<div className="mainView shape">
 			<div className="adView shape home-tag">
@@ -19,14 +10,8 @@ const Home = () => {
 				<h2>Alati</h2>
 				<AdvertList />
 				<h2>Zahtjevi</h2>
-				{
-
-					reqs.map(singleRequest => {
-						return <Request key={singleRequest.id} request={singleRequest}/>
-					})
-				}
+				<RequestList />
 			</div>
-
 		</div>
 	)
 }
