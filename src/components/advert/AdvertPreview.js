@@ -23,7 +23,7 @@ const AdvertPreview = ({ad}) => {
 					<p className="advertTitle">{advert.title}</p>
 					<p className="desc">{advert.details}</p>
 				</div>
-				<p className='p-col-12'>Objavio korisnik: <b>{advert.userCreated}</b></p>
+				<p className='p-col-12 p-as-end'>Objavio korisnik: <b>{advert.userCreated}</b></p>
 			</div>
 		</div>
 	);
