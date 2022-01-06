@@ -13,6 +13,7 @@ import AuthService from "./service/auth/auth.service";
 import {AuthContext} from "./common/auth.context";
 import {ToastContext} from "./common/toast.context";
 import {Toast} from "primereact/toast";
+import {Tooltip} from "primereact/tooltip";
 
 const App = () => {
 	const history = useHistory();
@@ -49,8 +50,9 @@ const App = () => {
 	const toastRef = useRef(null);
 
 	const start = <img alt="logo" src="../../favicon.ico"
-					   onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}
-					   height="40" className="p-mr-2"
+					   height="40" className="p-mr-2 home-page"
+					   style={{cursor: 'pointer'}}
+					   data-pr-tooltip="Početna stranica"
 					   onClick={() => history.push('/')}>
 	</img>;
 	const login = <span>
@@ -71,6 +73,7 @@ const App = () => {
 	return (
 		<AuthContext.Provider value={{user, setUser}}>
 			<ToastContext.Provider value={{toastRef}}>
+				<Tooltip target=".home-page" />
 				<Toast ref={toastRef}/>
 				<div className="p-m-2">
 					<Menubar model={menuItems} start={start} end={!!user ? logout : login}/>
