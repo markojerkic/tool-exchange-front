@@ -39,28 +39,19 @@ html {
     margin: 1.5em;
 }
 
-.shape {
-    padding: 0.5rem;
-    color: rgba(255, 255, 255, 0.87);
-    border-radius: 5px;
-}
-
 .mainView {
     margin: 1em auto;
     width: 90%;
     background: var(--surface-a);
     min-height: 90vh;
+    color: rgba(255, 255, 255, 0.87);
+    border-radius: 5px;
 }
 
-.adView {
+.ad-container {
     background: var(--surface-b);
-}
-
-.home-tag {
-    border: 1px solid var(--blue-900);
-    margin: 1em auto;
-    width: 70%;
-
+    border-radius: .7rem;
+    margin: 1rem;
 }
 
 

@@ -76,7 +76,7 @@ const App = () => {
 				<Tooltip target=".home-page" />
 				<Toast ref={toastRef}/>
 				<div className="p-m-2">
-					<Menubar model={menuItems} start={start} end={!!user ? logout : login}/>
+					<Menubar className="p-mb-3" model={menuItems} start={start} end={!!user ? logout : login}/>
 					<Main/>
 				</div>
 			</ToastContext.Provider>
