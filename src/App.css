@@ -37,18 +37,12 @@ html {
 
 .grid-child-element {
     margin: 1.5em;
-    height: fit-content;
 }
 
 .shape {
     padding: 0.5rem;
     color: rgba(255, 255, 255, 0.87);
     border-radius: 5px;
-}
-
-.grid-parent {
-    display: grid;
-    grid-template-columns: 3fr 8fr;
 }
 
 .mainView {
@@ -75,7 +69,6 @@ html {
     background-color: var(--surface-d);
     margin: 1.5em;
     border-color: black;
-    height: fit-content;
 }
 
 .adverElement {
@@ -99,8 +92,16 @@ html {
 }
 
 .advertPicture {
-    border-radius: 2px;
-    max-width: 20em;
+    border-radius: .7rem;
+    object-fit: contain;
+    max-width: 20rem;
+    max-height: 20rem;
+}
+
+@media (max-width:770px) {
+    .advertPicture {
+        max-width: 100%;
+    }
 }
 
 .advertDate {

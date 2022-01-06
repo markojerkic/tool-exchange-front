@@ -21,8 +21,8 @@ const AdvertList = () => {
 	return (
 		<Card title='Rezultati pretrage oglasa' >
 			{
-				ads.map(singleAdvert => {
-					return <AdvertPreview key={singleAdvert.id} ad={singleAdvert}/>
+				ads.map(advert => {
+					return <AdvertPreview key={advert.id} ad={advert}/>
 				})
 			}
 
