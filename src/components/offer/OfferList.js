@@ -38,7 +38,7 @@ const OfferList = () => {
 
 	useEffect(() => {
 		setLoading(true);
-		OfferService.getOffers(offset / rows, rows).finally(() => setLoading(false)).then((data) => {
+		OfferService.getOffers(offset / rows, rows, lastFilters, filteredStatus).finally(() => setLoading(false)).then((data) => {
 			const content = data.content.map((offer) => {
 				return {
 					...offer,
@@ -72,13 +72,13 @@ const OfferList = () => {
 	}
 
 	const onFilter = (filters) => {
-		setLastFilters(filters);
+		setLastFilters(filters.filters);
 	}
-
 
 	return (
 		<DataTable value={offers} loading={loading} lazy rows={rows} onPage={onPage} onFilter={onFilter}
-				   paginator={true} emptyMessage="Ponude nisu pronađene"
+				   paginator={true} emptyMessage="Ponude nisu pronađene" filters={lastFilters}
+				   globalFilterFields={['advertTitle', 'from', 'suggestedTimeframe', 'status']}
 				   totalRecords={totalOffers} dataKey="id">
 			<Column field="advertTitle" header="Naslov oglasa" sortable filter
 					filterPlaceholder="Pretražite po oglasima"/>
