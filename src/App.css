@@ -165,3 +165,18 @@ html {
     text-align: center;
     font-size: 10rem;
 }
+
+.userDetailText{
+    font-size: larger;
+}
+
+@media only screen and (min-width:600px){
+    .parentUserInfo{
+        white-space: nowrap;
+    }
+    .childUserInfo{
+        display:inline-block;
+        padding-right: 1%;
+    }
+
+}
