@@ -5,6 +5,7 @@ import {Column} from "primereact/column";
 import Moment from "moment";
 import './OfferList.css';
 import {Dropdown} from "primereact/dropdown";
+import {Calendar} from "primereact/calendar";
 
 const OfferList = () => {
 	const [totalOffers, setTotalOffers] = useState(0);
@@ -15,6 +16,9 @@ const OfferList = () => {
 	const [rows] = useState(10);
 	const [filteredStatus, setFilteredStatus] = useState();
 	const [lastFilters, setLastFilters] = useState();
+	const [dateFilter, setDateFilter] = useState();
+	const [sort, setSort] = useState(-1);
+	const [sortField, setSortField] = useState('suggestedTimeframe,DESC');
 
 
 	Moment.locale('hr');
@@ -33,12 +37,15 @@ const OfferList = () => {
 				return {label: 'ODBIJENO', css: 'rejected'};
 			case 'ACCEPTED':
 				return {label: 'PRIHVAĆENO', css: 'accepted'};
+			default:
+				throw Error('Pogrešan status');
 		}
 	};
 
 	useEffect(() => {
 		setLoading(true);
-		OfferService.getOffers(offset / rows, rows, lastFilters, filteredStatus).finally(() => setLoading(false)).then((data) => {
+		OfferService.getOffers(offset / rows, rows, lastFilters, filteredStatus, dateFilter, sortField)
+			.finally(() => setLoading(false)).then((data) => {
 			const content = data.content.map((offer) => {
 				return {
 					...offer,
@@ -49,7 +56,7 @@ const OfferList = () => {
 			setOffers(content);
 			setTotalOffers(data.totalElements);
 		})
-	}, [offset, rows, filteredStatus, lastFilters]);
+	}, [offset, rows, filteredStatus, lastFilters, dateFilter, sortField]);
 
 	const dateTemplate = (date) => {
 		return (
@@ -75,16 +82,29 @@ const OfferList = () => {
 		setLastFilters(filters.filters);
 	}
 
+	const calendarFilter = (
+		<Calendar value={dateFilter} onChange={(e) => setDateFilter(e.value)}
+				  placeholder='Odaberite datum' showButtonBar={true} locale='hr'
+				  dateFormat='dd.mm.yy.' />
+	);
+
+	const onSort = () => {
+		setSort(sort === -1? 1: -1);
+
+		setSortField(`suggestedTimeframe,${sort === 1? 'DESC': 'ASC'}`);
+	}
+
 	return (
 		<DataTable value={offers} loading={loading} lazy rows={rows} onPage={onPage} onFilter={onFilter}
 				   paginator={true} emptyMessage="Ponude nisu pronađene" filters={lastFilters}
+				   sortField='suggestedTimeframe' sortOrder={sort} onSort={onSort}
 				   globalFilterFields={['advertTitle', 'from', 'suggestedTimeframe', 'status']}
 				   totalRecords={totalOffers} dataKey="id">
-			<Column field="advertTitle" header="Naslov oglasa" sortable filter
+			<Column field="advertTitle" header="Naslov oglasa" filter
 					filterPlaceholder="Pretražite po oglasima"/>
-			<Column field="from" header="Od korisnika" sortable filter filterPlaceholder="Pretražite po korisnicima"/>
+			<Column field="from" header="Od korisnika" filter filterPlaceholder="Pretražite po korisnicima"/>
 			<Column field="suggestedTimeframe" header="Vrijeme povratka" sortable filter
-					body={dateTemplate}
+					body={dateTemplate} filterElement={calendarFilter} readonly={true}
 					filterPlaceholder="Pretražite po periodu povratka"/>
 			<Column field='status' header='Status ponude' filterPlaceholder='Daberite status'
 					body={statusTemplate} showFilterMenu={false} filterMenuStyle={{width: '14rem'}}

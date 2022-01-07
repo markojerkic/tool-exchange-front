@@ -1,6 +1,6 @@
 import 'primeflex/primeflex.min.css';
 import 'primeicons/primeicons.css';
-import PrimeReact from 'primereact/api';
+import PrimeReact, {addLocale} from 'primereact/api';
 import {Button} from 'primereact/button';
 import {Menubar} from 'primereact/menubar';
 import 'primereact/resources/primereact.min.css';
@@ -16,6 +16,19 @@ import {Toast} from "primereact/toast";
 import {Tooltip} from "primereact/tooltip";
 
 const App = () => {
+
+	addLocale('hr', {
+		firstDayOfWeek: 1,
+		dayNames: ['Nedjelja', 'Ponedjeljak', 'Utorak', 'Srijeda', 'Četvrtak', 'Petak', 'Subota'],
+		dayNamesShort: ['ned', 'pon', 'uto', 'sri', 'čet', 'pet', 'sub'],
+		dayNamesMin: ['N', 'P', 'U', 'S', 'Č', 'P', 'S'],
+		monthNames: ['Siječanj', 'Veljača', 'Ožujak', 'Travanj', 'Svibanj', 'Lipanj',
+			'Spranj', 'Kolovoz', 'Rujan', 'Listopad', 'Studeni', 'Prosinac'],
+		monthNamesShort: ['sij', 'velj', 'ožu', 'tra', 'svi', 'lip', 'sep', 'kol', 'ruj', 'lis', 'stu', 'pro'],
+		today: 'Danas',
+		clear: 'Očisti'
+	});
+
 	const history = useHistory();
 
 	const navigateToPage = (path) => {
