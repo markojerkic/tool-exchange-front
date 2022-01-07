@@ -91,12 +91,14 @@ const AdView = () => {
 				</Card>
 			</div>
 
-			<Sidebar visible={showOfferDialog} fullScreen
-					 onHide={() => setShowOfferDialog(false)}>
-				<div className="p-d-flex p-jc-center p-ai-center">
-					<NewOffer/>
-				</div>
-			</Sidebar>
+			{ advertData && (
+				<Sidebar visible={showOfferDialog} fullScreen
+						 onHide={() => setShowOfferDialog(false)}>
+					<div className="p-d-flex p-jc-center p-ai-center">
+						<NewOffer advertId={advertData.id} onComplete={() => setShowOfferDialog(false)} />
+					</div>
+				</Sidebar>
+			) }
 
 		</div>
 	)
