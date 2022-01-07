@@ -8,8 +8,12 @@ import {Dropdown} from "primereact/dropdown";
 import {Calendar} from "primereact/calendar";
 import {SplitButton} from "primereact/splitbutton";
 import {ToastContext} from "../../common/toast.context";
+import {useHistory} from "react-router-dom";
 
 const OfferList = () => {
+
+	const history = useHistory();
+
 	const [totalOffers, setTotalOffers] = useState(0);
 	const [offset, setOffset] = useState(0);
 	const [offers, setOffers] = useState([]);
@@ -105,17 +109,17 @@ const OfferList = () => {
 		{
 			icon: 'pi pi-check',
 			label: 'Prihvati ponudu',
-			disabled: offerClicked.status.css !== 'pending',
+			disabled: offerClicked?.status.css !== 'pending',
 			command: () => {
-				acceptOffer(offerClicked.id)
+				acceptOffer(offerClicked?.id)
 			}
 		},
 		{
 			icon: 'pi pi-times',
 			label: 'Odbij ponudu',
-			disabled: offerClicked.status.css !== 'pending',
+			disabled: offerClicked?.status.css !== 'pending',
 			command: () => {
-				declineOffer(offerClicked.id)
+				declineOffer(offerClicked?.id)
 			}
 		}
 	];
@@ -143,6 +147,7 @@ const OfferList = () => {
 		<div className="p-d-flex p-jc-around">
 			<SplitButton model={slitButtonItems} tooltip='Pogledaj ponudu' icon='pi pi-search'
 						 onShow={() => setOfferClicked(offer)}
+						 onClick={() => history.push(`/offer/${offer.id}`)}
 						 tooltipOptions={{position: 'left'}} />
 		</div>
 		);
@@ -152,7 +157,8 @@ const OfferList = () => {
 		<DataTable value={offers} loading={loading} lazy rows={rows} onPage={onPage} onFilter={onFilter}
 				   paginator={true} emptyMessage="Ponude nisu pronađene" filters={lastFilters}
 				   sortField='suggestedTimeframe' sortOrder={sort} onSort={onSort}
-				   globalFilterFields={['advertTitle', 'from', 'suggestedTimeframe', 'status']}
+				   // globalFilterFields={['advertTitle', 'from', 'suggestedTimeframe', 'status']}
+				   responsiveLayout="stack" breakpoint='960px'
 				   totalRecords={totalOffers} dataKey="id">
 			<Column field="advertTitle" header="Naslov oglasa" filter
 					filterPlaceholder="Pretražite po oglasima"/>
@@ -162,13 +168,13 @@ const OfferList = () => {
 					filterPlaceholder="Pretražite po periodu povratka"/>
 			<Column field='status' header='Status ponude' filterPlaceholder='Daberite status'
 					body={statusTemplate} showFilterMenu={false} filterMenuStyle={{width: '14rem'}}
-					style={{minWidth: '12rem'}}
-					filter filterFunction={console.log} filterElement={
+					// style={{minWidth: '12rem'}}
+					filter filterElement={
 				(<Dropdown options={statuses} style={{width: '14rem'}}
 						   value={filteredStatus} placeholder='Odaberite status' showClear={true}
 						   onChange={statusSelected}/>)
 			}/>
-			<Column  style={{width: '10rem'}} body={actionButtons} />
+			<Column header='Akcije' style={{width: '10rem'}} body={actionButtons} />
 		</DataTable>
 	);
 }

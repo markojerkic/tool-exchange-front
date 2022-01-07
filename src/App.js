@@ -5,7 +5,7 @@ import {Button} from 'primereact/button';
 import {Menubar} from 'primereact/menubar';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/arya-blue/theme.css';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useHistory} from 'react-router';
 import './App.css';
 import Main from './components/Main';
@@ -14,6 +14,8 @@ import {AuthContext} from "./common/auth.context";
 import {ToastContext} from "./common/toast.context";
 import {Toast} from "primereact/toast";
 import {Tooltip} from "primereact/tooltip";
+import {Badge} from "primereact/badge";
+import OfferService from "./service/offer.service";
 
 const App = () => {
 
@@ -28,6 +30,20 @@ const App = () => {
 		today: 'Danas',
 		clear: 'Očisti'
 	});
+
+	const [user, setUser] = useState(AuthService.getCurrentUserToken());
+
+	const toastRef = useRef(null);
+
+	const [pendingOffers, setPendingOffers] = useState(0);
+
+	useEffect(() => {
+		if (user) {
+			OfferService.countPendingoffers().then((count) => {
+				setPendingOffers(count);
+			});
+		}
+	}, [user]);
 
 	const history = useHistory();
 
@@ -58,10 +74,6 @@ const App = () => {
 		}
 	];
 
-	const [user, setUser] = useState(AuthService.getCurrentUserToken());
-
-	const toastRef = useRef(null);
-
 	const start = <img alt="logo" src="../../favicon.ico"
 					   height="40" className="p-mr-2 home-page"
 					   style={{cursor: 'pointer'}}
@@ -74,7 +86,15 @@ const App = () => {
     <Button label="Prijava" className="p-button-raised p-button-rounded " onClick={() => history.push('/login')}/>
   </span>
 	const logout = <span>
-    <Button label="Profil" className="p-button-raised p-button-rounded p-mr-1" onClick={() => history.push('/user')}/>
+		<Button className="p-button-rounded p-button-text" tooltip='Ponude' onClick={() => history.push('/offers')}>
+			<i className="pi pi-envelope p-text-secondary p-overlay-badge" style={{ fontSize: '1.5rem' }}>
+				{ (pendingOffers > 0 && user) &&
+					<Badge value={pendingOffers} />
+				}
+			</i>
+		</Button>
+		<Button label="Profil" className="p-button-raised p-button-rounded p-mr-1"
+				onClick={() => history.push('/user')} />
     <Button label="Odjavi se" className="p-button-raised p-button-rounded" onClick={() => {
 		AuthService.logout(setUser);
 		setUser();

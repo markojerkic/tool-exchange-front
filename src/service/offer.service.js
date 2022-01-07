@@ -6,6 +6,10 @@ const OfferService = {
 		return instance.post(`offer/acceptance`, { id: offerId, type: 'ACCEPT' })
 	},
 
+	countPendingoffers: function() {
+		return instance.get(`offer/count`).then((response) => response.data);
+	},
+
 	rejectOffer(offerId) {
 		return instance.post(`offer/acceptance`, { id: offerId, type: 'REJECT' })
 	},
@@ -13,7 +17,7 @@ const OfferService = {
 	addNewOffer: function (offerForm) {
 		return instance.post('offer', offerForm);
 	},
-	getOffers(page, size, lastFilters, filteredStatus, dateFilter, sortField) {
+	getOffers: function(page, size, lastFilters, filteredStatus, dateFilter, sortField) {
 
 		let filters = {};
 		if (lastFilters) {
@@ -28,6 +32,11 @@ const OfferService = {
 			.then((response) => {
 				return response.data;
 			});
+	},
+	getById: function(id) {
+		return instance.get(`offer/${id}`).then((data) => {
+			return data.data;
+		})
 	}
 }
 export default OfferService;

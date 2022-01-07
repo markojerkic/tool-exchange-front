@@ -13,6 +13,7 @@ import NewRequest from "./request/NewRequest";
 import AdView from "./advert/AdView";
 import ReqView from "./request/ReqView";
 import OfferList from "./offer/OfferList";
+import Offer from "./offer/Offer";
 
 const Main = () => {
 	return (
@@ -25,6 +26,7 @@ const Main = () => {
 				<PublicRoute restricted={false} exact path="/req/:id" component={ReqView}/>
 				<PrivateRoute exact path="/user" component={UserInfo}/>
 				<PrivateRoute exact path="/offers" component={OfferList}/>
+				<PrivateRoute exact path="/offer/:id" component={Offer}/>
 				<PrivateRoute exact path="/new-ad" component={Category}/>
 				<PrivateRoute exact path="/new-ad/tool" component={NewAd}/>
 				<PrivateRoute exact path="/new-ad/request" component={NewRequest}/>
