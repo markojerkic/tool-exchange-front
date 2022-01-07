@@ -21,9 +21,7 @@ const OfferList = () => {
 	const [loading, setLoading] = useState(false);
 
 	const [rows] = useState(10);
-	const [filteredStatus, setFilteredStatus] = useState();
 	const [lastFilters, setLastFilters] = useState();
-	const [dateFilter, setDateFilter] = useState();
 	const [sort, setSort] = useState(-1);
 	const [sortField, setSortField] = useState('suggestedTimeframe,DESC');
 
@@ -58,7 +56,7 @@ const OfferList = () => {
 
 	useEffect(() => {
 		setLoading(true);
-		OfferService.getOffers(offset / rows, rows, lastFilters, filteredStatus, dateFilter, sortField)
+		OfferService.getOffers(offset / rows, rows, lastFilters, sortField)
 			.finally(() => setLoading(false)).then((data) => {
 			const content = data.content.map((offer) => {
 				return {
@@ -71,7 +69,7 @@ const OfferList = () => {
 			setTotalOffers(data.totalElements);
 			setReloadPendingOffers(Math.random());
 		})
-	}, [offset, rows, filteredStatus, lastFilters, dateFilter, sortField, reload, setReloadPendingOffers]);
+	}, [offset, rows, lastFilters, sortField, reload, setReloadPendingOffers]);
 
 	const dateTemplate = (date) => {
 		return (
@@ -85,10 +83,6 @@ const OfferList = () => {
 		);
 	};
 
-	const statusSelected = (offerStatus) => {
-		setFilteredStatus(offerStatus.value);
-	};
-
 	const onPage = ({first}) => {
 		setOffset(first);
 	}
@@ -97,15 +91,16 @@ const OfferList = () => {
 		setLastFilters(filters.filters);
 	}
 
-	const calendarFilter = (
-		<Calendar value={dateFilter} onChange={(e) => setDateFilter(e.value)}
-				  placeholder='Odaberite datum' showButtonBar={true} locale='hr'
-				  dateFormat='dd.mm.yy.' />
-	);
+	const calendarFilter = (options) => {
+		return (
+			<Calendar value={options.value} onChange={(e) => options.filterApplyCallback(e.value)}
+					  placeholder='Odaberite datum' showButtonBar={true} locale='hr'
+					  dateFormat='dd.mm.yy.'/>
+		);
+	};
 
 	const onSort = () => {
 		setSort(sort === -1? 1: -1);
-
 		setSortField(`suggestedTimeframe,${sort === 1? 'DESC': 'ASC'}`);
 	}
 
@@ -159,10 +154,20 @@ const OfferList = () => {
 		);
 	};
 
+	const statusFiltersTemplate = (options) => {
+		return (
+			<Dropdown options={statuses}
+					  placeholder='Odaberite status'
+					  value={options.value}
+					  onChange={(e) => options.filterApplyCallback(e.value)}/>
+		);
+	}
+
 	return (
 		<DataTable value={offers} loading={loading} lazy rows={rows} onPage={onPage} onFilter={onFilter}
 				   paginator={true} emptyMessage="Ponude nisu pronađene" filters={lastFilters}
 				   stripedRows
+				   filterDisplay="row" globalFilterFields={['status']}
 				   sortField='suggestedTimeframe' sortOrder={sort} onSort={onSort}
 				   responsiveLayout="stack" breakpoint='960px'
 				   totalRecords={totalOffers} dataKey="id">
@@ -172,14 +177,15 @@ const OfferList = () => {
 			<Column field="suggestedTimeframe" header="Vrijeme povratka" sortable filter showFilterMenu={false}
 					body={dateTemplate} filterElement={calendarFilter} readonly={true}
 					filterPlaceholder="Pretražite po periodu povratka"/>
-			<Column field='status' header='Status ponude' filterPlaceholder='Daberite status'
-					body={statusTemplate} showFilterMenu={false} filterMenuStyle={{width: '14rem'}}
-					// style={{minWidth: '12rem'}}
-					filter filterElement={
-				(<Dropdown options={statuses} style={{width: '14rem'}}
-						   value={filteredStatus} placeholder='Odaberite status' showClear={true}
-						   onChange={statusSelected}/>)
-			}/>
+			<Column field='status' header='Status ponude'
+					filterPlaceholder='Daberite status'
+					body={statusTemplate}
+					showFilterMenu={false}
+					filterMenuStyle={{width: '14rem'}}
+					showClear={false}
+					filter
+					filterElement={statusFiltersTemplate}
+			/>
 			<Column header='Akcije' style={{width: '10rem'}} showFilterMenu={false} body={actionButtons} />
 		</DataTable>
 	);

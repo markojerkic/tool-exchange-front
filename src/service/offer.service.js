@@ -17,18 +17,20 @@ const OfferService = {
 	addNewOffer: function (offerForm) {
 		return instance.post('offer', offerForm);
 	},
-	getOffers: function(page, size, lastFilters, filteredStatus, dateFilter, sortField) {
+	getOffers: function(page, size, lastFilters, sortField) {
 
 		let filters = {};
 		if (lastFilters) {
 			Object.keys(lastFilters).forEach(key => {
-				filters[key] = lastFilters[key].value;
+				if (lastFilters[key].value instanceof Date) {
+					filters[key] = lastFilters[key].value.getTime();
+				} else {
+					filters[key] = lastFilters[key].value;
+				}
 			})
 		}
 
-		return instance.get('offer', {params: {page: page, size: size, sort: sortField,
-				suggestedTimeframe: dateFilter?.getTime(),
-				status: filteredStatus, ...filters}})
+		return instance.get('offer', {params: {page: page, size: size, sort: sortField, ...filters}})
 			.then((response) => {
 				return response.data;
 			});
