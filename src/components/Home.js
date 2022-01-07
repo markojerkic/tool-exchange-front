@@ -8,20 +8,20 @@ const Home = () => {
 		// <div className="mainView shape">
 			<Card className="ad-container">
 
-				<div className="p-d-flex p-jc-center  p-as-center p-grid">
-					<div className="p-lg-2 p-md-2 p-sm-12">
+				<div className="flex justify-content-center align-self-center grid">
+					<div className="lg:col-2 md:col-2 sm:col-12">
 						tu bi ja filtere
 					</div>
 
-					<div className="p-lg-8 p-md-8 p-sm-12">
+					<div className="lg:col-8 md:col-8 sm:col-12">
 						<h1 className="title">Rezultati pretrage</h1>
 						<h2>Alati</h2>
-						<AdvertList />
+						<AdvertList/>
 						<h2>Zahtjevi</h2>
-						<RequestList />
+						<RequestList/>
 					</div>
 
-					<div className="p-lg-2 p-md-2 p-sm-12"></div>
+					<div className="lg:col-2 md:col-2 sm:col-12"/>
 				</div>
 
 			</Card>

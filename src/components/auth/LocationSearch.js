@@ -36,8 +36,8 @@ const LocationSearch = (props) => {
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit(onSubmit)} className="p-grid p-fluid p-formgrid form-layout">
-				<div className="p-field p-col-12">
+			<form onSubmit={handleSubmit(onSubmit)} className="grid p-fluid p-formgrid form-layout">
+				<div className="p-field col-12">
                         <span className="p-float-label">
                             <Controller name="location" control={control} rules={{required: 'Lokacija je obacezna.'}}
 										render={({field, fieldState}) => (

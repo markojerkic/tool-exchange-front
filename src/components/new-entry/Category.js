@@ -17,12 +17,12 @@ const Category = () => {
 	return (
 		<div>
 			<Stepper stepId={0}/>
-			<div className="p-d-flex p-jc-center p-m-6">
+			<div className="flex justify-content-center m-6">
 
 				<Card className="card-container" title="Odabir kategorije" style={{width: '50rem'}}>
 
-					<form className="p-grid p-fluid p-formgrid form-layout p-jc-center">
-						<div className="p-field p-col-12 p-md-6 p-lg-8 p-sm-6">
+					<form className="grid p-fluid p-formgrid form-layout justify-content-center">
+						<div className="p-field col-12 md:col-6 lg:col-8 sm:col-6">
 							<SelectButton value={category} options={options}
 										  onChange={(e) => history.push(`/new-ad/${e.value}`)}/>
 						</div>

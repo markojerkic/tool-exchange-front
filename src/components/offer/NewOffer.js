@@ -36,9 +36,9 @@ const NewOffer = ({advertId, onComplete}) => {
 	return (
 
 		<form onSubmit={handleSubmit(onSubmit)} style={{width: '30rem'}}
-			  className="p-grid p-fluid p-formgrid form-layout p-d-flex p-jc-center">
+			  className="grid p-fluid p-formgrid form-layout flex justify-content-center">
 			<h2>Unesite svoju ponudu</h2>
-			<div className="p-field p-col-12">
+			<div className="p-field col-12">
 				<label htmlFor="suggestedTimeframe"
 					   className={classNames({'p-error': errors.description})}>Predloženo vrijeme povratka alata</label>
 				<Controller name="suggestedTimeframe" control={control} rules={{required: 'Datum povratka je obavezan'}}
@@ -50,7 +50,7 @@ const NewOffer = ({advertId, onComplete}) => {
 							)}/>
 				{getFormErrorMessage('suggestedTimeframe')}
 			</div>
-			<div className="p-field p-col-12 p-mt-4">
+			<div className="p-field col-12 mt-4">
                         <span className="p-float-label">
                             <Controller name="message" control={control}
 										render={({field, fieldState}) => (

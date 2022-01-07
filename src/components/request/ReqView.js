@@ -24,16 +24,18 @@ const ReqView = () => {
 	const header = <div className="divButtonTop">
 		<Button label="Povratak na listu zahtjeva" icon="pi pi-angle-left" onClick={() => history.push('/')}/>
 	</div>;
-	const footer = <div>
-		<label className="generalDate">Datum
+	const footer = <div className="grid">
+		<label className="generalDate col">Datum
 			objave: {Moment(requestData?.lastModified).format('DD.MM.yyyy.')}</label>
-		<Button className="generalButton" label="Pošalji poruku" style={{float: "right"}}/>
+		<div className="col flex align-items-center">
+			<Button className="generalButton" label="Pošalji poruku" style={{float: "right"}}/>
+		</div>
 	</div>;
 	const shortRep = `Objavljuje ${requestData?.creator.username}`
 
 	return (
 		<div>
-			<div className="p-d-flex p-jc-center p-m-6">
+			<div className="flex justify-content-center m-6">
 				<Card className="card-container" title={requestData?.title} subTitle={shortRep} header={header}
 					  footer={footer} style={{width: '50rem'}}>
 					<p>Opis: <b>{requestData?.details}</b></p>

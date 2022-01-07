@@ -34,7 +34,7 @@ const NewAdvert = () => {
 	const cancelOptions = {label: 'Otkaži', icon: 'pi pi-times', className: 'p-button-danger'};
 
 	const header = <div className="divButtonTop">
-		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-entry')}/>
+		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-ad')}/>
 		<Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/')}
 				style={{float: "right"}}/>
 	</div>;
@@ -138,14 +138,14 @@ const NewAdvert = () => {
 	return (
 		<div>
 			<Stepper stepId={1} category={"tool"}/>
-			<div className="p-d-flex p-jc-center p-m-6">
+			<div className="flex justify-content-center m-6">
 
 				<Card className="card-container" header={header} title="Dodavanje novog oglasa za alat"
 					  style={{width: '50rem'}}>
 
-					<form onSubmit={handleSubmit(onSubmit)} className="p-grid p-fluid p-formgrid form-layout">
+					<form onSubmit={handleSubmit(onSubmit)} className="grid p-fluid p-formgrid form-layout">
 
-						<div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
+						<div className="p-field col-12 md:col-12 lg:col-12 sm:col-12">
                             <span className="p-float-label">
                                 <Controller name="title" control={control} rules={{required: 'Naslov je obavezan.'}}
 											render={({field, fieldState}) => (
@@ -158,7 +158,7 @@ const NewAdvert = () => {
 							{getFormErrorMessage('title')}
 						</div>
 
-						<div className="p-field p-col-12 p-md-8 p-lg-8 p-sm-8">
+						<div className="p-field col-12 md:col-8 lg:col-8 sm:col-8">
                             <span className="p-float-label">
                                 <Controller name="toolName" control={control}
 											rules={{required: 'Naziv alata je obavezan.'}}
@@ -173,7 +173,8 @@ const NewAdvert = () => {
 							{getFormErrorMessage('toolName')}
 						</div>
 
-						<div className="p-field p-grid p-dir-col p-col-12 p-md-4 p-lg-4 p-sm-4 p-ml-1">
+						<div
+							className="p-field grid flex align-items-center p-dir-col col-12 md:col-4 lg:col-4 sm:col-4 ml-1">
 							<Controller name="electric" control={control}
 										render={({field, fieldState}) => (
 											<InputSwitch id={field.name} inputId={field.name}
@@ -184,13 +185,13 @@ const NewAdvert = () => {
 														 checked={field.value}
 														 className={classNames({'p-invalid': fieldState.invalid})}/>
 										)}/>
-							<label className='p-col' htmlFor="electric">Električan</label>
+							<label className='col' htmlFor="electric">Električan</label>
 						</div>
 
 						{electric &&
 
-							<div className="p-grid p-dir-col p-col-12 p-md-8 p-lg-8 p-sm-8" id="animDiv">
-								<div className='p-field p-grid p-dir-col p-ml-2'>
+							<div className="grid p-dir-col col-12 md:col-8 lg:col-8 sm:col-8" id="animDiv">
+								<div className='p-field grid p-dir-col ml-2'>
                                     <span className="p-float-label">
                                         <Controller name="power" control={control}
 													rules={{required: 'Snaga je obavezna.'}}
@@ -203,21 +204,21 @@ const NewAdvert = () => {
                                         <label htmlFor="power">Snaga (W) *</label>
                                     </span>
 								</div>
-								<div className='p-field p-grid p-dir-col p-ml-2'>
-									<Controller name="hasBattery" control={control} className='p-col'
+								<div className='p-field grid p-dir-col ml-2'>
+									<Controller name="hasBattery" control={control} className='col'
 												render={({field, fieldState}) => (
 													<InputSwitch id={field.name} inputId={field.name}
 																 onChange={(e) => field.onChange(e.value)}
 																 checked={field.value}
 																 className={classNames({'p-invalid': fieldState.invalid})}/>
 												)}/>
-									<label className='p-col' htmlFor="hasBattery">Ima bateriju</label>
+									<label className='col' htmlFor="hasBattery">Ima bateriju</label>
 								</div>
 							</div>
 
 						}
 
-						<div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
+						<div className="p-field col-12 md:col-12 lg:col-12 sm:col-12">
                             <span className="p-float-label">
                                 <Controller name="description" control={control} rules={{required: 'Opis je obavezan.'}}
 											render={({field}) => (
@@ -230,7 +231,7 @@ const NewAdvert = () => {
 							{getFormErrorMessage('description')}
 						</div>
 
-						<div className="p-field p-col-12 p-md-4 p-lg-4 p-sm-4">
+						<div className="p-field col-12 md:col-6 lg:col-6 sm:col-6">
                             <span className="p-float-label">
                                 <Controller name="condition" control={control} rules={{required: 'Stanje je obavezno.'}}
 											render={({field}) => (
@@ -243,7 +244,7 @@ const NewAdvert = () => {
 							{getFormErrorMessage('condition')}
 						</div>
 
-						<div className="p-field p-col-12 p-md-4 p-lg-4 p-sm-4">
+						<div className="p-field col-12 md:col-6 lg:col-6 sm:col-6">
                             <span className="p-float-label">
                                 <Controller name="phonenumber" control={control}
 											rules={{required: 'Broj mobitela je obavezan.'}} render={({field}) => (
@@ -255,19 +256,19 @@ const NewAdvert = () => {
 							{getFormErrorMessage('phonenumber')}
 						</div>
 
-						<div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
+						<div className="p-field col-12 md:col-12 lg:col-12 sm:col-12">
 							<FileUpload name="images[]" url="https://primefaces.org/primereact/showcase/upload.php"
 										ref={fileUploadRef} disabled={filesAreUploading}
 										chooseOptions={chooseOptions} uploadOptions={uploadOptions}
 										cancelOptions={cancelOptions} uploadHandler={onUpload} multiple accept="image/*"
 										maxFileSize={2000000} customUpload
-										emptyTemplate={<p className="p-m-0">Ovdje povucite i ispustite slike koje želite
+										emptyTemplate={<p className="m-0">Ovdje povucite i ispustite slike koje želite
 											prenijeti.</p>}/>
 						</div>
 
-						<div className="p-col-12 p-d-flex p-jc-center">
+						<div className="col-12 flex justify-content-center">
 							<div>
-								<Button type="submit" label="Predaj oglas" className="p-mt-2"
+								<Button type="submit" label="Predaj oglas" className="mt-2"
 										loading={loading}/>
 							</div>
 						</div>
@@ -275,16 +276,16 @@ const NewAdvert = () => {
 					</form>
 
 					{savedImages.map((image) => {
-						return <div className='p-grid p-flex p-jc-between p-ai-center'
+						return <div className='grid flex justify-content-between align-items-center'
 									key={`image-div-${image.uuid}`}>
 							<img key={image.uuid} style={{width: '10rem'}}
-									alt={image.uuid} className='p-col-4'
-									src={ImageService.getImageByUUID(image.uuid)}/>
-							<h4 key={`h4-${image.uuid}`} className='p-col-4'>{image.uuid}</h4>
-							<Button key={`button-${image.uuid}`} className='p-col-4'
+								 alt={image.uuid} className='col-4'
+								 src={ImageService.getImageByUUID(image.uuid)}/>
+							<h4 key={`h4-${image.uuid}`} className='col-4'>{image.uuid}</h4>
+							<Button key={`button-${image.uuid}`} className='col-4'
 									label='Ukloni sliku' onClick={() => deleteImage(image.uuid)}
-									icon={imageIsDeleting[image.uuid]? 'pi pi-spinner pi-spin': 'pi pi-times'}
-									disabled={imageIsDeleting[image.uuid]} />
+									icon={imageIsDeleting[image.uuid] ? 'pi pi-spinner pi-spin' : 'pi pi-times'}
+									disabled={imageIsDeleting[image.uuid]}/>
 						</div>
 					})}
 

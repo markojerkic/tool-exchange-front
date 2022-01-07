@@ -23,6 +23,7 @@ const Offer = () => {
 			toastRef.current.show({severity: 'error', summary: 'Greška', message: 'Greška prilikom dohvata'});
 		}).then((off) => {
 			setOffer(off);
+			setReloadPendingOffers(Math.random());
 		})
 	}, [toastRef, id, reload, setReloadPendingOffers]);
 
@@ -69,33 +70,34 @@ const Offer = () => {
 
 	return (
 		// <div>
-			<div className="p-d-flex p-jc-center p-m-6">
-				<Card title='Ponuda za oglas' >
+		<div className="flex justify-content-center m-6">
+			<Card title='Ponuda za oglas'>
 
-					{ offer &&
-						(
-							<>
-								<p><b>Postavio korisnik: </b>{offer.fromUsername}</p>
-								<p><b>Oglas: </b>{offer.advert.title}</p>
-								<p><b>Predloženo vrijeme povratka: </b>{Moment(new Date(offer.suggestedTimeframe)).format('DD.MM.yyyy.')}</p>
-								{ offer.message &&
-									<p><b>Poruka: </b>{offer.message}</p>
-								}
-								{ offer.offerStatus !== 'PENDING' &&
-									<p><b>Status: </b>{statusTemplate(offer.offerStatus)}</p>
-								}
-							</>
-						)
-					}
+				{offer &&
+					(
+						<>
+							<p><b>Postavio korisnik: </b>{offer.fromUsername}</p>
+							<p><b>Oglas: </b>{offer.advert.title}</p>
+							<p><b>Predloženo vrijeme
+								povratka: </b>{Moment(new Date(offer.suggestedTimeframe)).format('DD.MM.yyyy.')}</p>
+							{offer.message &&
+								<p><b>Poruka: </b>{offer.message}</p>
+							}
+							{offer.offerStatus !== 'PENDING' &&
+								<p><b>Status: </b>{statusTemplate(offer.offerStatus)}</p>
+							}
+						</>
+					)
+				}
 
-					<div className="p-grid p-d-flex p-jc-around p-mt-4">
-						<Button label='Prihvati ponudu' className='p-col' onClick={() => acceptOffer(offer.id)}
-								disabled={offer?.offerStatus !== 'PENDING'} />
-						<Button label='Odbij ponudu' className='p-col p-button-danger'
-								onClick={() => declineOffer(offer.id)} disabled={offer?.offerStatus !== 'PENDING'} />
-					</div>
+				<div className="grid flex justify-content-around mt-4">
+					<Button label='Prihvati ponudu' className='col' onClick={() => acceptOffer(offer.id)}
+							disabled={offer?.offerStatus !== 'PENDING'}/>
+					<Button label='Odbij ponudu' className='col p-button-danger'
+							onClick={() => declineOffer(offer.id)} disabled={offer?.offerStatus !== 'PENDING'}/>
+				</div>
 
-				</Card>
+			</Card>
 			</div>
 		// </div>
 	);

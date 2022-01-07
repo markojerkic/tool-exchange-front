@@ -69,8 +69,9 @@ const OfferList = () => {
 			});
 			setOffers(content);
 			setTotalOffers(data.totalElements);
+			setReloadPendingOffers(Math.random());
 		})
-	}, [offset, rows, filteredStatus, lastFilters, dateFilter, sortField, reload]);
+	}, [offset, rows, filteredStatus, lastFilters, dateFilter, sortField, reload, setReloadPendingOffers]);
 
 	const dateTemplate = (date) => {
 		return (
@@ -149,12 +150,12 @@ const OfferList = () => {
 
 	const actionButtons = (offer) => {
 		return (
-		<div className="p-d-flex p-jc-around">
-			<SplitButton model={slitButtonItems} tooltip='Pogledaj ponudu' icon='pi pi-search'
-						 onShow={() => setOfferClicked(offer)}
-						 onClick={() => history.push(`/offer/${offer.id}`)}
-						 tooltipOptions={{position: 'left'}} />
-		</div>
+			<div className="flex justify-content-around">
+				<SplitButton model={slitButtonItems} tooltip='Pogledaj ponudu' icon='pi pi-search'
+							 onShow={() => setOfferClicked(offer)}
+							 onClick={() => history.push(`/offer/${offer.id}`)}
+							 tooltipOptions={{position: 'left'}}/>
+			</div>
 		);
 	};
 
@@ -162,7 +163,6 @@ const OfferList = () => {
 		<DataTable value={offers} loading={loading} lazy rows={rows} onPage={onPage} onFilter={onFilter}
 				   paginator={true} emptyMessage="Ponude nisu pronađene" filters={lastFilters}
 				   sortField='suggestedTimeframe' sortOrder={sort} onSort={onSort}
-				   // globalFilterFields={['advertTitle', 'from', 'suggestedTimeframe', 'status']}
 				   responsiveLayout="stack" breakpoint='960px'
 				   totalRecords={totalOffers} dataKey="id">
 			<Column field="advertTitle" header="Naslov oglasa" filter

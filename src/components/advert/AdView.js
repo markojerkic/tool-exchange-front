@@ -38,20 +38,22 @@ const AdView = () => {
 	const header = <div className="divButtonTop">
 		<Button label="Povratak na listu oglasa" icon="pi pi-angle-left" onClick={() => history.push("/")}/>
 	</div>;
-	const footer = <div>
-		<label className="generalDate">Datum
+	const footer = <div className="grid">
+		<label className="generalDate col">Datum
 			objave: {Moment(advertData?.lastModified).format('DD.MM.yyyy.')}</label>
-		<Button className="generalButton" label="Pošalji ponudu" onClick={() => setShowOfferDialog(true)}
-				style={{float: "right"}}/>
+		<div className="col">
+			<Button className="generalButton" label="Pošalji ponudu" onClick={() => setShowOfferDialog(true)}
+					style={{float: "right"}}/>
+		</div>
 	</div>;
 	const shortRep = `Objavljuje ${advertData?.creator.username}`
 
 	const itemTemplate = (item) => {
-		return <img src={item} alt={item} style={{ width: '100%' }} />
+		return <img src={item} alt={item} style={{width: '80%'}}/>
 	}
 
 	const thumbnailTemplate = (item) => {
-		return <img src={item} alt={item} style={{ width: '5rem' }} />
+		return <img src={item} alt={item} style={{width: '5rem', maxWidth: '80%'}}/>
 	}
 
 	const responsiveOptions = [
@@ -71,14 +73,17 @@ const AdView = () => {
 
 	return (
 		<div>
-			<div className="p-d-flex p-jc-center p-m-6">
+			<div className="flex justify-content-center m-6">
 				<Card className="card-container" title={advertData?.title} subTitle={shortRep} header={header}
 					  footer={footer} style={{width: '50rem'}}>
 
-					{imageUrls.length > 0 &&
-						<Galleria value={imageUrls} numVisible={5} style={{maxWidth: '640px'}}
-								  responsiveOptions={responsiveOptions}
-								  item={itemTemplate} thumbnail={thumbnailTemplate}/>}
+					<div className="flex justify-content-center">
+						{imageUrls.length > 0 &&
+							<Galleria value={imageUrls} numVisible={5} style={{maxWidth: '640px'}}
+									  className="justify-self-center"
+									  responsiveOptions={responsiveOptions}
+									  item={itemTemplate} thumbnail={thumbnailTemplate}/>}
+					</div>
 
 					<p>Opis: <b>{advertData?.details}</b></p>
 					<p>Alat: <b>{advertData?.tool.name}</b></p>
@@ -94,8 +99,8 @@ const AdView = () => {
 			{ advertData && (
 				<Sidebar visible={showOfferDialog} fullScreen
 						 onHide={() => setShowOfferDialog(false)}>
-					<div className="p-d-flex p-jc-center p-ai-center">
-						<NewOffer advertId={advertData.id} onComplete={() => setShowOfferDialog(false)} />
+					<div className="flex justify-content-center p-ai-center">
+						<NewOffer advertId={advertData.id} onComplete={() => setShowOfferDialog(false)}/>
 					</div>
 				</Sidebar>
 			) }

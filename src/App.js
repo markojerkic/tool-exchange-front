@@ -77,26 +77,26 @@ const App = () => {
 	];
 
 	const start = <img alt="logo" src="../../favicon.ico"
-					   height="40" className="p-mr-2 home-page"
+					   height="40" className="mr-2 home-page"
 					   style={{cursor: 'pointer'}}
 					   data-pr-tooltip="Početna stranica"
 					   onClick={() => history.push('/')}>
 	</img>;
 	const login = <span>
-    <Button label="Registracija" className="p-button-raised p-button-danger p-button-rounded p-mr-1"
+    <Button label="Registracija" className="p-button-raised p-button-danger p-button-rounded mr-1"
 			onClick={() => history.push('/register')}/>
     <Button label="Prijava" className="p-button-raised p-button-rounded " onClick={() => history.push('/login')}/>
   </span>
 	const logout = <span>
 		<Button className="p-button-rounded p-button-text" tooltip='Ponude' onClick={() => history.push('/offers')}>
-			<i className="pi pi-envelope p-text-secondary p-overlay-badge" style={{ fontSize: '1.5rem' }}>
-				{ (pendingOffers > 0 && user) &&
-					<Badge value={pendingOffers} />
+			<i className="pi pi-envelope p-text-secondary p-overlay-badge" style={{fontSize: '1.5rem'}}>
+				{(pendingOffers > 0 && user) &&
+					<Badge value={pendingOffers}/>
 				}
 			</i>
 		</Button>
-		<Button label="Profil" className="p-button-raised p-button-rounded p-mr-1"
-				onClick={() => history.push('/user')} />
+		<Button label="Profil" className="p-button-raised p-button-rounded mr-1"
+				onClick={() => history.push('/user')}/>
     <Button label="Odjavi se" className="p-button-raised p-button-rounded" onClick={() => {
 		AuthService.logout(setUser);
 		setUser();
@@ -109,10 +109,10 @@ const App = () => {
 		<AuthContext.Provider value={{user, setUser}}>
 			<ToastContext.Provider value={{toastRef}}>
 				<PendingRequestsContext.Provider value={{setReloadPendingOffers}}>
-					<Tooltip target=".home-page" />
+					<Tooltip target=".home-page"/>
 					<Toast ref={toastRef}/>
-					<div className="p-m-2">
-						<Menubar className="p-mb-3" model={menuItems} start={start} end={!!user ? logout : login}/>
+					<div className="m-2">
+						<Menubar className="mb-3" model={menuItems} start={start} end={!!user ? logout : login}/>
 						<Main/>
 					</div>
 				</PendingRequestsContext.Provider>

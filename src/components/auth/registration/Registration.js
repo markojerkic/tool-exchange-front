@@ -84,12 +84,12 @@ const Registration = () => {
 	};
 
 	return (
-		<div className="p-d-flex p-jc-center p-m-4">
+		<div className="flex justify-content-center m-4">
 			<Card className="card-container" title="Registracija novog korisnika">
 
-				<form onSubmit={handleSubmit(onSubmit)} className="p-grid p-fluid p-formgrid form-layout">
+				<form onSubmit={handleSubmit(onSubmit)} className="grid p-fluid p-formgrid form-layout">
 
-					<div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
                         <span className="p-float-label">
                             <Controller name="firstName" control={control} rules={{required: 'Ime je obavezno.'}}
 										render={({field, fieldState}) => (
@@ -102,7 +102,7 @@ const Registration = () => {
                         </span>
 						{getFormErrorMessage('firstName')}
 					</div>
-					<div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
                         <span className="p-float-label">
                             <Controller name="lastName" control={control}
 										rules={{required: 'Prezime je obavezno.'}}
@@ -117,7 +117,7 @@ const Registration = () => {
 						{getFormErrorMessage('lastName')}
 					</div>
 
-					<div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
                         <span className="p-float-label">
                             <Controller name="formattedAddress" control={control}
 										rules={{required: 'Adresa je obavezna.'}}
@@ -134,7 +134,7 @@ const Registration = () => {
                         </span>
 					</div>
 
-					<div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
                         <span className="p-float-label">
                             <Controller name="phonenumber" control={control} render={({field}) => (
 								<InputMask id={field.name} mask="999 999 9999"/>
@@ -143,7 +143,7 @@ const Registration = () => {
                         </span>
 					</div>
 
-					<div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
                         <span className="p-float-label">    
                             <Controller name="email" control={control}
 										rules={{
@@ -163,7 +163,7 @@ const Registration = () => {
 						{getFormErrorMessage('email')}
 					</div>
 
-					<div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
                         <span className="p-float-label">
                             <Controller name="password" control={control} rules={{required: 'Password je obavezan.'}}
 										render={({field, fieldState}) => (
@@ -176,7 +176,7 @@ const Registration = () => {
 						{getFormErrorMessage('password')}
 					</div>
 
-					<div className="p-field p-col-12 p-md-6 p-lg-6 p-sm-12">
+					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
                             <span className="p-float-label">
                                 <Controller name="username" control={control}
 											rules={{required: 'Korisničko ime je obavezno.'}}
@@ -190,9 +190,9 @@ const Registration = () => {
 						{getFormErrorMessage('username')}
 					</div>
 
-					<div className="p-col-12 p-d-flex p-jc-start">
+					<div className="col-12 flex p-jc-start">
 						<div>
-							<Button type="submit" label="Registriraj se" className="p-mt-2"
+							<Button type="submit" label="Registriraj se" className="mt-2"
 									loading={loading}/>
 						</div>
 					</div>

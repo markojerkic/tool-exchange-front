@@ -44,7 +44,7 @@ const NewRequest = () => {
 		});
 	}
 	const header = <div className="divButtonTop">
-		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-entry')}/>
+		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-ad')}/>
 		<Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/')}
 				style={{float: "right"}}/>
 	</div>;
@@ -52,14 +52,14 @@ const NewRequest = () => {
 		<div>
 			<Stepper stepId={1} category={"request"}/>
 
-			<div className="p-d-flex p-jc-center p-m-6">
+			<div className="flex justify-content-center m-6">
 
 				<Card className="card-container" title="Dodavanje novog oglasa za zahtjev" header={header}
 					  style={{width: '50rem'}}>
 
-					<form onSubmit={handleSubmit(onSubmit)} className="p-grid p-fluid p-formgrid form-layout">
+					<form onSubmit={handleSubmit(onSubmit)} className="grid p-fluid p-formgrid form-layout">
 
-						<div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
+						<div className="p-field col-12 md:col-12 lg:col-12 sm:col-12">
                         <span className="p-float-label">
                             <Controller name="title" control={control} rules={{required: 'Naslov je obavezan.'}}
 										render={({field, fieldState}) => (
@@ -72,7 +72,7 @@ const NewRequest = () => {
 							{getFormErrorMessage('title')}
 						</div>
 
-						<div className="p-field p-col-12 p-md-12 p-lg-12 p-sm-12">
+						<div className="p-field col-12 md:col-12 lg:col-12 sm:col-12">
                         <span className="p-float-label">
                             <Controller name="details" control={control}
 										rules={{required: 'Opis je obavezan.'}}
@@ -86,9 +86,9 @@ const NewRequest = () => {
 							{getFormErrorMessage('details')}
 						</div>
 
-						<div className="p-col-12 p-d-flex p-jc-center">
+						<div className="col-12 flex justify-content-center">
 							<div>
-								<Button type="submit" label="Predaj oglas" className="p-mt-2"
+								<Button type="submit" label="Predaj oglas" className="mt-2"
 										loading={loading}/>
 							</div>
 						</div>

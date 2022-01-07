@@ -47,10 +47,10 @@ const Login = () => {
 	};
 
 	return (
-		<div className="p-d-flex p-jc-center p-m-4">
+		<div className="flex justify-content-center m-4">
 			<Card className="card-container" title="Prijavite se">
-				<form onSubmit={handleSubmit(onSubmit)} className="p-grid p-fluid p-formgrid form-layout">
-					<div className="p-field p-col-12">
+				<form onSubmit={handleSubmit(onSubmit)} className="grid p-fluid p-formgrid form-layout">
+					<div className="p-field col-12">
                 <span className="p-float-label">
                     <Controller name="username" control={control}
 								rules={{required: 'Korisničko ime je obavezno.'}}
@@ -63,7 +63,7 @@ const Login = () => {
                 </span>
 						{getFormErrorMessage('username')}
 					</div>
-					<div className="p-field p-col-12">
+					<div className="p-field col-12">
               <span className="p-float-label">
                     <Controller name="password" control={control} rules={{required: 'Zaporka je obavezna.'}}
 								render={({field, fieldState}) => (
@@ -77,9 +77,9 @@ const Login = () => {
 						{getFormErrorMessage('password')}
 					</div>
 
-					<div className="p-col-12 p-d-flex p-jc-center">
+					<div className="col-12 flex justify-content-center">
 						<div>
-							<Button type="submit" label="Prijavi se" className="p-mt-2"
+							<Button type="submit" label="Prijavi se" className="mt-2"
 									loading={loading}/>
 						</div>
 					</div>
