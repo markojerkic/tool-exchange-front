@@ -38,10 +38,10 @@ const AdView = () => {
 	const header = <div className="divButtonTop">
 		<Button label="Povratak na listu oglasa" icon="pi pi-angle-left" onClick={() => history.push("/")}/>
 	</div>;
-	const footer = <div className="grid">
+	const footer = <div className="grid flex align-items-center">
 		<label className="generalDate col">Datum
 			objave: {Moment(advertData?.lastModified).format('DD.MM.yyyy.')}</label>
-		<div className="col">
+		<div className="col flex justify-content-end">
 			<Button className="generalButton" label="Pošalji ponudu" onClick={() => setShowOfferDialog(true)}
 					style={{float: "right"}}/>
 		</div>

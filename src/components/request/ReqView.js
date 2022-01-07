@@ -24,10 +24,10 @@ const ReqView = () => {
 	const header = <div className="divButtonTop">
 		<Button label="Povratak na listu zahtjeva" icon="pi pi-angle-left" onClick={() => history.push('/')}/>
 	</div>;
-	const footer = <div className="grid">
+	const footer = <div className="grid flex align-items-center">
 		<label className="generalDate col">Datum
 			objave: {Moment(requestData?.lastModified).format('DD.MM.yyyy.')}</label>
-		<div className="col flex align-items-center">
+		<div className="col flex align-items-center justify-content-end">
 			<Button className="generalButton" label="Pošalji poruku" style={{float: "right"}}/>
 		</div>
 	</div>;
