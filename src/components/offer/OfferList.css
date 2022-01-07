@@ -1,0 +1,39 @@
+
+.badge {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+}
+
+.badge.status-accepted {
+    background-color: #C8E6C9;
+    color: #256029;
+}
+
+.badge.status-rejected {
+    background-color: #FFCDD2;
+    color: #C63737;
+}
+
+.badge.status-negotiation {
+    background-color: #FEEDAF;
+    color: #8A5340;
+}
+
+.badge.status-new {
+    background-color: #B3E5FC;
+    color: #23547B;
+}
+
+.badge.status-renewal {
+    background-color: #ECCFFF;
+    color: #694382;
+}
+
+.badge.status-pending {
+    background-color: #FFD8B2;
+    color: #805B36;
+}
