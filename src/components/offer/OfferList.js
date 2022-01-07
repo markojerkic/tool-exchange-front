@@ -162,6 +162,7 @@ const OfferList = () => {
 	return (
 		<DataTable value={offers} loading={loading} lazy rows={rows} onPage={onPage} onFilter={onFilter}
 				   paginator={true} emptyMessage="Ponude nisu pronađene" filters={lastFilters}
+				   stripedRows
 				   sortField='suggestedTimeframe' sortOrder={sort} onSort={onSort}
 				   responsiveLayout="stack" breakpoint='960px'
 				   totalRecords={totalOffers} dataKey="id">
