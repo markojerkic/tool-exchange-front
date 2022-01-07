@@ -8,11 +8,14 @@ import Moment from "moment";
 import {useParams} from "react-router";
 import {Galleria} from "primereact/galleria";
 import ImageService from "../../service/image.service";
+import NewOffer from "../offer/NewOffer";
+import {Sidebar} from "primereact/sidebar";
 
 const AdView = () => {
 	const {id} = useParams();
 
 	const [advertData, setAdvertData] = useState();
+	const [showOfferDialog, setShowOfferDialog] = useState(false);
 	const conditions = {
 		'NEW': 'Novo',
 		'USED': 'Korišteno',
@@ -38,7 +41,8 @@ const AdView = () => {
 	const footer = <div>
 		<label className="generalDate">Datum
 			objave: {Moment(advertData?.lastModified).format('DD.MM.yyyy.')}</label>
-		<Button className="generalButton" label="Pošalji poruku" style={{float: "right"}}/>
+		<Button className="generalButton" label="Pošalji ponudu" onClick={() => setShowOfferDialog(true)}
+				style={{float: "right"}}/>
 	</div>;
 	const shortRep = `Objavljuje ${advertData?.creator.username}`
 
@@ -86,6 +90,14 @@ const AdView = () => {
 					<p>Šifra oglasa: <b>{advertData?.id}</b></p>
 				</Card>
 			</div>
+
+			<Sidebar visible={showOfferDialog} fullScreen
+					 onHide={() => setShowOfferDialog(false)}>
+				<div className="p-d-flex p-jc-center p-ai-center">
+					<NewOffer/>
+				</div>
+			</Sidebar>
+
 		</div>
 	)
 }
