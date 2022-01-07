@@ -9,6 +9,7 @@ import {Calendar} from "primereact/calendar";
 import {SplitButton} from "primereact/splitbutton";
 import {ToastContext} from "../../common/toast.context";
 import {useHistory} from "react-router-dom";
+import {PendingRequestsContext} from "../../common/pending-offers.context";
 
 const OfferList = () => {
 
@@ -27,6 +28,8 @@ const OfferList = () => {
 	const [sortField, setSortField] = useState('suggestedTimeframe,DESC');
 
 	const [offerClicked, setOfferClicked] = useState();
+
+	const {setReloadPendingOffers} = useContext(PendingRequestsContext);
 
 	const [reload, setReload] = useState();
 
@@ -130,6 +133,7 @@ const OfferList = () => {
 		}).then(() => {
 			toastRef.current.show({severity: 'success', summary: 'Prihvaćeno', detail: 'Ponuda prihvaćena'});
 			setReload(Math.random());
+			setReloadPendingOffers(Math.random());
 		})
 	}
 
@@ -139,6 +143,7 @@ const OfferList = () => {
 		}).then(() => {
 			toastRef.current.show({severity: 'success', summary: 'Odbijeno', detail: 'Ponuda odbijena'});
 			setReload(Math.random());
+			setReloadPendingOffers(Math.random());
 		})
 	}
 

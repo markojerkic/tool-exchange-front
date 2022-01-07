@@ -6,12 +6,15 @@ import {ToastContext} from "../../common/toast.context";
 import Moment from "moment";
 import {Button} from "primereact/button";
 import './OfferList.css';
+import {PendingRequestsContext} from "../../common/pending-offers.context";
 
 const Offer = () => {
 
 	const {id} = useParams('id');
 	const [offer, setOffer] = useState();
 	const [reload, setReload] = useState();
+
+	const {setReloadPendingOffers} = useContext(PendingRequestsContext);
 
 	const {toastRef} = useContext(ToastContext);
 
@@ -21,7 +24,7 @@ const Offer = () => {
 		}).then((off) => {
 			setOffer(off);
 		})
-	}, [toastRef, id, reload]);
+	}, [toastRef, id, reload, setReloadPendingOffers]);
 
 	const statusTemplate = (offer) => {
 		let offerStatus;
@@ -50,6 +53,7 @@ const Offer = () => {
 		}).then(() => {
 			toastRef.current.show({severity: 'success', summary: 'Prihvaćeno', detail: 'Ponuda prihvaćena'});
 			setReload(Math.random());
+			setReloadPendingOffers(Math.random());
 		})
 	}
 
@@ -59,6 +63,7 @@ const Offer = () => {
 		}).then(() => {
 			toastRef.current.show({severity: 'success', summary: 'Odbijeno', detail: 'Ponuda odbijena'});
 			setReload(Math.random());
+			setReloadPendingOffers(Math.random());
 		})
 	}
 

@@ -16,6 +16,7 @@ import {Toast} from "primereact/toast";
 import {Tooltip} from "primereact/tooltip";
 import {Badge} from "primereact/badge";
 import OfferService from "./service/offer.service";
+import {PendingRequestsContext} from "./common/pending-offers.context";
 
 const App = () => {
 
@@ -36,6 +37,7 @@ const App = () => {
 	const toastRef = useRef(null);
 
 	const [pendingOffers, setPendingOffers] = useState(0);
+	const [reloadPendingOffers, setReloadPendingOffers] = useState(-1);
 
 	useEffect(() => {
 		if (user) {
@@ -43,7 +45,7 @@ const App = () => {
 				setPendingOffers(count);
 			});
 		}
-	}, [user]);
+	}, [user, reloadPendingOffers]);
 
 	const history = useHistory();
 
@@ -106,12 +108,14 @@ const App = () => {
 	return (
 		<AuthContext.Provider value={{user, setUser}}>
 			<ToastContext.Provider value={{toastRef}}>
-				<Tooltip target=".home-page" />
-				<Toast ref={toastRef}/>
-				<div className="p-m-2">
-					<Menubar className="p-mb-3" model={menuItems} start={start} end={!!user ? logout : login}/>
-					<Main/>
-				</div>
+				<PendingRequestsContext.Provider value={{setReloadPendingOffers}}>
+					<Tooltip target=".home-page" />
+					<Toast ref={toastRef}/>
+					<div className="p-m-2">
+						<Menubar className="p-mb-3" model={menuItems} start={start} end={!!user ? logout : login}/>
+						<Main/>
+					</div>
+				</PendingRequestsContext.Provider>
 			</ToastContext.Provider>
 		</AuthContext.Provider>
 	);
