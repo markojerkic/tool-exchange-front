@@ -165,10 +165,10 @@ const OfferList = () => {
 				   sortField='suggestedTimeframe' sortOrder={sort} onSort={onSort}
 				   responsiveLayout="stack" breakpoint='960px'
 				   totalRecords={totalOffers} dataKey="id">
-			<Column field="advertTitle" header="Naslov oglasa" filter
+			<Column field="advertTitle" header="Naslov oglasa" filter showFilterMenu={false}
 					filterPlaceholder="Pretražite po oglasima"/>
-			<Column field="from" header="Od korisnika" filter filterPlaceholder="Pretražite po korisnicima"/>
-			<Column field="suggestedTimeframe" header="Vrijeme povratka" sortable filter
+			<Column field="from" header="Od korisnika" filter showFilterMenu={false} filterPlaceholder="Pretražite po korisnicima"/>
+			<Column field="suggestedTimeframe" header="Vrijeme povratka" sortable filter showFilterMenu={false}
 					body={dateTemplate} filterElement={calendarFilter} readonly={true}
 					filterPlaceholder="Pretražite po periodu povratka"/>
 			<Column field='status' header='Status ponude' filterPlaceholder='Daberite status'
@@ -179,7 +179,7 @@ const OfferList = () => {
 						   value={filteredStatus} placeholder='Odaberite status' showClear={true}
 						   onChange={statusSelected}/>)
 			}/>
-			<Column header='Akcije' style={{width: '10rem'}} body={actionButtons} />
+			<Column header='Akcije' style={{width: '10rem'}} showFilterMenu={false} body={actionButtons} />
 		</DataTable>
 	);
 }
