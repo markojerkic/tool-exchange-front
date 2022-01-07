@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import OfferService from "../../service/offer.service";
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
@@ -6,6 +6,8 @@ import Moment from "moment";
 import './OfferList.css';
 import {Dropdown} from "primereact/dropdown";
 import {Calendar} from "primereact/calendar";
+import {SplitButton} from "primereact/splitbutton";
+import {ToastContext} from "../../common/toast.context";
 
 const OfferList = () => {
 	const [totalOffers, setTotalOffers] = useState(0);
@@ -20,6 +22,11 @@ const OfferList = () => {
 	const [sort, setSort] = useState(-1);
 	const [sortField, setSortField] = useState('suggestedTimeframe,DESC');
 
+	const [offerClicked, setOfferClicked] = useState();
+
+	const [reload, setReload] = useState();
+
+	const {toastRef} = useContext(ToastContext);
 
 	Moment.locale('hr');
 
@@ -56,7 +63,7 @@ const OfferList = () => {
 			setOffers(content);
 			setTotalOffers(data.totalElements);
 		})
-	}, [offset, rows, filteredStatus, lastFilters, dateFilter, sortField]);
+	}, [offset, rows, filteredStatus, lastFilters, dateFilter, sortField, reload]);
 
 	const dateTemplate = (date) => {
 		return (
@@ -94,6 +101,53 @@ const OfferList = () => {
 		setSortField(`suggestedTimeframe,${sort === 1? 'DESC': 'ASC'}`);
 	}
 
+	const slitButtonItems = [
+		{
+			icon: 'pi pi-check',
+			label: 'Prihvati ponudu',
+			disabled: offerClicked.status.css !== 'pending',
+			command: () => {
+				acceptOffer(offerClicked.id)
+			}
+		},
+		{
+			icon: 'pi pi-times',
+			label: 'Odbij ponudu',
+			disabled: offerClicked.status.css !== 'pending',
+			command: () => {
+				declineOffer(offerClicked.id)
+			}
+		}
+	];
+
+	const acceptOffer = (offerId) => {
+		OfferService.acceptOffer(offerId).catch(() => {
+			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom prihvaćanja ponude'});
+		}).then(() => {
+			toastRef.current.show({severity: 'success', summary: 'Prihvaćeno', detail: 'Ponuda prihvaćena'});
+			setReload(Math.random());
+		})
+	}
+
+	const declineOffer = (offerId) => {
+		OfferService.rejectOffer(offerId).catch(() => {
+			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom odbijanja ponude'});
+		}).then(() => {
+			toastRef.current.show({severity: 'success', summary: 'Odbijeno', detail: 'Ponuda odbijena'});
+			setReload(Math.random());
+		})
+	}
+
+	const actionButtons = (offer) => {
+		return (
+		<div className="p-d-flex p-jc-around">
+			<SplitButton model={slitButtonItems} tooltip='Pogledaj ponudu' icon='pi pi-search'
+						 onShow={() => setOfferClicked(offer)}
+						 tooltipOptions={{position: 'left'}} />
+		</div>
+		);
+	};
+
 	return (
 		<DataTable value={offers} loading={loading} lazy rows={rows} onPage={onPage} onFilter={onFilter}
 				   paginator={true} emptyMessage="Ponude nisu pronađene" filters={lastFilters}
@@ -114,6 +168,7 @@ const OfferList = () => {
 						   value={filteredStatus} placeholder='Odaberite status' showClear={true}
 						   onChange={statusSelected}/>)
 			}/>
+			<Column  style={{width: '10rem'}} body={actionButtons} />
 		</DataTable>
 	);
 }

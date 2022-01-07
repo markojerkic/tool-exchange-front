@@ -2,6 +2,14 @@ import instance from './interceptor.js'
 
 const OfferService = {
 
+	acceptOffer: function(offerId) {
+		return instance.post(`offer/acceptance`, { id: offerId, type: 'ACCEPT' })
+	},
+
+	rejectOffer(offerId) {
+		return instance.post(`offer/acceptance`, { id: offerId, type: 'REJECT' })
+	},
+
 	addNewOffer: function (offerForm) {
 		return instance.post('offer', offerForm);
 	},
