@@ -14,11 +14,15 @@ import AdView from "./advert/AdView";
 import ReqView from "./request/ReqView";
 import OfferList from "./offer/OfferList";
 import Offer from "./offer/Offer";
+
 import UserList from "./user/UserList";
 import RequestList from "./request/RequestList";
 import AdvertList from "./advert/AdvertList";
 import UserInfoPublic from "./user/UserInfoPublic";
 import Forum from "./forum/Forum";
+
+import NewAdvice from "./forum/NewAdvice";
+
 
 const Main = () => {
 	return (
@@ -42,6 +46,8 @@ const Main = () => {
 				<PublicRoute exaxt path="/advert" component={AdvertList}/>
 				<PublicRoute exaxt path="/req" component={RequestList}/>
 				<PublicRoute exact path="/forum" component={Forum}/>
+				<PublicRoute exact path="/forum/newAdvice" component={NewAdvice}/>
+				<PublicRoute exact path="/forum/:id" component={Forum}/>
 				<PublicRoute component={Error404}/>
 				
 			</Switch>
