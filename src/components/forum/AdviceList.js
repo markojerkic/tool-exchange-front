@@ -1,17 +1,40 @@
 import React from "react";
 import {Card} from "primereact/card";
 import AdvicePreview from "./AdvicePreview";
+import AdviceService from "../../service/advice.service";
+import { useEffect, useState } from "react";
+import { Paginator } from "primereact/paginator";
 
 const AdviceList = () => {
+
+
+	const [totalAdvices, setTotalAdvices] = useState(0);
+	const [offset, setOffset] = useState(0);
+	const [advices, setAdvices] = useState([]);
+
+	const [rows] = useState(10);
+
+	useEffect(() => {
+		AdviceService.getAdvices(offset / rows, rows).then((data) => {
+			setTotalAdvices(data.totalElements);
+			setAdvices(data.content);
+			console.log(data.content)
+		});
+	}, [offset, rows]);
+
 	return (
-		// <div className="mainView shape">
-			<Card title="Rezultati pretrage savjeta" className="ad-container">
+		<Card title='Zahtjevi za savjetima' >
+			{
+				advices?.map(adv => {
+					return <AdvicePreview key={adv.id} adv={adv}/>
+				})
+			}
 
-				<AdvicePreview />
-
-			</Card>
-		// </div>
+			<Paginator rows={rows} first={offset} totalRecords={totalAdvices}
+					   onPageChange={(event) => setOffset(event.first)} />
+		</Card>
 	)
+
 }
 
 export default AdviceList;

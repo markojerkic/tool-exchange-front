@@ -3,13 +3,13 @@ import {useHistory} from 'react-router';
 import PrimeReact from 'primereact/api';
 
 
-const AdvicePreview = ({req}) => {
+const AdvicePreview = ({adv}) => {
 	const history = useHistory();
-	const [request] = useState(req);
+	const [advice] = useState(adv);
 
 	return (
 
-		<div className="singleAdvert grid p-2" style={{cursor: 'pointer'}} onClick={() => history.push(`/req/${request.id}`)}>
+		<div className="singleAdvert grid p-2" style={{cursor: 'pointer'}} onClick={() => history.push(`/forum/${advice.id}`)}>
 			{/*
 				Ovdje bi mogli prikazati neku default sliku za sve zahtjeve, ali možda da bude razlličita od one
 				za oglase? Zasada sam ja uklonio tu sliku, pa onaj ko bude uređivao styling neka sredi to.
@@ -19,10 +19,10 @@ const AdvicePreview = ({req}) => {
 			{/*</div>*/}
 
 			<div className="col-12 lg:col-5 sm:col-12">
-				<p className="advertTitle">{request?.title}</p>
+				<b>{advice?.title} </b>
             </div>
-			<div className='col-12 lg:col-3 sm:col-12'>Objavio: <b>{request?.userCreated}</b></div>
-            <div className='col-12 lg:col-3 sm:col-12'>Datum:</div>
+			<div className='col-12 lg:col-3 sm:col-12'>Objavio: <b>{advice?.userCreated}</b></div>
+            <div className='col-12 lg:col-3 sm:col-12'>Datum: </div>
             <div className='col-12 lg:col-1 sm:col-12 pi pi-comments'> 10 </div>
 			
 		</div>

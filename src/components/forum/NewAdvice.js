@@ -9,8 +9,7 @@ import {classNames} from 'primereact/utils';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {Button} from 'primereact/button';
 import '../new-entry/fade-animation.css';
-import Stepper from '../stepper/Stepper'
-import RequestService from "../../service/ads/request.service";
+import AdviceService from "../../service/advice.service"
 
 
 const NewAdvice = () => {
@@ -33,19 +32,20 @@ const NewAdvice = () => {
 
 	const onSubmit = (data) => {
 		setLoading(true);
-		/*RequestService.addNewRequest(data).then((response) => {
+		AdviceService.addNewAdvice(data).then((response) => {
+			console.log(response);
 			reset();
-			history.push('/req/' + response.data.id);
+			history.push('/forum/' + response.data.id);
 			setLoading(false);
 			toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: 'Zahtjev spremljen'});
 		}, () => {
 			setLoading(false);
 			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom spremanja zahtjeva'});
-		});*/
+		});
 	}
 	const header = <div className="divButtonTop">
 		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/forum')}/>
-		<Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/')}
+		<Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/forum')}
 				style={{float: "right"}}/>
 	</div>;
 	return (
