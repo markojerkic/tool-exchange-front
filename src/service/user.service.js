@@ -9,7 +9,7 @@ const UserService = {
     },
 
     disableUser: function(id) {
-        instance.put(`user/block/id=${id}`)
+        return instance.put(`user/block/id=${id}`);
     }
 }
 
