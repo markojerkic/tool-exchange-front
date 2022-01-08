@@ -1,36 +1,54 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import UserService from "../service/user.service";
-
+import {DataTable} from 'primereact/datatable';
+import {Column} from "primereact/column";
+import {ToastContext} from "../common/toast.context";
 
 const UserList = () => {
-    const [usersData, setUsersData] = React.useState();
+    const [usersData, setUsersData] = useState([]);
+    const [expandedRows, setExpandedRows] = useState(null);
+    const {toastRef} = useContext(ToastContext);
 
     useEffect(() => {
         UserService.getUsers().then((users) => {
+            // const data = users.map((e) => {
+            //     return {
+            //         ...e,
+            //         status: e.isDisabled ? "Blokiran" : "Nije blokiran"
+            //     }
+            // })
             setUsersData(users);
-        })
+        });
     }, []);
 
-    function test(){ //implementirati nekako da pokaaze/sakrije detaljne informacije klikom
-        console.log("radi!!");
+    const disabledStatusBodyTemplate = (rowData) => {
+        return rowData.isDisabled ? <span className="badge status-rejected">{rowData.status}</span> : <span className="badge status-accepted">rowData.status</span>;
     }
 
-    const makeList = usersData => usersData.map((user,i) => (
-        <div onClick={() => test()}>
-            <h2>User {i+1}</h2>
-            <p>Username = {user.username}</p>
-            <p>Email = {user.email}</p>
-        </div>
-    ));
-
-    return(
-        <div>
-            <h1 className="stdText">Users</h1>
-            <div>
-                {!usersData ? "Loading" : makeList(usersData)}
+    const rowExpansionTemplate = (data) => {
+        return (
+            <div className="orders-subtable">
+                {console.log(data)}
+                <DataTable value={[data]}>
+                    <Column field="id" header="Id"></Column>
+                    <Column field="firstName" header="Ime"></Column>
+                    <Column field="lastName" header="Prezime"></Column>
+                    <Column field="formattedAddress" header="Adresa"></Column>
+                </DataTable>
             </div>
-        </div>
-    )
+        );
+    }
+
+    return (
+        <DataTable value={usersData} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                   rowExpansionTemplate={rowExpansionTemplate} dataKey="id">
+            <Column expander style={{ width: '3em' }} />
+            <Column field="username" header="Korisničko ime"></Column>
+            <Column field="email" header="Email"></Column>
+            <Column header="Blokiran"> body={disabledStatusBodyTemplate}</Column>
+        </DataTable>
+    );
+
 }
 
 export default UserList;
