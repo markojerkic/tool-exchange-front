@@ -1,17 +1,32 @@
-import React, {useContext} from "react";
-import {AuthContext} from "../common/auth.context";
+import React from "react";
+import AdvertList from "./advert/AdvertList";
+import RequestList from "./request/RequestList";
+import {Card} from "primereact/card";
 
 const Home = () => {
-    const {user} = useContext(AuthContext);
+	return (
+		// <div className="mainView shape">
+			<Card className="ad-container">
 
-    const loggedInUser = !!user? <p>Trenutno je prijavljen korisnik s korisničkim imenom <b>{user.username}</b></p>: <p>Trenutno nije prijavljen korisnik</p>;;
+				<div className="flex justify-content-center align-self-center grid">
+					<div className="lg:col-2 md:col-2 sm:col-12">
+						tu bi ja filtere
+					</div>
 
-    return(
-        <div>
-            <h1 className="stdText">Home</h1>
-            {loggedInUser}
-        </div>
-    )
+					<div className="lg:col-8 md:col-8 sm:col-12">
+						<h1 className="title">Rezultati pretrage</h1>
+						<h2>Alati</h2>
+						<AdvertList/>
+						<h2>Zahtjevi</h2>
+						<RequestList/>
+					</div>
+
+					<div className="lg:col-2 md:col-2 sm:col-12"/>
+				</div>
+
+			</Card>
+		// </div>
+	)
 }
 
 export default Home;
