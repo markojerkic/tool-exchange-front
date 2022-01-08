@@ -6,6 +6,10 @@ const UserService = {
         return instance.get("/user/page").then((response) =>{
             return response.data;
         })
+    },
+
+    disableUser: function(id) {
+        instance.put(`user/block/id=${id}`)
     }
 }
 
