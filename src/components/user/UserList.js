@@ -77,7 +77,7 @@ const UserList = () => {
             <Column field="email" header="Email"></Column>
             <Column field="status" header="Status profila"body={statusBodyTemplate}></Column>
             <Column header="Akcija" body={akcijaTempalte}></Column>
-            <Column expander style={{ width: '3em' }} />
+            <Column header="Osobni podatci" expander style={{ width: '10em' }} />
         </DataTable>
     );
 
