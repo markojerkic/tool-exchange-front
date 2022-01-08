@@ -3,6 +3,7 @@ import UserService from "../service/user.service";
 import {DataTable} from 'primereact/datatable';
 import {Column} from "primereact/column";
 import {ToastContext} from "../common/toast.context";
+import './offer/OfferList.css';
 
 const UserList = () => {
     const [usersData, setUsersData] = useState([]);
@@ -22,13 +23,12 @@ const UserList = () => {
     }, []);
 
     const disabledStatusBodyTemplate = (rowData) => {
-        return rowData.isDisabled ? <span className="badge status-rejected">{rowData.status}</span> : <span className="badge status-accepted">rowData.status</span>;
+        return rowData.isDisabled ? <span className="badge status-rejected">Blokiran</span> : <span className="badge status-accepted">Nije blokiran</span>;
     }
 
     const rowExpansionTemplate = (data) => {
         return (
             <div className="orders-subtable">
-                {console.log(data)}
                 <DataTable value={[data]}>
                     <Column field="id" header="Id"></Column>
                     <Column field="firstName" header="Ime"></Column>
