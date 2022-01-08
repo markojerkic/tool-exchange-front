@@ -5,7 +5,7 @@ import PublicRoute from "../routes/PublicRoute";
 import Login from "./auth/login/Login";
 import Registration from "./auth/registration/Registration.js";
 import Home from "./Home";
-import UserInfo from "./UserInfo";
+import UserInfo from "./user/UserInfo";
 import Error404 from "./error/Error404";
 import NewAd from "./advert/NewAdvert";
 import Category from "./new-entry/Category"
@@ -14,7 +14,7 @@ import AdView from "./advert/AdView";
 import ReqView from "./request/ReqView";
 import OfferList from "./offer/OfferList";
 import Offer from "./offer/Offer";
-import UserList from "./UserList";
+import UserList from "./user/UserList";
 
 const Main = () => {
 	return (

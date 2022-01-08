@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import AuthService from "../service/auth/auth.service";
+import AuthService from "../../service/auth/auth.service";
 
 const UserInfo = () => {
 	const [userData, setUserData] = React.useState();

@@ -3,7 +3,7 @@ import instance from "./interceptor";
 const UserService = {
 
     getUsers: function() {
-        return instance.get("/user/all").then((response) =>{
+        return instance.get("/user/page").then((response) =>{
             return response.data;
         })
     }
