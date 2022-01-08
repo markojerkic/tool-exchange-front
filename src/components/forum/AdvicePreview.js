@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router';
 import PrimeReact from 'primereact/api';
+import Moment from 'moment';
 
 
 const AdvicePreview = ({adv}) => {
 	const history = useHistory();
 	const [advice] = useState(adv);
+
+	advice.lastModified=new Date(advice.lastModified);
 
 	return (
 
@@ -22,7 +25,7 @@ const AdvicePreview = ({adv}) => {
 				<b>{advice?.title} </b>
             </div>
 			<div className='col-12 lg:col-3 sm:col-12'>Objavio: <b>{advice?.userCreated}</b></div>
-            <div className='col-12 lg:col-3 sm:col-12'>Datum: </div>
+            <div className='col-12 lg:col-3 sm:col-12'>Datum: {Moment(advice?.lastModified).format('DD.MM.yyyy.')}</div>
             <div className='col-12 lg:col-1 sm:col-12 pi pi-comments'> 10 </div>
 			
 		</div>

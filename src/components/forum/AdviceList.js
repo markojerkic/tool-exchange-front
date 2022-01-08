@@ -18,7 +18,6 @@ const AdviceList = () => {
 		AdviceService.getAdvices(offset / rows, rows).then((data) => {
 			setTotalAdvices(data.totalElements);
 			setAdvices(data.content);
-			console.log(data.content)
 		});
 	}, [offset, rows]);
 

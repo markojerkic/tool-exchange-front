@@ -22,6 +22,7 @@ import UserInfoPublic from "./user/UserInfoPublic";
 import Forum from "./forum/Forum";
 
 import NewAdvice from "./forum/NewAdvice";
+import AdviceView from "./forum/AdviceView";
 
 
 const Main = () => {
@@ -47,7 +48,7 @@ const Main = () => {
 				<PublicRoute exaxt path="/req" component={RequestList}/>
 				<PublicRoute exact path="/forum" component={Forum}/>
 				<PublicRoute exact path="/forum/newAdvice" component={NewAdvice}/>
-				<PublicRoute exact path="/forum/:id" component={Forum}/>
+				<PublicRoute exact path="/forum/:id" component={AdviceView}/>
 				<PublicRoute component={Error404}/>
 				
 			</Switch>
