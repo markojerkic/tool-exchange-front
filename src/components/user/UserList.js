@@ -70,9 +70,10 @@ const UserList = () => {
 
     return (
         <DataTable value={usersData} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-                   rowExpansionTemplate={rowExpansionTemplate} dataKey="id" stripedRows>
-            <Column field="id" header="Id"></Column>
-            <Column field="username" header="Korisničko ime"></Column>
+                   rowExpansionTemplate={rowExpansionTemplate} dataKey="id" stripedRows
+                   sortField="username" sortOrder={1}>
+            <Column sortable field="id" header="Id"></Column>
+            <Column sortable field="username" header="Korisničko ime"></Column>
             <Column field="email" header="Email"></Column>
             <Column field="status" header="Status profila"body={statusBodyTemplate}></Column>
             <Column header="Akcija" body={akcijaTempalte}></Column>
