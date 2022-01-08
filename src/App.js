@@ -87,6 +87,13 @@ const App = () => {
 					
 				}
 			]
+		},
+		{
+			label: 'Forum',
+			icon: 'pi pi-users',
+			command: () => {
+				navigateToPage('/forum')
+			}
 		}
 	];
 

@@ -18,6 +18,7 @@ import UserList from "./user/UserList";
 import RequestList from "./request/RequestList";
 import AdvertList from "./advert/AdvertList";
 import UserInfoPublic from "./user/UserInfoPublic";
+import Forum from "./forum/Forum";
 
 const Main = () => {
 	return (
@@ -40,7 +41,9 @@ const Main = () => {
 				<PrivateRoute exact path="/new-ad/request" component={NewRequest}/>
 				<PublicRoute exaxt path="/advert" component={AdvertList}/>
 				<PublicRoute exaxt path="/req" component={RequestList}/>
+				<PublicRoute exact path="/forum" component={Forum}/>
 				<PublicRoute component={Error404}/>
+				
 			</Switch>
 		</main>
 	)
