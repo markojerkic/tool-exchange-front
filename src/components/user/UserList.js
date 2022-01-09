@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import UserService from "../../service/user.service";
 import {DataTable} from 'primereact/datatable';
 import {Column} from "primereact/column";
-//import {ToastContext} from "../../common/toast.context";
 import './UserList.css';
 import {Button} from 'primereact/button';
 
@@ -76,7 +75,7 @@ const UserList = () => {
     return (
         <DataTable value={usersData} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                    rowExpansionTemplate={rowExpansionTemplate} dataKey="id" stripedRows
-                   sortField="username" sortOrder={1} onFilter={onFilter} filters={lastFilters} filterDisplay="menu">
+                   sortField="username" sortOrder={1} onFilter={onFilter} filters={lastFilters} filterDisplay="row">
             <Column sortable field="id" header="Id"></Column>
             <Column filter sortable field="username" header="Korisničko ime"></Column>
             <Column field="email" header="Email"></Column>
