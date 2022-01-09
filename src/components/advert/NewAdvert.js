@@ -12,7 +12,6 @@ import {InputNumber} from 'primereact/inputnumber'
 import {Dropdown} from "primereact/dropdown";
 import {FileUpload} from 'primereact/fileupload';
 import {InputSwitch} from 'primereact/inputswitch';
-import '../new-entry/fade-animation.css';
 import Stepper from '../stepper/Stepper'
 import AdService from "../../service/ads/ad.service";
 import {InputMask} from "primereact/inputmask";

@@ -1,7 +1,7 @@
 import React from "react";
 import {Card} from "primereact/card";
 import AdvicePreview from "./AdvicePreview";
-import AdviceService from "../../service/advice.service";
+import AdviceService from "../../../service/advice.service";
 import { useEffect, useState } from "react";
 import { Paginator } from "primereact/paginator";
 

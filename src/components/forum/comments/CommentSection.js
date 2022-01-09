@@ -7,8 +7,8 @@ import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { Paginator } from "primereact/paginator";
 import Comment from "./Comment";
-import CommentService from "../../service/comment.service";
-import { ToastContext } from "../../common/toast.context";
+import CommentService from "../../../service/comment.service";
+import { ToastContext } from "../../../common/toast.context";
 import {Controller, useForm } from "react-hook-form";
 
 const CommentSection = ({threadId}) => {
@@ -23,16 +23,12 @@ const CommentSection = ({threadId}) => {
 
     const {toastRef} = useContext(ToastContext);
 
-    const [comment, setComment] = useState()
-
     const [totalComments, setTotalComments] = useState(0);
 	const [offset, setOffset] = useState(0);
 	const [comments, setComments] = useState([]);
     const [rows] = useState(10);
 
     const {control, formState: {errors}, handleSubmit, reset} = useForm({defaultValues});
-
-    console.log(comments);
 
 	useEffect(() => {
 		CommentService.getComments(offset / rows, rows, id).then((data) => {
@@ -67,18 +63,18 @@ const CommentSection = ({threadId}) => {
 	const history = useHistory();
 	
 	return (
-		<div className="flex justify-content-center">
+		<div className="flex justify-content-center m-6">
             <Card className="card-container" title="Komentari" style={{width: '50rem'}}>
                 <form onSubmit={handleSubmit(onSubmit)} className="grid p-fluid p-formgrid form-layout">
-                    <div className="p-field col-12 lg:col-12">
+                    <div className="p-field col-12 lg:col-12 sm:col-12">
                     <Controller name="message" control={control}
 										render={({field}) => (
-											<InputTextarea id={field.name} {...field} type="text" rows={2} cols={80}
+											<InputTextarea id={field.name} {...field} type="text" rows={2} cols={60}
 														   autoResize/>
 										)}/>
                     </div>
 
-                    <div className="p-field col-4 lg:col-4">
+                    <div className="p-field col-4 lg:col-4 sm:col-4">
                         <Button label="Dodaj komentar" loading={loading} />
                     </div>
                 </form>

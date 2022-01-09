@@ -4,14 +4,13 @@ import 'primeflex/primeflex.css'
 import {Controller, useForm} from 'react-hook-form';
 import {InputText} from 'primereact/inputtext';
 import {useHistory} from 'react-router-dom';
-import {ToastContext} from "../../common/toast.context";
+import {ToastContext} from "../../../common/toast.context";
 import {classNames} from 'primereact/utils';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {Button} from 'primereact/button';
-import '../new-entry/fade-animation.css';
-import AdviceService from "../../service/advice.service"
+import AdviceService from "../../../service/advice.service"
 import {FileUpload} from 'primereact/fileupload';
-import ImageService from "../../service/image.service";
+import ImageService from "../../../service/image.service";
 
 
 const NewAdvice = () => {

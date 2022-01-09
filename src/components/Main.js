@@ -12,7 +12,6 @@ import Category from "./new-entry/Category"
 import NewRequest from "./request/NewRequest";
 import AdView from "./advert/AdView";
 import ReqView from "./request/ReqView";
-import OfferList from "./offer/OfferList";
 import Offer from "./offer/Offer";
 
 import UserList from "./user/UserList";
@@ -20,9 +19,9 @@ import RequestList from "./request/RequestList";
 import AdvertList from "./advert/AdvertList";
 import UserInfoPublic from "./user/UserInfoPublic";
 import Forum from "./forum/Forum";
-
-import NewAdvice from "./forum/NewAdvice";
-import AdviceView from "./forum/AdviceView";
+import OfferList from "./offer/OfferList";
+import NewAdvice from "./forum/adviceThread/NewAdvice";
+import AdviceView from "./forum/adviceThread/AdviceView";
 
 
 const Main = () => {

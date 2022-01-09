@@ -1,6 +1,6 @@
 import React from "react";
 import {Card} from "primereact/card";
-import AdviceList from "./AdviceList";
+import AdviceList from "./adviceThread/AdviceList";
 import { Button } from "primereact/button";
 import { useHistory } from "react-router";
 

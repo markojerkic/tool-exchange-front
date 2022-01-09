@@ -5,10 +5,10 @@ import {useHistory} from 'react-router-dom';
 import {Button} from 'primereact/button';
 import Moment from 'moment';
 import {useParams} from "react-router";
-import AdviceService from "../../service/advice.service";
-import ImageService from "../../service/image.service";
+import AdviceService from "../../../service/advice.service";
+import ImageService from "../../../service/image.service";
 import {Galleria} from "primereact/galleria";
-import CommentSection from "./CommentSection"
+import CommentSection from "../comments/CommentSection"
 
 const AdviceView = () => {
 	const {id} = useParams();
@@ -27,7 +27,6 @@ const AdviceView = () => {
 			Moment.locale('hr');
 			data.lastModified = new Date(data.lastModified);
 			setAdviceData(data);
-            //console.log(data);
 			ImageService.getImagesByAdvertId(data.id).then((images) => {
 				setImageUrls(images);
 			});
@@ -41,9 +40,6 @@ const AdviceView = () => {
 	const footer = <div className="grid flex align-items-center">
 		<label className="generalDate col">Datum
 			objave: {Moment(adviceData?.lastModified).format('DD.MM.yyyy.')}</label>
-		<div className="col flex align-items-center justify-content-end">
-			<Button className="generalButton" label="Pošalji poruku" style={{float: "right"}}/>
-		</div>
 	</div>;
 	const shortRep = `Objavljuje ${adviceData?.creator.username}`
 
@@ -85,12 +81,9 @@ const AdviceView = () => {
 					<p>Opis: <b>{adviceData?.details}</b></p>
 					<p>Šifra zahtjeva: <b>{adviceData?.id}</b></p>
 				</Card>
-
-				
 			</div>
-
 			<div className="flex justify-content-center m-6">
-				<CommentSection threadId={adviceData?.id}/>
+				<CommentSection threadId={adviceData?.id} threadOwner={adviceData?.creator.username}/>
 			</div>
 		</div>
 	)

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router';
-import PrimeReact from 'primereact/api';
 import Moment from 'moment';
 
 
