@@ -22,7 +22,7 @@ const ReqView = () => {
 
 	const history = useHistory();
 	const header = <div className="divButtonTop">
-		<Button label="Povratak na listu zahtjeva" icon="pi pi-angle-left" onClick={() => history.push('/')}/>
+		<Button label="Povratak na listu zahtjeva" icon="pi pi-angle-left" onClick={() => history.push('/req')}/>
 	</div>;
 	const footer = <div className="grid flex align-items-center">
 		<label className="generalDate col">Datum

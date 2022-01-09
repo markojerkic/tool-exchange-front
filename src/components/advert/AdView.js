@@ -36,7 +36,7 @@ const AdView = () => {
 
 	const history = useHistory();
 	const header = <div className="divButtonTop">
-		<Button label="Povratak na listu oglasa" icon="pi pi-angle-left" onClick={() => history.push("/")}/>
+		<Button label="Povratak na listu oglasa" icon="pi pi-angle-left" onClick={() => history.push("/advert")}/>
 	</div>;
 	const footer = <div className="grid flex align-items-center">
 		<label className="generalDate col">Datum

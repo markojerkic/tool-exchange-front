@@ -35,7 +35,7 @@ const NewAdvert = () => {
 
 	const header = <div className="divButtonTop">
 		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/new-ad')}/>
-		<Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/')}
+		<Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/advert')}
 				style={{float: "right"}}/>
 	</div>;
 
