@@ -10,6 +10,7 @@ const UserList = () => {
     const [blockReload, setBlockReload] = useState();
     const [usersData, setUsersData] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
+    const [lastFilters, setLastFilters] = useState();
     //const {toastRef} = useContext(ToastContext);
 
     const mapStatus = (userStatus) => {
@@ -19,6 +20,10 @@ const UserList = () => {
             return {label: 'NORMALAN', css: 'normal'};
 
     };
+
+    const onFilter = (filters) => {
+        setLastFilters(filters.filters);
+    }
 
     useEffect(() => {
         UserService.getUsers().then((users) => {
@@ -30,7 +35,7 @@ const UserList = () => {
             });
             setUsersData(data);
         });
-    }, [blockReload]);
+    }, [blockReload, lastFilters]);
 
     const statusBodyTemplate = (rowData) => {
         return (<span className={`badge status-${rowData.status.css}`}>{rowData.status.label}</span>);
@@ -71,16 +76,15 @@ const UserList = () => {
     return (
         <DataTable value={usersData} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                    rowExpansionTemplate={rowExpansionTemplate} dataKey="id" stripedRows
-                   sortField="username" sortOrder={1}>
+                   sortField="username" sortOrder={1} onFilter={onFilter} filters={lastFilters} filterDisplay="menu">
             <Column sortable field="id" header="Id"></Column>
-            <Column sortable field="username" header="Korisničko ime"></Column>
+            <Column filter sortable field="username" header="Korisničko ime"></Column>
             <Column field="email" header="Email"></Column>
-            <Column field="status" header="Status profila"body={statusBodyTemplate}></Column>
+            <Column sortable field="status" header="Status profila"body={statusBodyTemplate}></Column>
             <Column header="Akcija" body={akcijaTempalte}></Column>
             <Column header="Osobni podatci" expander style={{ width: '10em' }} />
         </DataTable>
     );
-
 }
 
 export default UserList;
