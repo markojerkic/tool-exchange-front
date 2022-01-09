@@ -129,3 +129,21 @@ h2 {
     margin: 1%;
 }
 
+.center {
+    text-align:center;
+    width:100%;
+}
+
+i{
+    border-radius: 10px;
+    padding: 10%;
+}
+
+i:hover{
+    background: var(--surface-a);
+}
+
+.buttonHome{
+    text-align: center;
+    font-size: 20vh;
+}
