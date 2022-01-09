@@ -129,6 +129,7 @@ h2 {
     margin: 1%;
 }
 
+
 .center {
     text-align:center;
     width:100%;
@@ -145,5 +146,5 @@ i:hover{
 
 .buttonHome{
     text-align: center;
-    font-size: 20vh;
+    font-size: 10rem;
 }

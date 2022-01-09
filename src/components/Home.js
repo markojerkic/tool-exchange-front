@@ -1,7 +1,6 @@
 import React from "react";
 import {Card} from "primereact/card";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {useHistory} from 'react-router-dom';
 
 function getWindowDimensions() {
@@ -29,7 +28,7 @@ function getWindowDimensions() {
 
 const Home = () => {
 	const history = useHistory();
-	const {width, height} = useWindowDimensions();
+	const { height, width } = useWindowDimensions();
 	return (
 		// <div className="mainView shape">
 			<Card className="ad-container">
@@ -41,42 +40,44 @@ const Home = () => {
 
 					<div className="lg:col-8 md:col-8 sm:col-12">
 						<h1 className="title p-mb-5" >Odaberite kategoriju</h1>
-						{width > 700 &&
-						<div className="p-grid center">
-							<div className="p-col-4">
+						
+						{width > 1200 &&
+						<div className="grid center">
+							<div className="col-4">
 								<h3>Forum</h3>
 								<i className="pi pi-users buttonHome" onClick={() => history.push('/forum') }></i>
 							</div>
-							<div className="p-col-4">
+							<div className="col-4">
 								<h3>Alati</h3>
 								<i className="pi pi-briefcase buttonHome" onClick={() => history.push('/tools')}></i>
 							</div>
-							<div className="p-col-4">
+							<div className="col-4">
 								<h3>Zahtjevi</h3>
 								<i className="pi pi-bookmark buttonHome" onClick={() => history.push('/requests')}></i>
 							</div>
 						</div>
 						}
 
-						{width < 700 &&
-						<div className="p-grid center">
-							<div className="p-col-12">
+						{width < 1200 &&
+						<div className="grid center">
+							<div className="col-12">
 								<h3>Forum</h3>
 								<i className="pi pi-users buttonHome" onClick={() => history.push('/forum') }></i>
 							</div>
-							<div className="p-col-12">
+							<div className="col-12">
 								<h3>Alati</h3>
 								<i className="pi pi-briefcase buttonHome" onClick={() => history.push('/tools')}></i>
 							</div>
-							<div className="p-col-12">
+							<div className="col-12">
 								<h3>Zahtjevi</h3>
 								<i className="pi pi-bookmark buttonHome" onClick={() => history.push('/requests')}></i>
 							</div>
 						</div>
 						}
+
 					</div>
 
-					<div className="lg:col-2 md:col-2 sm:col-12"/>
+					<div className="lg:col-2 md:col-2 sm:col-12"></div>
 				</div>
 
 			</Card>
