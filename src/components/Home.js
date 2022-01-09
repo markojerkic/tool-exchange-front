@@ -1,16 +1,27 @@
 import React from "react";
 import {Card} from "primereact/card";
+
 import {useHistory} from 'react-router-dom';
 import '../App.css';
+
+
+import HomeFilterBar from "./home-filter/homeFilter"
 
 const Home = () => {
 	const history = useHistory();
 	return (
 		<Card className="ad-container">
 
+
 			<div className="flex justify-content-center align-self-center grid">
 
 				<h1 className="title mb-5 col-12">Odaberite kategoriju</h1>
+				<div className="flex justify-content-center align-self-center grid">
+					<div className="lg:col-2 md:col-2 sm:col-12">
+						tu bi ja filtere - eto ti ih
+						<HomeFilterBar />
+					</div>
+				</div>
 
 				<div className="grid flex justify-content-center col-12">
 					<div
