@@ -7,7 +7,7 @@ const RequestPreview = ({req}) => {
 
 	return (
 
-		<div className="singleAdvert grid p-2" style={{cursor: 'pointer'}}
+		<div id="card" className="singleAdvert grid p-2" style={{cursor: 'pointer'}}
 			 onClick={() => history.push(`/req/${request.id}`)}>
 			{/*
 				Ovdje bi mogli prikazati neku default sliku za sve zahtjeve, ali možda da bude razlličita od one

@@ -19,15 +19,24 @@ const RequestList = () => {
 	}, [offset, rows]);
 
 	return (
-		<Card title='Rezultati pretrage zahtjeva' >
-			{
-				requests.map(req => {
-					return <RequestPreview key={req.id} req={req}/>
-				})
-			}
+		<Card className="ad-container">
+			<div className="flex justify-content-center align-self-center grid">
+				<div className="lg:col-2 md:col-2 sm:col-12">
+					tu bi ja filtere
+				</div>
+				<div className="lg:col-8 md:col-8 sm:col-12">
+				<h1 className="title mb-5">Rezultati pretrage</h1>
+				{
+					requests.map(req => {
+						return <RequestPreview key={req.id} req={req}/>
+					})
+				}
+				</div>
+				<div className="lg:col-2 md:col-2 sm:col-12"/>	
 
-			<Paginator rows={rows} first={offset} totalRecords={totalRequests}
-					   onPageChange={(event) => setOffset(event.first)} />
+				<Paginator rows={rows} first={offset} totalRecords={totalRequests}
+						onPageChange={(event) => setOffset(event.first)} />
+			</div>
 		</Card>
 	)
 

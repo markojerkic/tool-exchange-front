@@ -19,15 +19,23 @@ const AdvertList = () => {
 	}, [offset, rows]);
 
 	return (
-		<Card title='Rezultati pretrage oglasa' >
-			{
-				ads.map(advert => {
-					return <AdvertPreview key={advert.id} ad={advert}/>
-				})
-			}
-
-			<Paginator rows={rows} first={offset} totalRecords={totalAds}
+		<Card className="ad-container">
+			<div className="flex justify-content-center align-self-center grid">
+				<div className="lg:col-2 md:col-2 sm:col-12">
+					tu bi ja filtere
+				</div>
+				<div className="lg:col-8 md:col-8 sm:col-12">
+				<h1 className="title mb-5">Rezultati pretrage</h1>
+				{
+					ads.map(advert => {
+						return <AdvertPreview key={advert.id} ad={advert}/>
+					})
+				}
+				</div>
+				<div className="lg:col-2 md:col-2 sm:col-12"/>	
+				<Paginator rows={rows} first={offset} totalRecords={totalAds}
 					   onPageChange={(event) => setOffset(event.first)} />
+			</div>
 		</Card>
 	)
 }

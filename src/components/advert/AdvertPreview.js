@@ -15,7 +15,7 @@ const AdvertPreview = ({ad}) => {
 
 	return (
 
-		<div className="singleAdvert grid p-2" style={{cursor: 'pointer'}}
+		<div id="card" className="singleAdvert grid p-2" style={{cursor: 'pointer'}}
 			 onClick={() => history.push(`/advert/${advert.id}`)}>
 			<img src={imageUrl} className="col advertPicture" alt="Slika"/>
 			<div className="grid col flex align-items-stretch">

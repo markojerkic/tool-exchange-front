@@ -36,6 +36,8 @@ const Main = () => {
 				<PrivateRoute exact path="/new-ad" component={Category}/>
 				<PrivateRoute exact path="/new-ad/tool" component={NewAd}/>
 				<PrivateRoute exact path="/new-ad/request" component={NewRequest}/>
+				<PublicRoute exaxt path="/tools" component={AdvertList}/>
+				<PublicRoute exaxt path="/requests" component={RequestList}/>
 				<PublicRoute component={Error404}/>
 			</Switch>
 		</main>
