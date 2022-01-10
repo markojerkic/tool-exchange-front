@@ -16,19 +16,19 @@ const Home = () => {
 					<div
 						className="sm:col-12 md:col-12 lg:col-4 xl:col-4 col-12 flex flex-column align-items-center">
 						<h2>Forum</h2>
-						<i className="pi pi-users button-home navigation-icon" onClick={() => history.push('/forum')}/>
+						<i className="pi pi-users button-home navigation-icon" onClick={() => history.push('/forum')} style={{cursor: 'pointer'}}/>
 					</div>
 					<div
 						className="sm:col-12 md:col-12 lg:col-4 xl:col-4 col-12 flex flex-column align-items-center">
 						<h2>Alati</h2>
 						<i className="pi pi-briefcase button-home navigation-icon"
-						   onClick={() => history.push('/tools')}/>
+						   onClick={() => history.push('/tools')} style={{cursor: 'pointer'}}/>
 					</div>
 					<div
 						className="sm:col-12 md:col-12 lg:col-4 xl:col-4 col-12 flex flex-column align-items-center">
 						<h2>Zahtjevi</h2>
 						<i className="pi pi-bookmark button-home navigation-icon"
-						   onClick={() => history.push('/requests')}/>
+						   onClick={() => history.push('/requests')} style={{cursor: 'pointer'}}/>
 					</div>
 					</div>
 
