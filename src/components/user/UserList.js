@@ -48,7 +48,7 @@ const UserList = () => {
     useEffect(() => {
         setLoading(true);
         UserService.getUsers(offset / rows, rows, lastFilters, `${sortField},${sortOrder}`)
-            .then(() => setLoading(false)).then((users) => {
+            .then((users) => {
                 const data = users.content.map((e) => {
                     return {
                         ...e,
@@ -65,7 +65,7 @@ const UserList = () => {
                     detail: 'Nemate potrebna prava za tu akciju'
                 });
             }
-        });
+        }).finally(() => setLoading(false));
     }, [blockReload, lastFilters, toastRef, offset, rows, sortField, sortOrder]);
 
     const statusBodyTemplate = (rowData) => {
