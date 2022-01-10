@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
-import AuthService from "../service/auth/auth.service";
+import AuthService from "../../service/auth/auth.service";
 import {Card} from "primereact/card";
 import {Rating} from 'primereact/rating';
-import RatingService from "../service/rating.service";
+import RatingService from "../../service/rating.service";
 import {useParams} from "react-router";
-import {ToastContext} from "../common/toast.context";
+import {ToastContext} from "../../common/toast.context";
 
 
 const UserInfo = () => {
@@ -53,6 +53,8 @@ const UserInfo = () => {
 						<p className="advertTitle p-mb-2">Korisnik: {userData.username}</p>
 
 						<hr></hr>
+						{console.log(AuthService.getCurrentUserToken().roles)}
+						authserviis.getcurrentusertoken.roles.contains('ROLE_ADMIN')
 						<p>Ime: <b>{userData.firstName}</b></p>
 						<p>Prezime: <b>{userData.lastName}</b></p>
 

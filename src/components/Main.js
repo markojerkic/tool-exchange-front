@@ -17,7 +17,7 @@ import Offer from "./offer/Offer";
 import UserList from "./user/UserList";
 import RequestList from "./request/RequestList";
 import AdvertList from "./advert/AdvertList";
-import UserInfoPublic from "./UserInfoPublic";
+import UserInfoPublic from "./user/UserInfoPublic";
 
 const Main = () => {
 	return (
