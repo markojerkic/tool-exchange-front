@@ -37,7 +37,7 @@ const NewOffer = ({advertId, onComplete}) => {
 
 		<form onSubmit={handleSubmit(onSubmit)} style={{width: '30rem'}}
 			  className="grid p-fluid p-formgrid form-layout flex justify-content-center">
-			<h2>Unesite svoju ponudu</h2>
+			<h2 className="blue-title">Unesite svoju ponudu</h2>
 			<div className="p-field col-12">
 				<label htmlFor="suggestedTimeframe"
 					   className={classNames({'p-error': errors.description})}>Predloženo vrijeme povratka alata</label>

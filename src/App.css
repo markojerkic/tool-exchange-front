@@ -111,7 +111,7 @@ html {
     -webkit-box-orient: vertical;
 }
 
-h2 {
+.blue-title {
     margin-left: 5%;
     color: var(--blue-200);
 }
@@ -139,9 +139,29 @@ h2 {
     transition-duration: 0.3s;
     -webkit-transition-property: box-shadow, transform;
     transition-property: box-shadow, transform;
-  }
+}
+
 #card:hover, #card:focus, #card:active {
     box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
     -webkit-transform: scale(1.02);
     transform: scale(1.02);
+}
+
+.center {
+    text-align: center;
+    width: 100%;
+}
+
+.navigation-icon {
+    border-radius: 10px;
+    padding: 10%;
+}
+
+.navigation-icon:hover {
+    background: var(--surface-a);
+}
+
+.button-home {
+    text-align: center;
+    font-size: 10rem;
 }
