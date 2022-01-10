@@ -87,7 +87,7 @@ const App = () => {
 			onClick={() => history.push('/register')}/>
     <Button label="Prijava" className="p-button-raised p-button-rounded " onClick={() => history.push('/login')}/>
   </span>
-	const logout = <span>
+	const logout = <span className="flex flex-row">
 		<Button className="p-button-rounded p-button-text" tooltip='Ponude' onClick={() => history.push('/offers')}>
 			<i className="pi pi-envelope p-text-secondary p-overlay-badge" style={{fontSize: '1.5rem'}}>
 				{(pendingOffers > 0 && user) &&

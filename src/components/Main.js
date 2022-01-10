@@ -15,6 +15,8 @@ import ReqView from "./request/ReqView";
 import OfferList from "./offer/OfferList";
 import Offer from "./offer/Offer";
 import UserList from "./user/UserList";
+import RequestList from "./request/RequestList";
+import AdvertList from "./advert/AdvertList";
 
 const Main = () => {
 	return (
@@ -23,6 +25,8 @@ const Main = () => {
 				<PublicRoute restricted={false} exact path="/" component={Home}/>
 				<PublicRoute restricted={false} exact path="/login" component={Login}/>
 				<PublicRoute restricted={false} exact path="/register" component={Registration}/>
+				<PublicRoute restricted={false} exact path="/requests" component={RequestList}/>
+				<PublicRoute restricted={false} exact path="/tools" component={AdvertList}/>
 				<PublicRoute exact path="/advert/:id" component={AdView}/>
 				<PublicRoute restricted={false} exact path="/req/:id" component={ReqView}/>
 				<PrivateRoute exact path="/user" component={UserInfo}/>
