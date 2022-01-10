@@ -69,7 +69,7 @@ const App = () => {
 					label: 'Pregledaj oglase',
 					icon: 'pi pi-list',
 					command: () => {
-						navigateToPage('')
+						navigateToPage('/tools')
 					}
 				}
 			]
