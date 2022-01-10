@@ -1,15 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import AuthService from "../service/auth/auth.service";
 import {Card} from "primereact/card";
 import {Rating} from 'primereact/rating';
 import RatingService from "../service/rating.service";
 import {useParams} from "react-router";
+import {ToastContext} from "../common/toast.context";
 
 
 const UserInfo = () => {
 	const [userData, setUserData] = useState();
 	const [userRatings, setUserRatings] = useState([]);
 	const {username} = useParams('username');
+	const [newRating, setNewRating] = useState();
+	const {toastRef} = useContext(ToastContext);
+	const [reload, setReload] = useState();
 
 	useEffect(() => {
 		AuthService.getUserByUsername(username).then((user) => {
@@ -18,7 +22,18 @@ const UserInfo = () => {
 				RatingService.getRatings(user.username).then((ratings) => setUserRatings(ratings));
 			}
 		})
-	}, [username]);
+	}, [username, reload]);
+
+	const addNewRating = (rating) => {
+		setNewRating(rating);
+		RatingService.addRating({
+			aboutUser: username,
+			mark: rating
+		}).then(() => {
+			toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: `Uspješno ste ocijenili korisnika ${username}`});
+			setReload(Math.random());
+		});
+	}
 
 	return (
 
@@ -29,15 +44,20 @@ const UserInfo = () => {
 					<div className="p-px-6 userDetailText parentUserInfo">
 						<p className="advertTitle p-mb-2">Korisnik: {userData.username}</p>
 
-						{userData.averageRating &&
-							<div>
-								<p className="childUserInfo">Prosječna ocjena korisnika:</p>
-								<Rating value={userData.averageRating} readOnly cancel={false}/>
-							</div>
-						}
 						<hr></hr>
 						<p>Ime: <b>{userData.firstName}</b></p>
 						<p>Prezime: <b>{userData.lastName}</b></p>
+
+						{userData.averageRating &&
+							<div>
+								<hr></hr>
+								<p className="childUserInfo">Prosječna ocjena korisnika: <b>{userData.averageRating}</b>/5</p>
+							</div>
+						}
+
+						<h3>Dodajte novu ocjenu korisnika:</h3>
+						<Rating value={newRating} onChange={(e) => addNewRating(e.value)} stars={5}
+								readOnly={!!newRating} cancel={false}/>
 
 
 						{userRatings.length > 0 &&
@@ -48,19 +68,11 @@ const UserInfo = () => {
 								{userRatings.map((rating) => {
 									return (<div>
 										<p className="childUserInfo">{rating.fromUser}: </p>
-										<Rating value={rating.maek} readOnly cancel={false} className="childUserInfo"/>
+										<Rating value={rating.mark} readOnly cancel={false} className="childUserInfo"/>
 									</div>);
 								})}
 							</div>
 						}
-						{/*<div>*/}
-						{/*	<p className="childUserInfo">Username korisnika 2: </p>*/}
-						{/*	<Rating value={4.5} readOnly cancel={false} className="childUserInfo"/>*/}
-						{/*</div>*/}
-						{/*<div>*/}
-						{/*	<p className="childUserInfo">Username korisnika 3: </p>*/}
-						{/*	<Rating value={4.5} readOnly cancel={false} className="childUserInfo"/>*/}
-						{/*</div>*/}
 
 					</div>
 				}
