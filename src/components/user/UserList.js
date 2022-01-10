@@ -46,7 +46,17 @@ const UserList = () => {
 
     useEffect(() => {
         setLoading(true);
-        UserService.getUsers(offset / rows, rows, lastFilters, `${sortField},${sortOrder}`).finally(() => setLoading(false)).catch((err) => {
+        UserService.getUsers(offset / rows, rows, lastFilters, `${sortField},${sortOrder}`)
+            .then(() => setLoading(false)).then((users) => {
+                const data = users.content.map((e) => {
+                    return {
+                        ...e,
+                        status: mapStatus(e.isDisabled)
+                    }
+                });
+                setTotalUsers(users.totalElements);
+                setUsersData(data);
+        }).catch((err) => {
             if (err.forbidden) {
                 toastRef.current.show({
                     severity: 'warn',
@@ -54,15 +64,6 @@ const UserList = () => {
                     detail: 'Nemate potrebna prava za tu akciju'
                 });
             }
-        }).then((users) => {
-            const data = users.content.map((e) => {
-                return {
-                    ...e,
-                    status: mapStatus(e.isDisabled)
-                }
-            });
-            setTotalUsers(users.totalElements);
-            setUsersData(data);
         });
     }, [blockReload, lastFilters, toastRef, offset, rows, sortField, sortOrder]);
 

@@ -53,7 +53,11 @@ const Offer = () => {
 			toastRef.current.show({severity: 'success', summary: 'Prihvaćeno', detail: 'Ponuda prihvaćena'});
 			setReload(Math.random());
 			setReloadPendingOffers(Math.random()).catch(() => {
-				toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom prihvaćanja ponude'});
+				toastRef.current.show({
+					severity: 'error',
+					summary: 'Greška',
+					detail: 'Greška prilikom prihvaćanja ponude'
+				});
 			});
 		})
 	}

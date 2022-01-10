@@ -2,8 +2,9 @@ import React, {useContext, useEffect} from 'react';
 import {Redirect, Route} from 'react-router-dom';
 import {AuthContext} from '../common/auth.context';
 import {ToastContext} from '../common/toast.context';
+import AuthService from "../service/auth/auth.service";
 
-const PrivateRoute = ({component: Component, ...rest}) => {
+const PrivateRoute = ({requireAdmin, component: Component, ...rest}) => {
 	const {user} = useContext(AuthContext);
 	const {toastRef} = useContext(ToastContext);
 
@@ -20,11 +21,22 @@ const PrivateRoute = ({component: Component, ...rest}) => {
 
 		// Show the component only when the user is logged in
 		// Otherwise, redirect the user to /signin page
-		<Route {...rest} render={props => (
-			!!user ?
-				<Component {...props} />
-				: <Redirect to="/login"/>
-		)}/>
+		<Route {...rest} render={props => {
+			if (!!requireAdmin && !AuthService.getCurrentUserToken().roles.includes('ROLE_ADMIN')) {
+				if (toastRef.current) {
+					toastRef.current.show({
+						severity: 'info', summary: 'Potrebna prava admina',
+						detail: "Za pristup toj komponenti morate imati ulogu admina"
+					});
+				}
+				return <Redirect to="/" />
+			}
+			return (
+				!!user ?
+					<Component {...props} />
+					: <Redirect to="/login"/>
+			);
+		}}/>
 	);
 };
 
