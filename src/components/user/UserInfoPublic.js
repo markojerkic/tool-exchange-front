@@ -30,7 +30,11 @@ const UserInfo = () => {
 			aboutUser: username,
 			mark: rating
 		}).then(() => {
-			toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: `Uspješno ste ocijenili korisnika ${username}`});
+			toastRef.current.show({
+				severity: 'success',
+				summary: 'Uspjeh',
+				detail: `Uspješno ste ocijenili korisnika ${username}`
+			});
 			setReload(Math.random());
 		}).catch((err) => {
 			if (err.forbidden) {

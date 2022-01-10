@@ -32,7 +32,7 @@ const Main = () => {
 				<PublicRoute restricted={false} exact path="/req/:id" component={ReqView}/>
 				<PrivateRoute exact path="/user" component={UserInfo}/>
 				<PublicRoute exact path="/user/:username" component={UserInfoPublic}/>
-				<PrivateRoute exact path="/users" component={UserList}/>
+				<PrivateRoute exact path="/users" requireAdmin={true} component={UserList}/>
 				<PrivateRoute exact path="/offers" component={OfferList}/>
 				<PrivateRoute exact path="/offer/:id" component={Offer}/>
 				<PrivateRoute exact path="/new-ad" component={Category}/>
