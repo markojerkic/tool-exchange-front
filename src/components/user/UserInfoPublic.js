@@ -57,10 +57,17 @@ const UserInfo = () => {
 						<p className="advertTitle p-mb-2">Korisnik: {userData.username}</p>
 
 						<hr></hr>
-						{console.log(AuthService.getCurrentUserToken().roles)}
-						authserviis.getcurrentusertoken.roles.contains('ROLE_ADMIN')
-						<p>Ime: <b>{userData.firstName}</b></p>
-						<p>Prezime: <b>{userData.lastName}</b></p>
+						{AuthService.getCurrentUserToken().roles.includes('ROLE_ADMIN')
+							?
+							<div>
+								<p>Ime: <b>{userData.firstName}</b></p>
+								<p>Prezime: <b>{userData.lastName}</b></p>
+								<p>Email: <b>{userData.email}</b></p>
+								<p>Adresa: <b>{userData.formattedAddress}</b></p>
+							</div>
+							: ""
+						}
+
 
 						{userData.averageRating &&
 							<div>
