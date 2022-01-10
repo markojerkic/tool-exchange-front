@@ -27,7 +27,7 @@ const OfferService = {
 				} else {
 					filters[key] = lastFilters[key].value;
 				}
-			})
+			});
 		}
 
 		return instance.get('offer', {params: {page: page, size: size, sort: sortField, ...filters}})

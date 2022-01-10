@@ -178,7 +178,7 @@ const OfferList = () => {
 					body={dateTemplate} filterElement={calendarFilter} readonly={true}
 					filterPlaceholder="Pretražite po periodu povratka"/>
 			<Column field='status' header='Status ponude'
-					filterPlaceholder='Daberite status'
+					filterPlaceholder='Odaberite status'
 					body={statusTemplate}
 					showFilterMenu={false}
 					filterMenuStyle={{width: '14rem'}}

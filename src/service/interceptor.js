@@ -29,7 +29,15 @@ instance.interceptors.response.use(
 	},
 	async (err) => {
 		const originalConfig = err.config;
-		if (AuthService.getCurrentUserToken() && originalConfig.url !== "/auth/login" && err.response) {
+
+		if (err.response.status === 401 && err.response.data.reason === 'disabled') {
+			TokenService.removeUser();
+			console.log(err.response)
+			return Promise.reject({...err, disabled: true});
+		} else if (err.response.status === 403) {
+
+			return Promise.reject({...err, forbidden: true});
+		} else if (AuthService.getCurrentUserToken() && originalConfig.url !== "/auth/login" && err.response) {
 			// Access Token was expired
 			if (err.response.status === 401 && !originalConfig._retry) {
 				originalConfig._retry = true;

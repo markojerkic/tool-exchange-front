@@ -34,7 +34,13 @@ const Login = () => {
 			setLoading(false);
 		}, (error) => {
 			setLoading(false);
-			if (error.response.status !== 400) {
+			if (error.response.status === 401 && error.disabled) {
+				toastRef.current.show({
+					severity: 'info',
+					summary: 'Blokirani ste',
+					detail: 'Vaš račun je blokiran od strane admina'
+				});
+			} else if (error.response.status !== 400) {
 				toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Došlo je do greške pri prijavi'});
 			} else {
 				setError("username", {type: "manual", message: "Korisničko ime možda nije ispravno"});
