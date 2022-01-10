@@ -6,22 +6,23 @@ import './UserList.css';
 import {Button} from 'primereact/button';
 import {ToastContext} from "../../common/toast.context";
 import {Dropdown} from "primereact/dropdown";
+import {useHistory} from 'react-router-dom';
 
 const UserList = () => {
     const [blockReload, setBlockReload] = useState();
     const [usersData, setUsersData] = useState([]);
-    const [expandedRows, setExpandedRows] = useState();
     const [lastFilters, setLastFilters] = useState();
     const [loading, setLoading] = useState(false);
     const [rows] = useState(10);
     const [offset, setOffset] = useState(0);
     const [sort, setSort] = useState(-1);
     const [sortOrder, setSortOrder] = useState('DESC');
-    const [sortField, setSortField] = useState('id');
+    const [sortField, setSortField] = useState('username');
     const [isDisabling, setIsDisabling] = useState(false);
     const [totalUsers, setTotalUsers] = useState(0);
 
     const {toastRef} = useContext(ToastContext);
+    const history = useHistory();
 
     const statuses = [
         {
@@ -102,18 +103,6 @@ const UserList = () => {
         setBlockReload(Math.random());
     }
 
-    const rowExpansionTemplate = (data) => {
-        return (
-            <div className="orders-subtable">
-                <DataTable value={[data]}>
-                    <Column field="firstName" header="Ime"/>
-                    <Column field="lastName" header="Prezime"/>
-                    <Column field="formattedAddress" header="Adresa"/>
-                </DataTable>
-            </div>
-        );
-    }
-
     const onPage = ({first}) => {
         setOffset(first);
     }
@@ -133,15 +122,21 @@ const UserList = () => {
         );
     }
 
+    const goToTemplate = (rowData) => {
+        return (
+            <Button icon="pi pi-user" className="p-button-rounded p-button-info"
+                    onClick={() => history.push(`/user/${rowData.username}`)}/>
+        )
+    }
+
     return (
-        <DataTable value={usersData} expandedRows={expandedRows}
+        <DataTable value={usersData}
                    loading={loading} lazy rows={rows} onPage={onPage} onFilter={onFilter}
-                   onRowToggle={(e) => setExpandedRows(e.data)}
                    paginator={true} emptyMessage="Korisnici nisu pronađeni"
                    sortOrder={sort} onSort={onSort}
                    globalFilterFields={['username', 'id', 'isBlocked', 'email']}
                    totalRecords={totalUsers}
-                   rowExpansionTemplate={rowExpansionTemplate} dataKey="id" stripedRows
+                   dataKey="id"
                    responsiveLayout="stack" breakpoint='960px'
                    sortField={sortField} filters={lastFilters} filterDisplay="row">
             <Column sortable field="id" header="Id"/>
@@ -156,8 +151,8 @@ const UserList = () => {
                     filterPlaceholder='Odaberite status'
                     header="Status profila"
                     body={statusBodyTemplate}/>
-            <Column header="Akcija" body={actionTemplate}/>
-            <Column header="Osobni podatci" expander style={{width: '10em'}}/>
+            <Column header="Akcije" body={actionTemplate}/>
+            <Column body={goToTemplate}/>
         </DataTable>
     );
 }
