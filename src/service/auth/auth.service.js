@@ -30,6 +30,12 @@ const AuthService = {
 		return instance.get("auth").then((response) => {
 			return response.data;
 		});
+	},
+	getUserByUsername: function (username) {
+		return instance.get(`user/by-username/${username}`).then((response) => {
+			return response.data;
+		});
+
 	}
 };
 

@@ -29,10 +29,10 @@ const Main = () => {
 				<PublicRoute restricted={false} exact path="/requests" component={RequestList}/>
 				<PublicRoute restricted={false} exact path="/tools" component={AdvertList}/>
 				<PublicRoute exact path="/advert/:id" component={AdView}/>
-				<PublicRoute exact path="/user/:username" component={UserInfoPublic}/>
 				<PublicRoute restricted={false} exact path="/req/:id" component={ReqView}/>
 				<PrivateRoute exact path="/user" component={UserInfo}/>
-				<PrivateRoute exact path="/users" component={UserList} />
+				<PublicRoute exact path="/user/:username" component={UserInfoPublic}/>
+				<PrivateRoute exact path="/users" component={UserList}/>
 				<PrivateRoute exact path="/offers" component={OfferList}/>
 				<PrivateRoute exact path="/offer/:id" component={Offer}/>
 				<PrivateRoute exact path="/new-ad" component={Category}/>

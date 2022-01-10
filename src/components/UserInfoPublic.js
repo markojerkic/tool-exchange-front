@@ -1,17 +1,24 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import AuthService from "../service/auth/auth.service";
 import {Card} from "primereact/card";
-import { Rating } from 'primereact/rating';
+import {Rating} from 'primereact/rating';
+import RatingService from "../service/rating.service";
+import {useParams} from "react-router";
 
 
 const UserInfo = () => {
-	const [userData, setUserData] = React.useState();
+	const [userData, setUserData] = useState();
+	const [userRatings, setUserRatings] = useState([]);
+	const {username} = useParams('username');
 
 	useEffect(() => {
-		AuthService.getCurrentLoggedInUser().then((user) => {
+		AuthService.getUserByUsername(username).then((user) => {
 			setUserData(user);
+			if (user.averageRating) {
+				RatingService.getRatings(user.username).then((ratings) => setUserRatings(ratings));
+			}
 		})
-	}, []);
+	}, [username]);
 
 	return (
 
@@ -20,27 +27,40 @@ const UserInfo = () => {
 			<div>
 				{!userData ? "Loading" :
 					<div className="p-px-6 userDetailText parentUserInfo">
-						<p className="advertTitle p-mb-2">User: {userData.username} (id-{userData.id})</p>
+						<p className="advertTitle p-mb-2">Korisnik: {userData.username}</p>
 
-						<p className="childUserInfo">Prosječna ocjena korisnika:</p>
-						<Rating value={4.5} readOnly cancel={false} className="childUserInfo"/>
-						
+						{userData.averageRating &&
+							<div>
+								<p className="childUserInfo">Prosječna ocjena korisnika:</p>
+								<Rating value={userData.averageRating} readOnly cancel={false}/>
+							</div>
+						}
 						<hr></hr>
-						
-						<h3 className="p-mb-2">Ocjene ostalih korisnika</h3>
+						<p>Ime: <b>{userData.firstName}</b></p>
+						<p>Prezime: <b>{userData.lastName}</b></p>
 
-						<div>
-							<p className="childUserInfo">Username korisnika 1: </p>
-							<Rating value={4.5} readOnly cancel={false} className="childUserInfo"/>
-						</div>
-						<div>
-							<p className="childUserInfo">Username korisnika 2: </p>
-							<Rating value={4.5} readOnly cancel={false} className="childUserInfo"/>
-						</div>
-						<div>
-							<p className="childUserInfo">Username korisnika 3: </p>
-							<Rating value={4.5} readOnly cancel={false} className="childUserInfo"/>
-						</div>
+
+						{userRatings.length > 0 &&
+							<div>
+								<hr></hr>
+
+								<h3 className="p-mb-2">Ocjene:</h3>
+								{userRatings.map((rating) => {
+									return (<div>
+										<p className="childUserInfo">{rating.fromUser}: </p>
+										<Rating value={rating.maek} readOnly cancel={false} className="childUserInfo"/>
+									</div>);
+								})}
+							</div>
+						}
+						{/*<div>*/}
+						{/*	<p className="childUserInfo">Username korisnika 2: </p>*/}
+						{/*	<Rating value={4.5} readOnly cancel={false} className="childUserInfo"/>*/}
+						{/*</div>*/}
+						{/*<div>*/}
+						{/*	<p className="childUserInfo">Username korisnika 3: </p>*/}
+						{/*	<Rating value={4.5} readOnly cancel={false} className="childUserInfo"/>*/}
+						{/*</div>*/}
 
 					</div>
 				}
