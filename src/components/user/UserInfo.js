@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
-import AuthService from "../service/auth/auth.service";
 import {Card} from "primereact/card";
-import { Rating } from 'primereact/rating';
+import {Rating} from 'primereact/rating';
+import AuthService from "../../service/auth/auth.service";
 
 const UserInfo = () => {
 	const [userData, setUserData] = React.useState();
@@ -22,11 +22,11 @@ const UserInfo = () => {
 						<p className="advertTitle p-my-2">User: {userData.username} (id-{userData.id})</p>
 						<Rating value={4.5} readOnly cancel={false} />
 						<hr></hr>
-						<p>Ime: {userData.firstName}</p>
-						<p>Prezime: {userData.lastName}</p>
-						<p>Email: {userData.email}</p>
+						<p>Ime: <b>{userData.firstName}</b></p>
+						<p>Prezime: <b>{userData.lastName}</b></p>
+						<p>Email: <b>{userData.email}</b></p>
 						
-						<p>Adresa: {userData.formattedAddress}</p>
+						<p>Adresa: <b>{userData.formattedAddress}</b></p>
 
 						
 					</div>
