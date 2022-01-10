@@ -19,12 +19,12 @@ const Offer = () => {
 	const {toastRef} = useContext(ToastContext);
 
 	useEffect(() => {
-		OfferService.getById(id).catch(() => {
-			toastRef.current.show({severity: 'error', summary: 'Greška', message: 'Greška prilikom dohvata'});
-		}).then((off) => {
+		OfferService.getById(id).then((off) => {
 			setOffer(off);
 			setReloadPendingOffers(Math.random());
-		})
+		}).catch(() => {
+			toastRef.current.show({severity: 'error', summary: 'Greška', message: 'Greška prilikom dohvata'});
+		});
 	}, [toastRef, id, reload, setReloadPendingOffers]);
 
 	const statusTemplate = (offer) => {
@@ -49,27 +49,26 @@ const Offer = () => {
 	};
 
 	const acceptOffer = (offerId) => {
-		OfferService.acceptOffer(offerId).catch(() => {
-			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom prihvaćanja ponude'});
-		}).then(() => {
+		OfferService.acceptOffer(offerId).then(() => {
 			toastRef.current.show({severity: 'success', summary: 'Prihvaćeno', detail: 'Ponuda prihvaćena'});
 			setReload(Math.random());
-			setReloadPendingOffers(Math.random());
+			setReloadPendingOffers(Math.random()).catch(() => {
+				toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom prihvaćanja ponude'});
+			});
 		})
 	}
 
 	const declineOffer = (offerId) => {
-		OfferService.rejectOffer(offerId).catch(() => {
-			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom odbijanja ponude'});
-		}).then(() => {
+		OfferService.rejectOffer(offerId).then(() => {
 			toastRef.current.show({severity: 'success', summary: 'Odbijeno', detail: 'Ponuda odbijena'});
 			setReload(Math.random());
 			setReloadPendingOffers(Math.random());
+		}).catch(() => {
+			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom odbijanja ponude'});
 		})
 	}
 
 	return (
-		// <div>
 		<div className="flex justify-content-center m-6">
 			<Card title='Ponuda za oglas'>
 
@@ -98,8 +97,7 @@ const Offer = () => {
 				</div>
 
 			</Card>
-			</div>
-		// </div>
+		</div>
 	);
 }
 

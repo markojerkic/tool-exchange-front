@@ -62,8 +62,10 @@ const Registration = () => {
 		}
 
 		console.log(user);
-		AuthService.register(user).finally(() => setLoading(false)).catch((error) => {
-			console.log(error);
+		AuthService.register(user).finally(() => setLoading(false)).then(() => {
+			reset();
+			history.push('/login');
+		}).catch((error) => {
 			if (error.response.status !== 409) {
 				toastRef.current.show({severity: 'error', summary: 'Greška', detail: error.response.data.message});
 			} else {
@@ -73,9 +75,6 @@ const Registration = () => {
 					setError("username", {type: "manual", message: "Korisničko ime se već koristi"});
 				}
 			}
-		}).then(() => {
-			reset();
-			history.push('/login');
 		});
 	};
 

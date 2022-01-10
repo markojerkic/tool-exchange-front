@@ -32,6 +32,14 @@ const UserInfo = () => {
 		}).then(() => {
 			toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: `Uspješno ste ocijenili korisnika ${username}`});
 			setReload(Math.random());
+		}).catch((err) => {
+			if (err.forbidden) {
+				toastRef.current.show({
+					severity: 'info',
+					summary: 'Nije dopušteno',
+					detail: 'Ne možete ocijeniti sami sebe'
+				});
+			}
 		});
 	}
 
@@ -66,10 +74,14 @@ const UserInfo = () => {
 
 								<h3 className="p-mb-2">Ocjene:</h3>
 								{userRatings.map((rating) => {
-									return (<div>
-										<p className="childUserInfo">{rating.fromUser}: </p>
-										<Rating value={rating.mark} readOnly cancel={false} className="childUserInfo"/>
-									</div>);
+									return (
+										<div key={`card-rating-${rating.id}`}>
+											<p className="childUserInfo"
+											   key={`card-rating-title-${rating.id}`}>{rating.fromUser}: </p>
+											<Rating value={rating.mark} key={`card-rating-mark-${rating.id}`}
+													readOnly cancel={false} className="childUserInfo"/>
+										</div>
+									);
 								})}
 							</div>
 						}

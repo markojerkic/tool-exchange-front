@@ -17,16 +17,16 @@ const LocationSearch = (props) => {
 	const onSubmit = (data) => {
 		setResultLoading(true);
 		LocationSearchService.searchLocations(data.location).finally(() => setResultLoading(false))
+			.then(result => {
+				const results = result.data.results;
+				setSearchResults(results);
+			})
 			.catch(() => {
 				toastRef.current.show({
 					severity: 'error',
 					summary: 'Greška',
 					detail: 'Greška prilikom dohvata lokacija'
 				});
-			})
-			.then(result => {
-				const results = result.data.results;
-				setSearchResults(results);
 			});
 	}
 

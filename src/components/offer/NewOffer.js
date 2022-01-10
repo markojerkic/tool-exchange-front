@@ -24,13 +24,12 @@ const NewOffer = ({advertId, onComplete}) => {
 			}
 		}
 		setLoading(true);
-		OfferService.addNewOffer(postBody).finally(() => setLoading(false)).catch(() => {
-			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom slanja ponude'});
-		}).then(() => {
+		OfferService.addNewOffer(postBody).finally(() => setLoading(false)).then(() => {
 			onComplete();
 			toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: 'Ponuda poslana'});
+		}).catch(() => {
+			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom slanja ponude'});
 		});
-		// toastRef.current.show({severity: 'succes', message: 'Predano'})
 	};
 
 	return (

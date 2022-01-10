@@ -110,17 +110,16 @@ const NewAdvert = () => {
 
 	const onUpload = (images) => {
 		setFilesAreUploading(true);
-		ImageService.uploadImage(images.files)
-			.catch(() => {
-				toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom prijenosa slika'});
-			}).finally(() => {
-				setFilesAreUploading(false);
-				fileUploadRef.current.clear();
-				toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: 'Slike prenijete'});
-		}).then((images) => {
+		ImageService.uploadImage(images.files).then((images) => {
 			savedImages.push(...images);
 			setSavedImages([...savedImages]);
 			setValue('images', savedImages);
+		}).catch(() => {
+			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom prijenosa slika'});
+		}).finally(() => {
+			setFilesAreUploading(false);
+			fileUploadRef.current.clear();
+			toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: 'Slike prenijete'});
 		});
 
 	}
