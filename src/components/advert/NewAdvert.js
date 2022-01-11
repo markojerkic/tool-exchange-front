@@ -202,15 +202,15 @@ const NewAdvert = () => {
                                         <label htmlFor="power">Snaga (W) *</label>
                                     </span>
 								</div>
-								<div className='p-field grid p-dir-col ml-2'>
+								<div className='p-field grid p-dir-col ml-4 pt-1'>
 									<Controller name="hasBattery" control={control} className='col'
 												render={({field, fieldState}) => (
-													<InputSwitch id={field.name} inputId={field.name}
+													<InputSwitch  id={field.name} inputId={field.name}
 																 onChange={(e) => field.onChange(e.value)}
 																 checked={field.value}
 																 className={classNames({'p-invalid': fieldState.invalid})}/>
 												)}/>
-									<label className='col' htmlFor="hasBattery">Ima bateriju</label>
+									<label className='col pt-1' htmlFor="hasBattery">Ima bateriju</label>
 								</div>
 							</div>
 

@@ -37,3 +37,8 @@
     background-color: #FFD8B2;
     color: #805B36;
 }
+
+.buttonBackground{
+    background-color: #64B5F6;
+    border-radius: 3px;
+}

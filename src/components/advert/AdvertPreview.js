@@ -21,9 +21,9 @@ const AdvertPreview = ({ad}) => {
 			<div className="grid col flex align-items-stretch">
 				<div className='col-12'>
 					<p className="advertTitle">{advert.title}</p>
-					<p className="desc">{advert.details}</p>
+					<p className="desc pb-2">{advert.details}</p>
 				</div>
-				<p className='col-12 p-as-end'>Objavio korisnik: <b>{advert.userCreated}</b></p>
+				<p className='col-12 absolute bottom-0 left-30'>Objavio korisnik: <b>{advert.userCreated}</b></p>
 			</div>
 		</div>
 	);

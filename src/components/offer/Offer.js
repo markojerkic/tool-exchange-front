@@ -94,9 +94,9 @@ const Offer = () => {
 				}
 
 				<div className="grid flex justify-content-around mt-4">
-					<Button label='Prihvati ponudu' className='col' onClick={() => acceptOffer(offer.id)}
+					<Button label='Prihvati ponudu' className='col mx-2' onClick={() => acceptOffer(offer.id)}
 							disabled={offer?.offerStatus !== 'PENDING'}/>
-					<Button label='Odbij ponudu' className='col p-button-danger'
+					<Button label='Odbij ponudu' className='col p-button-danger mx-2'
 							onClick={() => declineOffer(offer.id)} disabled={offer?.offerStatus !== 'PENDING'}/>
 				</div>
 

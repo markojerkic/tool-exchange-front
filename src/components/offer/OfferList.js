@@ -146,7 +146,7 @@ const OfferList = () => {
 	const actionButtons = (offer) => {
 		return (
 			<div className="flex justify-content-around">
-				<SplitButton model={slitButtonItems} tooltip='Pogledaj ponudu' icon='pi pi-search'
+				<SplitButton className="buttonBackground" model={slitButtonItems} tooltip='Pogledaj ponudu' icon='pi pi-search'
 							 onShow={() => setOfferClicked(offer)}
 							 onClick={() => history.push(`/offer/${offer.id}`)}
 							 tooltipOptions={{position: 'left'}}/>
