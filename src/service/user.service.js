@@ -23,6 +23,10 @@ const UserService = {
 
     disableUser: function (id) {
         return instance.put(`user/block/id=${id}`);
+    },
+
+    updateUser: function (data) {
+        return instance.put('user/update');
     }
 }
 

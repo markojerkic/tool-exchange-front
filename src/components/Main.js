@@ -18,6 +18,7 @@ import UserList from "./user/UserList";
 import RequestList from "./request/RequestList";
 import AdvertList from "./advert/AdvertList";
 import UserInfoPublic from "./user/UserInfoPublic";
+import UserUpdate from "./user/UserUpdate";
 import Forum from "./forum/Forum";
 import OfferList from "./offer/OfferList";
 import NewThread from "./forum/adviceThread/NewThread";
@@ -36,6 +37,7 @@ const Main = () => {
 				<PublicRoute exact path="/advert/:id" component={AdView}/>
 				<PublicRoute restricted={false} exact path="/req/:id" component={ReqView}/>
 				<PrivateRoute exact path="/user" component={UserInfo}/>
+				<PrivateRoute exact path="/user/update" component={UserUpdate}/>
 				<PrivateRoute exact path="/user/:username" component={UserInfoPublic}/>
 				<PrivateRoute exact path="/users" requireAdmin={true} component={UserList}/>
 				<PrivateRoute exact path="/offers" component={OfferList}/>
