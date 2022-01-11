@@ -60,11 +60,12 @@ html {
     background-color: var(--surface-d);
     margin: 1.5em;
     border-color: black;
+    width: 100%;
 }
 
-.adverElement {
-    padding: 0px;
-    margin: 0px;
+.advetrElement {
+    padding: 0;
+    margin: 0;
 }
 
 .advertLocation {
