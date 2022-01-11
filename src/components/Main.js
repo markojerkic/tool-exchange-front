@@ -20,8 +20,8 @@ import AdvertList from "./advert/AdvertList";
 import UserInfoPublic from "./user/UserInfoPublic";
 import Forum from "./forum/Forum";
 import OfferList from "./offer/OfferList";
-import NewAdvice from "./forum/adviceThread/NewAdvice";
-import AdviceView from "./forum/adviceThread/AdviceView";
+import NewThread from "./forum/adviceThread/NewThread";
+import ThreadView from "./forum/adviceThread/ThreadView";
 
 
 const Main = () => {
@@ -46,10 +46,10 @@ const Main = () => {
 				<PublicRoute exaxt path="/advert" component={AdvertList}/>
 				<PublicRoute exaxt path="/req" component={RequestList}/>
 				<PublicRoute exact path="/forum" component={Forum}/>
-				<PublicRoute exact path="/forum/newAdvice" component={NewAdvice}/>
-				<PublicRoute exact path="/forum/:id" component={AdviceView}/>
+				<PrivateRoute exact path="/forum/new-advice" component={NewThread}/>
+				<PublicRoute exact path="/forum/:id" component={ThreadView}/>
 				<PublicRoute component={Error404}/>
-				
+
 			</Switch>
 		</main>
 	)

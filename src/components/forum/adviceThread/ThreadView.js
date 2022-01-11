@@ -10,24 +10,18 @@ import ImageService from "../../../service/image.service";
 import {Galleria} from "primereact/galleria";
 import CommentSection from "../comments/CommentSection"
 
-const AdviceView = () => {
+const ThreadView = () => {
 	const {id} = useParams();
 
 	const [adviceData, setAdviceData] = useState();
 
 	const [imageUrls, setImageUrls] = useState([]);
-
-	const defaultValues = {
-		title: '',
-		details: ''
-	};
-
 	useEffect(() => {
 		AdviceService.getAdviceById(id).then((data) => {
 			Moment.locale('hr');
 			data.lastModified = new Date(data.lastModified);
 			setAdviceData(data);
-			ImageService.getImagesByAdvertId(data.id).then((images) => {
+			ImageService.getImagesByThreadId(data.id).then((images) => {
 				setImageUrls(images);
 			});
 		})
@@ -88,4 +82,4 @@ const AdviceView = () => {
 		</div>
 	)
 }
-export default AdviceView;
+export default ThreadView;

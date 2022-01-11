@@ -19,6 +19,11 @@ const ImageService = {
 			response.data.map(image => this.getImageByUUID(image.uuid)));
 	},
 
+	getImagesByThreadId(threadId) {
+		return instance.get(`image/by-thread/${threadId}`).then((response) =>
+			response.data.map(image => this.getImageByUUID(image.uuid)));
+	},
+
 	deleteImage(uuid) {
 		return instance.delete(`image/${uuid}`);
 	}

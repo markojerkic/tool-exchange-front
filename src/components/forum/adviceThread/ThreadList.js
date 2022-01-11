@@ -1,18 +1,17 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Card} from "primereact/card";
-import AdvicePreview from "./AdvicePreview";
+import ThreadPreview from "./ThreadPreview";
 import AdviceService from "../../../service/advice.service";
-import { useEffect, useState } from "react";
-import { Paginator } from "primereact/paginator";
+import {Paginator} from "primereact/paginator";
 
-const AdviceList = () => {
+const ThreadList = () => {
 
 
 	const [totalAdvices, setTotalAdvices] = useState(0);
 	const [offset, setOffset] = useState(0);
 	const [advices, setAdvices] = useState([]);
 
-	const [rows] = useState(10);
+	const [rows] = useState(2);
 
 	useEffect(() => {
 		AdviceService.getAdvices(offset / rows, rows).then((data) => {
@@ -24,8 +23,8 @@ const AdviceList = () => {
 	return (
 		<Card title='Zahtjevi za savjetima' >
 			{
-				advices?.map(adv => {
-					return <AdvicePreview key={adv.id} adv={adv}/>
+				advices.map(adv => {
+					return <ThreadPreview key={adv.id} adv={adv}/>
 				})
 			}
 
@@ -36,4 +35,4 @@ const AdviceList = () => {
 
 }
 
-export default AdviceList;
+export default ThreadList;

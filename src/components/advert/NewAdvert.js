@@ -109,16 +109,16 @@ const NewAdvert = () => {
 
 	const onUpload = (images) => {
 		setFilesAreUploading(true);
-		ImageService.uploadImage(images.files).then((images) => {
-			savedImages.push(...images);
-			setSavedImages([...savedImages]);
-			setValue('images', savedImages);
-		}).catch(() => {
+		ImageService.uploadImage(images.files).catch(() => {
 			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom prijenosa slika'});
 		}).finally(() => {
 			setFilesAreUploading(false);
 			fileUploadRef.current.clear();
 			toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: 'Slike prenijete'});
+		}).then((images) => {
+			savedImages.push(...images);
+			setSavedImages([...savedImages]);
+			setValue('images', savedImages);
 		});
 
 	}
@@ -255,7 +255,7 @@ const NewAdvert = () => {
 						</div>
 
 						<div className="p-field col-12 md:col-12 lg:col-12 sm:col-12">
-							<FileUpload name="images[]" url="https://primefaces.org/primereact/showcase/upload.php"
+							<FileUpload name="images[]"
 										ref={fileUploadRef} disabled={filesAreUploading}
 										chooseOptions={chooseOptions} uploadOptions={uploadOptions}
 										cancelOptions={cancelOptions} uploadHandler={onUpload} multiple accept="image/*"

@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef} from "react";
+import React, {useContext, useRef, useState} from "react";
 import {Card} from "primereact/card";
 import 'primeflex/primeflex.css'
 import {Controller, useForm} from 'react-hook-form';
@@ -13,7 +13,7 @@ import {FileUpload} from 'primereact/fileupload';
 import ImageService from "../../../service/image.service";
 
 
-const NewAdvice = () => {
+const NewThread = () => {
 
 	const [loading, setLoading] = useState(false);
 	const [imageIsDeleting, setImageIsDeleting] = useState({});
@@ -125,7 +125,7 @@ const NewAdvice = () => {
 						</div>
 
 						<div className="p-field col-12 md:col-12 lg:col-12 sm:col-12">
-							<FileUpload name="images[]" url="https://primefaces.org/primereact/showcase/upload.php"
+							<FileUpload name="images[]"
 										ref={fileUploadRef} disabled={filesAreUploading}
 										chooseOptions={chooseOptions} uploadOptions={uploadOptions}
 										cancelOptions={cancelOptions} uploadHandler={onUpload} multiple accept="image/*"
@@ -164,4 +164,4 @@ const NewAdvice = () => {
 
 }
 
-export default NewAdvice;
+export default NewThread;

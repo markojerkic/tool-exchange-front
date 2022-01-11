@@ -1,43 +1,46 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import 'primeflex/primeflex.css'
-import {useHistory} from 'react-router-dom';
 import {useParams} from "react-router";
-import { InputTextarea } from "primereact/inputtextarea";
-import { Button } from "primereact/button";
-import { Card } from "primereact/card";
-import { Paginator } from "primereact/paginator";
+import {InputTextarea} from "primereact/inputtextarea";
+import {Button} from "primereact/button";
+import {Card} from "primereact/card";
+import {Paginator} from "primereact/paginator";
 import Comment from "./Comment";
 import CommentService from "../../../service/comment.service";
-import { ToastContext } from "../../../common/toast.context";
-import {Controller, useForm } from "react-hook-form";
+import {ToastContext} from "../../../common/toast.context";
+import {Controller, useForm} from "react-hook-form";
 
 const CommentSection = ({threadId}) => {
 	const {id} = useParams(threadId);
-    
-    const defaultValues = {
+
+	const defaultValues = {
 		message: '',
-        parentThread: { id: null }
+		parentThread: {id: null}
 	};
-    
-    const [loading, setLoading] = useState(false);
 
-    const {toastRef} = useContext(ToastContext);
+	const [loading, setLoading] = useState(false);
 
-    const [totalComments, setTotalComments] = useState(0);
+	const {toastRef} = useContext(ToastContext);
+
+	const [totalComments, setTotalComments] = useState(0);
 	const [offset, setOffset] = useState(0);
 	const [comments, setComments] = useState([]);
-    const [rows] = useState(10);
+	const [rows] = useState(10);
 
-    const {control, formState: {errors}, handleSubmit, reset} = useForm({defaultValues});
+	const [reload, setReload] = useState();
+
+	const {control, handleSubmit, reset} = useForm({defaultValues});
 
 	useEffect(() => {
 		CommentService.getComments(offset / rows, rows, id).then((data) => {
 			setTotalComments(data.totalElements);
-			setComments(data.content);
+			setComments(data.content.map((comment) => {
+				return {...comment, lastModified: new Date(comment.lastModified)}
+			}));
 		});
-	}, [offset, rows, id]);
+	}, [offset, rows, id, reload]);
 
-    const onSubmit = (data) => {
+	const onSubmit = (data) => {
 
         let parentThreadId = {
             id: id
@@ -53,26 +56,27 @@ const CommentSection = ({threadId}) => {
 			reset();
 			setLoading(false);
 			toastRef.current.show({severity: 'success', summary: 'Uspjeh', detail: 'Komentar spremljen'});
-            window.location.reload();
+			setReload(Math.random);
 		}, () => {
 			setLoading(false);
 			toastRef.current.show({severity: 'error', summary: 'Greška', detail: 'Greška prilikom spremanja komentara'});
 		});
 	}
 
-	const history = useHistory();
-	
 	return (
 		<div className="flex justify-content-center m-6">
             <Card className="card-container" title="Komentari" style={{width: '50rem'}}>
                 <form onSubmit={handleSubmit(onSubmit)} className="grid p-fluid p-formgrid form-layout">
-                    <div className="p-field col-12 lg:col-12 sm:col-12">
-                    <Controller name="message" control={control}
+					<div className="p-field col-12 lg:col-12 sm:col-12">
+						<span className="p-float-label">
+							<Controller name="message" control={control}
 										render={({field}) => (
 											<InputTextarea id={field.name} {...field} type="text" rows={2} cols={60}
 														   autoResize/>
 										)}/>
-                    </div>
+							<label htmlFor="message">Komentar</label>
+						</span>
+					</div>
 
                     <div className="p-field col-4 lg:col-4 sm:col-4">
                         <Button label="Dodaj komentar" loading={loading} />
@@ -81,7 +85,7 @@ const CommentSection = ({threadId}) => {
 
             {
 				comments?.map(com => {
-					return <Comment key={com.id} com={com}/>
+					return <Comment key={com.id} comment={com} reload={() => setReload(Math.random())}/>
 				})
 			}
 
