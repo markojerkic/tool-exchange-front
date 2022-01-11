@@ -68,9 +68,23 @@ const App = () => {
 				{
 					label: 'Pregledaj oglase',
 					icon: 'pi pi-list',
-					command: () => {
-						navigateToPage('/tools')
-					}
+					items: [
+						{
+							label: 'Alati',
+							icon: 'pi pi-briefcase',
+							command: () => {
+								navigateToPage('/tools')
+							}
+						},
+						{
+							label: 'Zahtjevi',
+							icon: 'pi pi-bookmark',
+							command: () => {
+								navigateToPage('/req')
+							}
+						}
+					]
+					
 				}
 			]
 		}
