@@ -64,7 +64,7 @@ const CommentSection = ({threadId}) => {
 	}
 
 	return (
-		<div className="flex justify-content-center m-6">
+		<div className="flex justify-content-center m-6 max-w-screen">
             <Card className="card-container" title="Komentari" style={{width: '50rem'}}>
                 <form onSubmit={handleSubmit(onSubmit)} className="grid p-fluid p-formgrid form-layout">
 					<div className="p-field col-12 lg:col-12 sm:col-12">
