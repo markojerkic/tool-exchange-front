@@ -6,6 +6,11 @@ const AdService = {
 		return instance.post('advert', adForm);
 	},
 
+
+	deleteAd: function (id) {
+		return instance.delete(`/delete/id=${id}`);
+	},
+
 	getAdById: function (id) {
 		return instance.get(`advert/${id}`).then((response) => {
 			return response.data;

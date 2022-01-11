@@ -10,6 +10,7 @@ import {Galleria} from "primereact/galleria";
 import ImageService from "../../service/image.service";
 import NewOffer from "../offer/NewOffer";
 import {Sidebar} from "primereact/sidebar";
+import AuthService from "../../service/auth/auth.service";
 
 const AdView = () => {
 	const {id} = useParams();
@@ -35,8 +36,13 @@ const AdView = () => {
 	}, [id]);
 
 	const history = useHistory();
-	const header = <div className="divButtonTop">
+	const header = <div className="divButtonTop flex row justify-content-between " >
 		<Button label="Povratak na listu oglasa" icon="pi pi-angle-left" onClick={() => history.push("/advert")}/>
+		{AuthService.getCurrentUserToken()?.roles.includes('ROLE_ADMIN')
+			?<Button label="Obriši" icon="pi pi-times" className="p-button p-button-danger"
+					 onClick={() => AdService.deleteAd(id).then(history.push("/advert")) }/>
+			: ""
+		}
 	</div>;
 	const footer = <div className="grid flex align-items-center">
 		<label className="generalDate col">Datum

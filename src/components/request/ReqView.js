@@ -6,6 +6,7 @@ import {Button} from 'primereact/button';
 import RequestService from "../../service/ads/request.service";
 import Moment from 'moment';
 import {useParams} from "react-router";
+import AuthService from "../../service/auth/auth.service";
 
 const ReqView = () => {
 	const {id} = useParams();
@@ -21,8 +22,13 @@ const ReqView = () => {
 	}, [id]);
 
 	const history = useHistory();
-	const header = <div className="divButtonTop">
-		<Button label="Povratak na listu zahtjeva" icon="pi pi-angle-left" onClick={() => history.push('/req')}/>
+	const header = <div className="divButtonTop flex row justify-content-between " >
+		<Button label="Povratak na listu zahtjeva" icon="pi pi-angle-left" onClick={() => history.push("/req")}/>
+		{AuthService.getCurrentUserToken()?.roles.includes('ROLE_ADMIN')
+			?<Button label="Obriši" icon="pi pi-times" className="p-button p-button-danger"
+					 onClick={() => RequestService.deleteRequest(id).then(history.push("/advert")) }/>
+			: ""
+		}
 	</div>;
 	const footer = <div className="grid flex align-items-center">
 		<label className="generalDate col">Datum

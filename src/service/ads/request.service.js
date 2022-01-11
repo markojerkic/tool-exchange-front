@@ -6,6 +6,10 @@ const RequestService = {
 		return instance.post("request", adForm);
 	},
 
+	deleteRequest: function (id) {
+		return instance.delete(`/delete/id=${id}`);
+	},
+
 	getRequestById: function (id) {
 		return instance.get(`request/${id}`).then((response) => {
 			return response.data;
