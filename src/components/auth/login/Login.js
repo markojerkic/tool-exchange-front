@@ -89,7 +89,7 @@ const Login = () => {
 									loading={loading}/>
 						</div>
 					</div>
-					<div className="col-12 flex justify-content-center">
+					<div className="col-12 flex justify-content-center mt-2 mb-0 pb-0">
 						<div>
 							Nemate profil? <span onClick={() => history.push('/register')}>Registrirajte se!</span>
 						</div>
