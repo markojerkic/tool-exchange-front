@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Card} from "primereact/card";
 import 'primeflex/primeflex.css'
 import {Controller, useForm} from 'react-hook-form';
@@ -11,8 +11,11 @@ import {InputSwitch} from 'primereact/inputswitch';
 import '../new-entry/fade-animation.css';
 import './HomeFilter.css';
 import defaultFilters from "../../service/filter/default-filters";
+import {AuthContext} from "../../common/auth.context";
 
 const HomeFilter = ({ onFilter }) => {
+
+    const {user} = useContext(AuthContext);
 
     const initialConditions = [
         { name: 'Novo', value: 'NEW' },
@@ -21,26 +24,27 @@ const HomeFilter = ({ onFilter }) => {
     ];
 
     const [loading] = useState(false);
-    const { control, formState: { errors }, handleSubmit, setValue } = useForm({defaultFilters});
+    const { control, formState: { errors }, handleSubmit, setValue } = useForm({...defaultFilters,
+        ...(!user && { maxRange: undefined })});
     const [electric, setElectric] = useState(false);
 
     const onSubmit = (data) => {
-        onFilter({...data, ...(!electric && {power: undefined}), ...(electric && {
+        onFilter({...data, ...(!electric && {power: undefined}), ...(!user && { maxRange: undefined }), ...(electric && {
                 power: undefined, minPower: (data.power | [undefined, undefined])[0],
                 maxPower: (data.power | [undefined, undefined])[0]
-            })
+            }), ...(data.title === '' && {title: undefined})
         });
     }
 
     const reset = () => {
         setValue('title', '');
-        setValue('electric', null);
-        setValue('nonelectric', null);
-        setValue('hasBattery', null);
-        setValue('condition', null);
-        setValue('maxRange', 300);
+        setValue('electric', undefined);
+        setValue('nonelectric', undefined);
+        setValue('hasBattery', undefined);
+        setValue('condition', undefined);
+        setValue('maxRange', !user? undefined: 300);
         setValue('power', [0, 50000]);
-        setElectric(null);
+        setElectric(undefined);
     }
 
     return (
@@ -65,11 +69,12 @@ const HomeFilter = ({ onFilter }) => {
                     </div>
 
                     <div className="p-field sm:col-6 md:col-6 lg:col-12 xl:col-12 col-12">
-                        <Controller name="maxRange" control={control} defaultValue={defaultFilters.maxRange}
+                        <Controller name="maxRange" control={control} disabled={!user} defaultValue={defaultFilters.maxRange}
                             render={({ field, fieldState }) => (
                                 <div >
                                     <h4>Radijus pretrage: {field.value === 300? "Sve": `${field.value} km`} </h4>
                                     <Slider className="mb-3 mx-3" value={field.value} onChange={(e) => field.onChange(e.value)}
+                                            disabled={!user}
                                             min={0} max={300} step={10} />
                                 </div>
                             )} />
@@ -151,9 +156,8 @@ const HomeFilter = ({ onFilter }) => {
                                     loading={loading} />
                         </div>
                         <div className="col-6">
-                            <Button label="Očisti filtere" onClick={() => {
+                            <Button label="Očisti" onClick={() => {
                                 reset();
-                                setValue('power', defaultFilters.power);
                                 onSubmit({});
                             }}
                                     className="p-button-raised p-button-danger p-button-rounded mt-3"

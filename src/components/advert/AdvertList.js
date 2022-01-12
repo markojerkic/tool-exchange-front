@@ -1,16 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import AdService from "../../service/ads/ad.service";
 import {Card} from "primereact/card";
 import AdvertPreview from "./AdvertPreview";
 import {Paginator} from "primereact/paginator";
 import HomeFilterBar from "../home-filter/HomeFilter";
 import defaultFilters from "../../service/filter/default-filters";
+import {AuthContext} from "../../common/auth.context";
 
 const AdvertList = () => {
+	const {user} = useContext(AuthContext);
 	const [totalAds, setTotalAds] = useState(0);
 	const [offset, setOffset] = useState(0);
 	const [ads, setAds] = useState([]);
-	const [filters, setFilters] = useState({...defaultFilters, power: undefined});
+	const [filters, setFilters] = useState({...defaultFilters, power: undefined, ...(!user && { maxRange: undefined })});
 
 	const [rows] = useState(10);
 
