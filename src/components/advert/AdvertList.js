@@ -4,12 +4,13 @@ import {Card} from "primereact/card";
 import AdvertPreview from "./AdvertPreview";
 import {Paginator} from "primereact/paginator";
 import HomeFilterBar from "../home-filter/HomeFilter";
+import defaultFilters from "../../service/filter/default-filters";
 
 const AdvertList = () => {
 	const [totalAds, setTotalAds] = useState(0);
 	const [offset, setOffset] = useState(0);
 	const [ads, setAds] = useState([]);
-	const [filters, setFilters] = useState({});
+	const [filters, setFilters] = useState(defaultFilters);
 
 	const [rows] = useState(10);
 
@@ -34,7 +35,7 @@ const AdvertList = () => {
 					<h1 className="title mb-5">Rezultati pretrage</h1>
 					{
 						ads.map(advert => {
-							return <AdvertPreview key={advert.id} ad={advert}/>
+							return <AdvertPreview key={advert.id} ad={advert} />
 						})
 					}
 					<Paginator rows={rows} first={offset} totalRecords={totalAds}

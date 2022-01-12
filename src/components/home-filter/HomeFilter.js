@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Card} from "primereact/card";
 import 'primeflex/primeflex.css'
 import {Controller, useForm} from 'react-hook-form';
@@ -10,18 +10,9 @@ import {Dropdown} from "primereact/dropdown";
 import {InputSwitch} from 'primereact/inputswitch';
 import '../new-entry/fade-animation.css';
 import './HomeFilter.css';
+import defaultFilters from "../../service/filter/default-filters";
 
-const HomeFilter = ({onFilter}) => {
-
-    const defaultValues = {
-        title: '',
-        maxRange: 40,
-        electric: null,
-        nonelectric: null,
-        hasBattery: null,
-        power: [0, 5000],
-        condition: null
-    }
+const HomeFilter = ({ onFilter }) => {
 
     const initialConditions = [
         { name: 'Novo', value: 'NEW' },
@@ -30,18 +21,15 @@ const HomeFilter = ({onFilter}) => {
     ];
 
     const [loading] = useState(false);
-    const { control, formState: { errors }, handleSubmit, reset, watch } = useForm({ defaultValues });
+    const { control, formState: { errors }, handleSubmit, reset } = useForm({defaultFilters});
     const [electric, setElectric] = useState(false);
 
     const onSubmit = (data) => {
         onFilter({...data, ...(!electric && {power: undefined}), ...(electric && {
                 power: undefined, minPower: data.power[0], maxPower: data.power[1]
-            })});
+            })
+        });
     }
-
-    useEffect(() => {
-        // watch(onSubmit);
-    }, [watch]);
 
     return (
 
@@ -65,11 +53,12 @@ const HomeFilter = ({onFilter}) => {
                     </div>
 
                     <div className="p-field sm:col-6 md:col-6 lg:col-12 xl:col-12 col-12">
-                        <Controller name="maxRange" control={control} defaultValue={defaultValues.maxRange}
+                        <Controller name="maxRange" control={control} defaultValue={defaultFilters.maxRange}
                             render={({ field, fieldState }) => (
                                 <div >
-                                    <h4>Radijus pretrage: {field.value === 0 ? "1 km" : field.value === 10 ? "2 km" : field.value === 20 ? "5 km" : field.value === 30 ? "10 km" : field.value === 40 ? "20 km" : field.value === 50 ? "50 km" : field.value === 60 ? "100 km" : field.value === 70 ? "200 km" : "Sve"} </h4>
-                                    <Slider className="mb-3 mx-3" value={field.value} onChange={(e) => field.onChange(e.value)} min={0} max={80} step={10} />
+                                    <h4>Radijus pretrage: {field.value === 300? "Sve": `${field.value} km`} </h4>
+                                    <Slider className="mb-3 mx-3" value={field.value} onChange={(e) => field.onChange(e.value)}
+                                            min={0} max={300} step={10} />
                                 </div>
                             )} />
                     </div>
@@ -106,7 +95,7 @@ const HomeFilter = ({onFilter}) => {
                         <div className="p-field sm:col-6 md:col-6 lg:col-12 xl:col-12 col-12">
                             <hr />
                             <div className="p-col">
-                                <Controller name="power" control={control} defaultValue={defaultValues.power}
+                                <Controller name="power" control={control} defaultValue={[0, 5000]}
                                     render={({ field, fieldState }) => (
                                         <div >
                                             <h4>Snaga: {field.value[0]} W - {field.value[1] === 5000 ? "max" : field.value[1] + " W"} </h4>
@@ -135,7 +124,7 @@ const HomeFilter = ({onFilter}) => {
 
 
                     <div className="p-field sm:col-6 md:col-6 lg:col-12 xl:col-12 col-12">
-                        <Controller name="condition" control={control} defaultValue={defaultValues.condition}
+                        <Controller name="condition" control={control} defaultValue={defaultFilters.condition}
                             render={({ field}) => (
                                 <div className="mb-3" >
                                     <Dropdown value={field.value} options={initialConditions}
