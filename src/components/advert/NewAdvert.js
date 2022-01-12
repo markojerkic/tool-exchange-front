@@ -157,7 +157,7 @@ const NewAdvert = () => {
 						</div>
 
 						<div className="p-field col-12 md:col-8 lg:col-8 sm:col-8">
-                            <span className="p-float-label">
+                            <span className="p-float-label mt-2">
                                 <Controller name="toolName" control={control}
 											rules={{required: 'Naziv alata je obavezan.'}}
 											render={({field, fieldState}) => (
@@ -188,7 +188,7 @@ const NewAdvert = () => {
 
 						{electric &&
 
-							<div className="grid p-dir-col col-12 md:col-8 lg:col-8 sm:col-8" id="animDiv">
+							<div className="grid p-dir-col col-12 md:col-8 lg:col-8 sm:col-8 mt-3" id="animDiv">
 								<div className='p-field grid p-dir-col ml-2'>
                                     <span className="p-float-label">
                                         <Controller name="power" control={control}
@@ -217,7 +217,7 @@ const NewAdvert = () => {
 						}
 
 						<div className="p-field col-12 md:col-12 lg:col-12 sm:col-12">
-                            <span className="p-float-label">
+                            <span className="p-float-label mt-1">
                                 <Controller name="description" control={control} rules={{required: 'Opis je obavezan.'}}
 											render={({field}) => (
 												<InputTextarea id={field.name} {...field} type="text" rows={5} cols={30}
@@ -230,7 +230,7 @@ const NewAdvert = () => {
 						</div>
 
 						<div className="p-field col-12 md:col-6 lg:col-6 sm:col-6">
-                            <span className="p-float-label">
+                            <span className="p-float-label mt-1">
                                 <Controller name="condition" control={control} rules={{required: 'Stanje je obavezno.'}}
 											render={({field}) => (
 												<Dropdown id={field.name} value={field.value} options={conditions}
@@ -243,7 +243,7 @@ const NewAdvert = () => {
 						</div>
 
 						<div className="p-field col-12 md:col-6 lg:col-6 sm:col-6">
-                            <span className="p-float-label">
+                            <span className="p-float-label  mt-1">
                                 <Controller name="phonenumber" control={control}
 											rules={{required: 'Broj mobitela je obavezan.'}} render={({field}) => (
 									<InputMask id={field.name} value={field.value}

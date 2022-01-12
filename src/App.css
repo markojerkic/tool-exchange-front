@@ -180,3 +180,12 @@ html {
     }
 
 }
+
+.p-galleria-thumbnail-container{
+    border-radius: 3px;
+}
+
+img{
+    border-radius: 3px;
+    margin-bottom: 0.5em;
+}
