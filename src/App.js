@@ -139,7 +139,15 @@ const App = () => {
 					<Tooltip target=".home-page"/>
 					<Toast ref={toastRef}/>
 					<div className="m-2">
-						<Menubar className="mb-3" model={menuItems} start={start} end={!!user ? logout : login}/>
+						<Menubar className="mb-3" model={[...menuItems,
+							(user && user.roles.includes('ROLE_ADMIN')? {
+									label: 'Korisnici',
+									icon: 'pi pi-user-edit',
+									command: () => {
+										navigateToPage('/users')
+									}
+								}:
+								{})]} start={start} end={!!user ? logout : login}/>
 						<Main/>
 					</div>
 				</PendingRequestsContext.Provider>
