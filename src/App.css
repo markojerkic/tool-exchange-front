@@ -58,9 +58,8 @@ html {
 .singleAdvert {
     border-radius: 3px;
     background-color: var(--surface-d);
-    margin: 1.5em;
+    margin-bottom: 1.5em;
     border-color: black;
-    width: 100%;
 }
 
 .advetrElement {

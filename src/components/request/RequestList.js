@@ -20,7 +20,7 @@ const RequestList = () => {
 	}, [offset, rows]);
 
 	return (
-		<Card title='Rezultati pretrage zahtjeva' >
+		<Card title='Rezultati pretrage zahtjeva' className="px-6" >
 			{
 				requests?.map(req => {
 					return <RequestPreview key={req.id} req={req}/>

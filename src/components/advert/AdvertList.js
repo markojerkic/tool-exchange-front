@@ -28,7 +28,7 @@ const AdvertList = () => {
 	return (
 		<Card className="ad-container">
 			<div className="flex justify-content-center align-self-center grid">
-				<div className="xl:col-3 col-12 flex justify-content-center">
+				<div className="xl:col-3 col-12 flex justify-content-center xl:p-6">
 					<HomeFilterBar onFilter={filter} />
 				</div>
 				<div className="xl:col-6 col-12 flex-shrink">
