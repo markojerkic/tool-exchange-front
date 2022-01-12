@@ -12,7 +12,7 @@ const Forum = () => {
 
 			<div className="p-d-flex p-jc-center  p-as-center p-grid">
 				<div className="p-lg-2 p-md-2 p-sm-12">
-					<Button className="p-button-raised mb-2" label="Zahtjev za savjet" icon="pi pi-plus"
+					<Button className="p-button-raised" label="Zahtjev za savjet" icon="pi pi-plus"
 							onClick={() => history.push('/forum/new-advice')}/>
 				</div>
 
