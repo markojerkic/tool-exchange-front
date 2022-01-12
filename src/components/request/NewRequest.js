@@ -73,7 +73,7 @@ const NewRequest = () => {
 						</div>
 
 						<div className="p-field col-12 md:col-12 lg:col-12 sm:col-12">
-                        <span className="p-float-label">
+                        <span className="p-float-label mt-2">
                             <Controller name="details" control={control}
 										rules={{required: 'Opis je obavezan.'}}
 										render={({field}) => (
