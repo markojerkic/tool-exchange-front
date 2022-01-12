@@ -11,7 +11,7 @@ const ThreadPreview = ({adv}) => {
 
 	return (
 
-		<div className="singleAdvert grid p-2" style={{cursor: 'pointer'}}
+		<div className="singleAdvert grid p-2 mx-2" style={{cursor: 'pointer'}}
 			 onClick={() => history.push(`/forum/${advice.id}`)}>
 			{/*
 				Ovdje bi mogli prikazati neku default sliku za sve zahtjeve, ali možda da bude razlličita od one

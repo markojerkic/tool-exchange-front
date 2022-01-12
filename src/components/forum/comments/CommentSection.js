@@ -79,7 +79,7 @@ const CommentSection = ({threadId}) => {
 					</div>
 
                     <div className="p-field col-4 lg:col-4 sm:col-4">
-                        <Button label="Dodaj komentar" loading={loading} />
+                        <Button className="mb-3" label="Dodaj komentar" loading={loading} />
                     </div>
                 </form>
 
