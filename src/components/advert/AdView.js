@@ -19,6 +19,7 @@ const AdView = () => {
 
 	const {id} = useParams();
 
+	const [isDeleting, setIsDeleting] = useState(false);
 	const [advertData, setAdvertData] = useState();
 	const [showOfferDialog, setShowOfferDialog] = useState(false);
 	const conditions = {
@@ -44,7 +45,12 @@ const AdView = () => {
 		<Button label="Povratak na listu oglasa" icon="pi pi-angle-left" onClick={() => history.push("/advert")}/>
 		{AuthService.getCurrentUserToken()?.roles.includes('ROLE_ADMIN')
 			?<Button label="Obriši" icon="pi pi-times" className="p-button p-button-danger"
-					 onClick={() => AdService.deleteAd(id).then(history.push("/advert")) }/>
+					 disabled={isDeleting} loading={isDeleting}
+					 onClick={() => {
+						 setIsDeleting(true);
+						 AdService.deleteAd(id).then(() => history.push("/advert"))
+							 .finally(() => setIsDeleting(false));
+					 }}/>
 			: ""
 		}
 	</div>;

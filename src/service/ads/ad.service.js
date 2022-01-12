@@ -8,7 +8,7 @@ const AdService = {
 
 
 	deleteAd: function (id) {
-		return instance.delete(`/delete/id=${id}`);
+		return instance.delete(`/advert/${id}`);
 	},
 
 	getAdById: function (id) {
