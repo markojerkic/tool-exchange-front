@@ -2,7 +2,6 @@ import React, {useContext, useEffect} from 'react';
 import {Redirect, Route} from 'react-router-dom';
 import {AuthContext} from '../common/auth.context';
 import {ToastContext} from '../common/toast.context';
-import AuthService from "../service/auth/auth.service";
 
 const PrivateRoute = ({requireAdmin, component: Component, ...rest}) => {
 	const {user} = useContext(AuthContext);
@@ -13,11 +12,6 @@ const PrivateRoute = ({requireAdmin, component: Component, ...rest}) => {
 			toastRef.current.show({
 				severity: 'info', summary: 'Potrebna prijava',
 				detail: "Za pristup toj komponenti trebate se prijaviti"
-			});
-		} else if (user && requireAdmin) {
-			toastRef.current.show({
-				severity: 'info', summary: 'Potrebna viša razina autorizacije',
-				detail: "Za pristup toj komponenti trebate biti admin"
 			});
 		}
 	}, [requireAdmin, toastRef, user]);
