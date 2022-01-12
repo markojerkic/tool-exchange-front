@@ -91,7 +91,8 @@ const Login = () => {
 					</div>
 					<div className="col-12 flex justify-content-center mt-2 mb-0 pb-0">
 						<div>
-							Nemate profil? <span onClick={() => history.push('/register')}>Registrirajte se!</span>
+							Nemate profil? <b style={{cursor: 'pointer', textDecoration: 'underline'}}
+												 onClick={() => history.push('/register')}>Registrirajte se!</b>
 						</div>
 					</div>
 				</form>
