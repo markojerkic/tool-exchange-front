@@ -10,7 +10,7 @@ const AdvertList = () => {
 	const [totalAds, setTotalAds] = useState(0);
 	const [offset, setOffset] = useState(0);
 	const [ads, setAds] = useState([]);
-	const [filters, setFilters] = useState(defaultFilters);
+	const [filters, setFilters] = useState({...defaultFilters, power: undefined});
 
 	const [rows] = useState(10);
 

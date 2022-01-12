@@ -21,14 +21,26 @@ const HomeFilter = ({ onFilter }) => {
     ];
 
     const [loading] = useState(false);
-    const { control, formState: { errors }, handleSubmit, reset } = useForm({defaultFilters});
+    const { control, formState: { errors }, handleSubmit, setValue } = useForm({defaultFilters});
     const [electric, setElectric] = useState(false);
 
     const onSubmit = (data) => {
         onFilter({...data, ...(!electric && {power: undefined}), ...(electric && {
-                power: undefined, minPower: data.power[0], maxPower: data.power[1]
+                power: undefined, minPower: (data.power | [undefined, undefined])[0],
+                maxPower: (data.power | [undefined, undefined])[0]
             })
         });
+    }
+
+    const reset = () => {
+        setValue('title', '');
+        setValue('electric', null);
+        setValue('nonelectric', null);
+        setValue('hasBattery', null);
+        setValue('condition', null);
+        setValue('maxRange', 300);
+        setValue('power', [0, 50000]);
+        setElectric(null);
     }
 
     return (
@@ -96,7 +108,7 @@ const HomeFilter = ({ onFilter }) => {
                             <hr />
                             <div className="p-col">
                                 <Controller name="power" control={control} defaultValue={[0, 5000]}
-                                    render={({ field, fieldState }) => (
+                                    render={({ field }) => (
                                         <div >
                                             <h4>Snaga: {field.value[0]} W - {field.value[1] === 5000 ? "max" : field.value[1] + " W"} </h4>
                                             <Slider className="mb-3 mx-3" value={field.value}
@@ -141,6 +153,7 @@ const HomeFilter = ({ onFilter }) => {
                         <div className="col-6">
                             <Button label="Očisti filtere" onClick={() => {
                                 reset();
+                                setValue('power', defaultFilters.power);
                                 onSubmit({});
                             }}
                                     className="p-button-raised p-button-danger p-button-rounded mt-3"
