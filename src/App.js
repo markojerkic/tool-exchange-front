@@ -98,7 +98,7 @@ const App = () => {
 	];
 
 	const start = <img alt="logo" src="../../favicon.ico"
-					   height="40" className="mr-2 home-page"
+					   height="40" className="mr-2 mb-0"
 					   style={{cursor: 'pointer'}}
 					   data-pr-tooltip="Početna stranica"
 					   onClick={() => history.push('/')}>
