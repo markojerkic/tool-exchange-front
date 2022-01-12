@@ -14,15 +14,20 @@ const PrivateRoute = ({requireAdmin, component: Component, ...rest}) => {
 				severity: 'info', summary: 'Potrebna prijava',
 				detail: "Za pristup toj komponenti trebate se prijaviti"
 			});
+		} else if (user && requireAdmin) {
+			toastRef.current.show({
+				severity: 'info', summary: 'Potrebna viša razina autorizacije',
+				detail: "Za pristup toj komponenti trebate biti admin"
+			});
 		}
-	}, [toastRef, user]);
+	}, [requireAdmin, toastRef, user]);
 
 	return (
 
 		// Show the component only when the user is logged in
 		// Otherwise, redirect the user to /signin page
 		<Route {...rest} render={props => {
-			if (!!requireAdmin && !AuthService.getCurrentUserToken().roles.includes('ROLE_ADMIN')) {
+			if (!!requireAdmin && (!user || !user.roles.includes('ROLE_ADMIN'))) {
 				if (toastRef.current) {
 					toastRef.current.show({
 						severity: 'info', summary: 'Potrebna prava admina',
