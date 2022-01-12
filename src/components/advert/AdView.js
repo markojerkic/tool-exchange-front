@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Card} from "primereact/card";
 import 'primeflex/primeflex.css'
 import {useHistory} from 'react-router-dom';
@@ -11,8 +11,12 @@ import ImageService from "../../service/image.service";
 import NewOffer from "../offer/NewOffer";
 import {Sidebar} from "primereact/sidebar";
 import AuthService from "../../service/auth/auth.service";
+import {AuthContext} from "../../common/auth.context";
 
 const AdView = () => {
+
+	const {user} = useContext(AuthContext);
+
 	const {id} = useParams();
 
 	const [advertData, setAdvertData] = useState();
@@ -48,7 +52,7 @@ const AdView = () => {
 		<label className="generalDate col">Datum
 			objave: {Moment(advertData?.lastModified).format('DD.MM.yyyy.')}</label>
 		<div className="col flex justify-content-end">
-			<Button className="generalButton" label="Pošalji ponudu" onClick={() => setShowOfferDialog(true)}
+			<Button className="generalButton" disabled={!user} label="Pošalji ponudu" onClick={() => setShowOfferDialog(true)}
 					style={{float: "right"}}/>
 		</div>
 	</div>;
