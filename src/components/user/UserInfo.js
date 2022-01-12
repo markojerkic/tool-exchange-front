@@ -4,6 +4,7 @@ import {Rating} from 'primereact/rating';
 import AuthService from "../../service/auth/auth.service";
 import {Button} from "primereact/button"
 import {useHistory} from "react-router-dom";
+import OfferList from "../offer/OfferList";
 
 const UserInfo = () => {
 	const [userData, setUserData] = useState();
@@ -35,6 +36,9 @@ const UserInfo = () => {
 						<p>Prezime: <b>{userData.lastName}</b></p>
 						<p>Email: <b>{userData.email}</b></p>
 						<p>Adresa: <b>{userData.formattedAddress}</b></p>
+
+						<hr/>
+						<OfferList mine={true} />
 					</div>
 				}
 			</div>

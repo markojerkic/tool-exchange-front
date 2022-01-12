@@ -7,8 +7,11 @@ import Moment from "moment";
 import {Button} from "primereact/button";
 import './OfferList.css';
 import {PendingRequestsContext} from "../../common/pending-offers.context";
+import {AuthContext} from "../../common/auth.context";
 
 const Offer = () => {
+
+	const {user} = useContext(AuthContext);
 
 	const {id} = useParams('id');
 	const [offer, setOffer] = useState();
@@ -93,12 +96,14 @@ const Offer = () => {
 					)
 				}
 
-				<div className="grid flex justify-content-around mt-4">
-					<Button label='Prihvati ponudu' className='col mx-2' onClick={() => acceptOffer(offer.id)}
-							disabled={offer?.offerStatus !== 'PENDING'}/>
-					<Button label='Odbij ponudu' className='col p-button-danger mx-2'
-							onClick={() => declineOffer(offer.id)} disabled={offer?.offerStatus !== 'PENDING'}/>
-				</div>
+				{ (user && user.username !== offer?.fromUsername) && (
+					<div className="grid flex justify-content-around mt-4">
+						<Button label='Prihvati ponudu' className='col mx-2' onClick={() => acceptOffer(offer.id)}
+								disabled={offer?.offerStatus !== 'PENDING'}/>
+						<Button label='Odbij ponudu' className='col p-button-danger mx-2'
+								onClick={() => declineOffer(offer.id)} disabled={offer?.offerStatus !== 'PENDING'}/>
+					</div>
+				)}
 
 			</Card>
 		</div>

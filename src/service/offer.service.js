@@ -17,7 +17,7 @@ const OfferService = {
 	addNewOffer: function (offerForm) {
 		return instance.post('offer', offerForm);
 	},
-	getOffers: function(page, size, lastFilters, sortField) {
+	getOffers: function(page, size, lastFilters, sortField, mine) {
 
 		let filters = {};
 		if (lastFilters) {
@@ -30,7 +30,8 @@ const OfferService = {
 			});
 		}
 
-		return instance.get('offer', {params: {page: page, size: size, sort: sortField, ...filters}})
+		return instance.get('offer', {params: {page: page, size: size, sort: sortField, ...filters,
+				...(mine && {sentByMe: true})}})
 			.then((response) => {
 				return response.data;
 			});

@@ -10,8 +10,9 @@ import {SplitButton} from "primereact/splitbutton";
 import {ToastContext} from "../../common/toast.context";
 import {useHistory} from "react-router-dom";
 import {PendingRequestsContext} from "../../common/pending-offers.context";
+import {Button} from "primereact/button";
 
-const OfferList = () => {
+const OfferList = ({mine}) => {
 
 	const history = useHistory();
 
@@ -56,7 +57,7 @@ const OfferList = () => {
 
 	useEffect(() => {
 		setLoading(true);
-		OfferService.getOffers(offset / rows, rows, lastFilters, sortField)
+		OfferService.getOffers(offset / rows, rows, lastFilters, sortField, mine)
 			.finally(() => setLoading(false)).then((data) => {
 			const content = data.content.map((offer) => {
 				return {
@@ -69,7 +70,7 @@ const OfferList = () => {
 			setTotalOffers(data.totalElements);
 			setReloadPendingOffers(Math.random());
 		})
-	}, [offset, rows, lastFilters, sortField, reload, setReloadPendingOffers]);
+	}, [offset, rows, lastFilters, sortField, reload, setReloadPendingOffers, mine]);
 
 	const dateTemplate = (date) => {
 		return (
@@ -146,10 +147,13 @@ const OfferList = () => {
 	const actionButtons = (offer) => {
 		return (
 			<div className="flex justify-content-around">
-				<SplitButton className="buttonBackground" model={slitButtonItems} tooltip='Pogledaj ponudu' icon='pi pi-search'
-							 onShow={() => setOfferClicked(offer)}
-							 onClick={() => history.push(`/offer/${offer.id}`)}
-							 tooltipOptions={{position: 'left'}}/>
+				{ mine && <Button className="buttonBackground" tooltip='Pogledaj ponudu' icon='pi pi-search'
+								  onShow={() => setOfferClicked(offer)}
+								  onClick={() => history.push(`/offer/${offer.id}`)}/>}
+				{ !mine && <SplitButton className="buttonBackground" model={slitButtonItems} tooltip='Pogledaj ponudu' icon='pi pi-search'
+									   onShow={() => setOfferClicked(offer)}
+									   onClick={() => history.push(`/offer/${offer.id}`)}
+									   tooltipOptions={{position: 'left'}}/>}
 			</div>
 		);
 	};
