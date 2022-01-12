@@ -26,7 +26,7 @@ const UserService = {
     },
 
     updateUser: function (data) {
-        return instance.put('user/update');
+        return instance.put('user/update', data);
     }
 }
 

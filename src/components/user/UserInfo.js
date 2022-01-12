@@ -17,14 +17,15 @@ const UserInfo = () => {
 
 	return (
 
-		<Card className="ad-container">
+		<Card className="ad-container" subTitle={<Button icon="pi pi-user" className="my-2 p-button-info"
+														 label="Promjeni osobne podatke"
+														 onClick={() => history.push("/user/update")}/>}>
 			<h1 className="title">Korisnički podaci</h1>
 			<div>
 				{!userData ? "Loading" :
 					<div className="pl-6 pr-6 userDetailText">
 						<div className="flex row justify-content-between"><
 							p className="advertTitle my-2">Korisnik: {userData.username}</p>
-							<Button icon="pi pi-user" className="my-2 p-button-info" label="Promjeni osobne podatke" onClick={() => history.push("/user/update")}/>
 						</div>
 						{userData.averageRating &&
 							<Rating value={userData.averageRating} readOnly cancel={false}/>
