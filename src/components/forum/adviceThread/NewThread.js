@@ -84,8 +84,6 @@ const NewThread = () => {
 
 	const header = <div className="divButtonTop">
 		<Button label="Povratak" icon="pi pi-angle-left" onClick={() => history.push('/forum')}/>
-		<Button className="p-button-danger" label="Odustani" icon="pi pi-times" onClick={() => history.push('/forum')}
-				style={{float: "right"}}/>
 	</div>;
 	return (
 		<div>

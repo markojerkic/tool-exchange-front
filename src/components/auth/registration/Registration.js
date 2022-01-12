@@ -127,6 +127,7 @@ const Registration = () => {
 														   className={classNames({'p-invalid': fieldState.invalid})}/>
 												<Button icon="pi pi-search" className="p-button-warning" type="button"
 														tooltip='Pretražite lokacije'
+														onMouseUp={() => setShowLocationDialog(true)}
 														onClick={() => setShowLocationDialog(true)}/>
 											</div>
 										)}/>
