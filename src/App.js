@@ -59,7 +59,7 @@ const App = () => {
 			icon: 'pi pi-book',
 			items: [
 				{
-					label: 'Dodaj novi oglas',
+					label: 'Dodaj novi oglasi',
 					icon: 'pi pi-plus',
 					command: () => {
 						navigateToPage('/new-ad')
@@ -67,24 +67,30 @@ const App = () => {
 				},
 				{
 					label: 'Pregledaj oglase',
-					icon: 'pi pi-list',
-					items: [
-						{
-							label: 'Alati',
-							icon: 'pi pi-briefcase',
-							command: () => {
-								navigateToPage('/tools')
-							}
-						},
-						{
-							label: 'Zahtjevi',
-							icon: 'pi pi-bookmark',
-							command: () => {
-								navigateToPage('/req')
-							}
-						}
-					]
-					
+					icon: 'pi pi-briefcase',
+					command: () => {
+						navigateToPage('/tools')
+					}
+				}
+			]
+		},
+		{
+			label: 'Zahtjevi',
+			icon: 'pi pi-bookmark',
+			items: [
+				{
+					label: 'Dodaj novi zahtjev',
+					icon: 'pi pi-plus',
+					command: () => {
+						navigateToPage('/new-ad')
+					}
+				},
+				{
+					label: 'Pregledaj zahtjeve',
+					icon: 'pi pi-bookmark',
+					command: () => {
+						navigateToPage('/req')
+					}
 				}
 			]
 		},

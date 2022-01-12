@@ -89,6 +89,11 @@ const Login = () => {
 									loading={loading}/>
 						</div>
 					</div>
+					<div className="col-12 flex justify-content-center">
+						<div>
+							Nemate profil? <span onClick={() => history.push('/register')}>Registrirajte se!</span>
+						</div>
+					</div>
 				</form>
 			</Card>
 		</div>
