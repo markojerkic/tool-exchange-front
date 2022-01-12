@@ -7,7 +7,7 @@ const RequestService = {
 	},
 
 	deleteRequest: function (id) {
-		return instance.delete(`/delete/id=${id}`);
+		return instance.delete(`request/${id}`);
 	},
 
 	getRequestById: function (id) {

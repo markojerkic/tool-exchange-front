@@ -10,6 +10,7 @@ import AuthService from "../../service/auth/auth.service";
 
 const ReqView = () => {
 	const {id} = useParams();
+	const [isDeleting, setIsDeleting] = useState(false);
 
 	const [requestData, setRequestData] = useState();
 
@@ -26,7 +27,13 @@ const ReqView = () => {
 		<Button label="Povratak na listu zahtjeva" icon="pi pi-angle-left" onClick={() => history.push("/req")}/>
 		{AuthService.getCurrentUserToken()?.roles.includes('ROLE_ADMIN')
 			?<Button label="Obriši" icon="pi pi-times" className="p-button p-button-danger"
-					 onClick={() => RequestService.deleteRequest(id).then(history.push("/advert")) }/>
+					 loading={isDeleting} disabled={isDeleting}
+					 onClick={() => {
+						 setIsDeleting(true);
+						 RequestService.deleteRequest(id).then(() => {
+							 history.push("/advert");
+						 }).finally(() => setIsDeleting(false));
+					 }}/>
 			: ""
 		}
 	</div>;
