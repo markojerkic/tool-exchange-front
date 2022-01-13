@@ -55,11 +55,18 @@ const App = () => {
 
 	const menuItems = [
 		{
+			label: 'Naslovnica',
+			icon: 'pi pi-home',
+			command: () => {
+				navigateToPage('/')
+			}
+		},
+		{
 			label: 'Oglasi',
 			icon: 'pi pi-book',
 			items: [
 				{
-					label: 'Dodaj novi oglasi',
+					label: 'Dodaj novi oglas',
 					icon: 'pi pi-plus',
 					command: () => {
 						navigateToPage('/new-ad')
@@ -67,30 +74,24 @@ const App = () => {
 				},
 				{
 					label: 'Pregledaj oglase',
-					icon: 'pi pi-briefcase',
-					command: () => {
-						navigateToPage('/tools')
-					}
-				}
-			]
-		},
-		{
-			label: 'Zahtjevi',
-			icon: 'pi pi-bookmark',
-			items: [
-				{
-					label: 'Dodaj novi zahtjev',
-					icon: 'pi pi-plus',
-					command: () => {
-						navigateToPage('/new-ad')
-					}
-				},
-				{
-					label: 'Pregledaj zahtjeve',
-					icon: 'pi pi-bookmark',
-					command: () => {
-						navigateToPage('/req')
-					}
+					icon: 'pi pi-bars',
+					items: [
+						{
+							label: 'Oglasi za alat',
+							icon: 'pi pi-briefcase',
+							command: () => {
+								navigateToPage('/advert')
+							}
+						},
+						{
+							label: 'Oglasi za zahtjeve',
+							icon: 'pi pi-bookmark',
+							command: () => {
+								navigateToPage('/req')
+							}
+						}
+					]
+					
 				}
 			]
 		},
