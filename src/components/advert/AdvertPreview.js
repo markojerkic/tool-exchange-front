@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useHistory} from 'react-router';
 import ImageService from "../../service/image.service";
+import UserLink from "../user/UserLink";
 
 const AdvertPreview = ({ad}) => {
 	const history = useHistory();
@@ -23,7 +24,8 @@ const AdvertPreview = ({ad}) => {
 					<p className="advertTitle">{advert.title}</p>
 					<p className="desc pb-2">{advert.details}</p>
 				</div>
-				<p className='col-12 absolute bottom-0 left-30'>Objavio korisnik: <b>{advert.userCreated}</b></p>
+				<p className='col-12 absolute bottom-0 left-30'>Objavio korisnik: <UserLink username={advert.userCreated}
+																							isBest={!!advert.isBest} /></p>
 			</div>
 		</div>
 	);

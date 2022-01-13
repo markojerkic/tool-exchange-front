@@ -7,6 +7,7 @@ import RequestService from "../../service/ads/request.service";
 import Moment from 'moment';
 import {useParams} from "react-router";
 import AuthService from "../../service/auth/auth.service";
+import UserLink from "../user/UserLink";
 
 const ReqView = () => {
 	const {id} = useParams();
@@ -49,8 +50,11 @@ const ReqView = () => {
 	return (
 		<div>
 			<div className="flex justify-content-center m-6">
-				<Card className="card-container" title={requestData?.title} subTitle={shortRep} header={header}
+				<Card className="card-container" title={requestData?.title} header={header}
 					  footer={footer} style={{width: '50rem'}}>
+
+					<h3 className="flex">Objavljuje <UserLink username={requestData?.creator?.username}
+															  isBest={requestData?.creator?.isBestHandyman} /></h3>
 					<p>Opis: <b>{requestData?.details}</b></p>
 					<p>Šifra zahtjeva: <b>{requestData?.id}</b></p>
 				</Card>

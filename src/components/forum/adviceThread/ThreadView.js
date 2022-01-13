@@ -9,6 +9,7 @@ import AdviceService from "../../../service/advice.service";
 import ImageService from "../../../service/image.service";
 import {Galleria} from "primereact/galleria";
 import CommentSection from "../comments/CommentSection"
+import UserLink from "../../user/UserLink";
 
 const ThreadView = () => {
 	const {id} = useParams();
@@ -63,8 +64,11 @@ const ThreadView = () => {
 	return (
 		<div>
 			<div className="flex justify-content-center m-6">
-				<Card className="card-container" title={adviceData?.title} subTitle={shortRep} header={header}
+				<Card className="card-container" title={adviceData?.title} header={header}
 					  footer={footer} style={{width: '50rem'}}>
+
+					<h3 className="flex">Objavljuje <UserLink username={adviceData?.creator?.username}
+															  isBest={adviceData?.creator?.isBestHandyman} /></h3>
 					<div className="flex justify-content-center">
 						{imageUrls.length > 0 &&
 							<Galleria value={imageUrls} numVisible={5} style={{maxWidth: '640px'}}

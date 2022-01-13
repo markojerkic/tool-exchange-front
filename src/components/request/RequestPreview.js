@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router';
+import UserLink from "../user/UserLink";
 
 const RequestPreview = ({req}) => {
 	const history = useHistory();
@@ -20,7 +21,8 @@ const RequestPreview = ({req}) => {
 			<div className="col">
 				<p className="advertTitle">{request?.title}</p>
 				<p>Opis: <b>{request?.details}</b></p>
-				<p>Objavio korisnik: <b>{request.userCreated}</b></p>
+				<p>Objavio korisnik: <UserLink username={request?.userCreated}
+											   isBest={request?.isBest} /></p>
 			</div>
 		</div>
 	);

@@ -12,6 +12,7 @@ import NewOffer from "../offer/NewOffer";
 import {Sidebar} from "primereact/sidebar";
 import AuthService from "../../service/auth/auth.service";
 import {AuthContext} from "../../common/auth.context";
+import UserLink from "../user/UserLink";
 
 const AdView = () => {
 
@@ -90,8 +91,11 @@ const AdView = () => {
 	return (
 		<div>
 			<div className="flex justify-content-center m-6">
-				<Card className="card-container" title={advertData?.title} subTitle={shortRep} header={header}
+				<Card className="card-container" title={advertData?.title} header={header}
 					  footer={footer} style={{width: '50rem'}}>
+
+					<h3 className="flex">Objavljuje <UserLink username={advertData?.creator.username}
+															  isBest={advertData?.creator.isBestHandyman} /></h3>
 
 					<div className="flex justify-content-center">
 						{imageUrls.length > 0 &&

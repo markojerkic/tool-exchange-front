@@ -134,7 +134,7 @@ const NewThread = () => {
 
 						<div className="col-12 flex justify-content-center">
 							<div>
-								<Button type="submit" label="Predaj oglas" className="mt-2"
+								<Button type="submit" label="Predaj" className="mt-2"
 										loading={loading}/>
 							</div>
 						</div>
