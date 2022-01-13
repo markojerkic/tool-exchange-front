@@ -10,7 +10,6 @@ import {useHistory} from 'react-router-dom';
 import AuthService from "../../../service/auth/auth.service";
 import '../containers.css';
 import {ToastContext} from "../../../common/toast.context";
-import {InputMask} from 'primereact/inputmask';
 import {Dialog} from "primereact/dialog";
 import LocationSearch from "../LocationSearch";
 
@@ -59,6 +58,7 @@ const Registration = () => {
 			username: data.username,
 			password: data.password,
 			locationSearchResult: locationSelected,
+			phonenumber: data.phonenumber
 		}
 
 		console.log(user);
@@ -136,15 +136,20 @@ const Registration = () => {
 
 					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
                         <span className="p-float-label">
-                            <Controller name="phonenumber" control={control} render={({field}) => (
-								<InputMask id={field.name} mask="999 999 9999"/>
+                            <Controller name="phonenumber" control={control}
+										rules={{required: 'Broj mobitela je obavezan.'}}
+										render={({field, fieldState}) => (
+								<InputText id={field.name} {...field}
+									className={classNames({'p-invalid': fieldState.invalid})}
+									type='phonenumber'/>
 							)}/>
                             <label htmlFor="phonenumber">Broj telefona</label>
                         </span>
+						{getFormErrorMessage('phonenumber')}
 					</div>
 
 					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
-                        <span className="p-float-label">    
+                        <span className="p-float-label">
                             <Controller name="email" control={control}
 										rules={{
 											required: 'E-mail je obavezan.',
