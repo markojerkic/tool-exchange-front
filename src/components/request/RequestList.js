@@ -15,7 +15,6 @@ const RequestList = () => {
 		RequestService.getRequests(offset / rows, rows).then((data) => {
 			setTotalRequests(data.totalElements);
 			setRequests(data.content);
-			console.log(data.content)
 		});
 	}, [offset, rows]);
 

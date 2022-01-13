@@ -42,3 +42,8 @@
     background-color: #64B5F6;
     border-radius: 3px;
 }
+
+#txt:hover{
+    color: #64B5F6;
+    text-decoration: underline;
+}

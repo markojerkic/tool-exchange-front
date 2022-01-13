@@ -1,4 +1,4 @@
-import {useParams} from "react-router";
+import {useHistory, useParams} from "react-router";
 import {Card} from "primereact/card";
 import {useContext, useEffect, useState} from "react";
 import OfferService from "../../service/offer.service";
@@ -10,6 +10,8 @@ import {PendingRequestsContext} from "../../common/pending-offers.context";
 import {AuthContext} from "../../common/auth.context";
 
 const Offer = () => {
+
+	const history = useHistory();
 
 	const {user} = useContext(AuthContext);
 
@@ -82,8 +84,8 @@ const Offer = () => {
 				{offer &&
 					(
 						<>
-							<p><b>Postavio korisnik: </b>{offer.fromUsername}</p>
-							<p><b>Oglas: </b>{offer.advert.title}</p>
+							<p><b>Postavio korisnik: </b> <span id="txt" onClick={()=> history.push(`/user/${offer.fromUsername}`)} style={{cursor:"pointer"}}>{offer.fromUsername}</span></p>
+							<p><b>Oglas: </b><span id="txt" onClick={()=> history.push(`/advert/${offer.advert.id}`)} style={{cursor:"pointer"}}>{offer.advert.title}</span></p>
 							<p><b>Predloženo vrijeme
 								povratka: </b>{Moment(new Date(offer.suggestedTimeframe)).format('DD.MM.yyyy.')}</p>
 							{offer.message &&

@@ -63,14 +63,17 @@ const OfferList = ({mine}) => {
 				return {
 					...offer,
 					suggestedTimeframe: new Date(offer.suggestedTimeframe),
-					status: mapStatus(offer.status)
+					status: mapStatus(offer.status),
+					from: <span id="txt" onClick={()=> history.push(`/user/${offer.from}`)} style={{cursor:"pointer"}}>{offer.from}</span>,
+					advertTitle: <span id="txt" onClick={()=> history.push(`/advert/${offer.id}`)} style={{cursor:"pointer"}}>{offer.advertTitle}</span>
+
 				}
 			});
 			setOffers(content);
 			setTotalOffers(data.totalElements);
 			setReloadPendingOffers(Math.random());
 		})
-	}, [offset, rows, lastFilters, sortField, reload, setReloadPendingOffers, mine]);
+	}, [offset, rows, lastFilters, sortField, reload, setReloadPendingOffers, mine, history]);
 
 	const dateTemplate = (date) => {
 		return (
