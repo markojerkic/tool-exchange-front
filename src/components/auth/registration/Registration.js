@@ -143,7 +143,7 @@ const Registration = () => {
 									className={classNames({'p-invalid': fieldState.invalid})}
 									type='phonenumber'/>
 							)}/>
-                            <label htmlFor="phonenumber">Broj telefona</label>
+                            <label htmlFor="phonenumber" className={classNames({'p-error': !!errors.phonenumber})}>Broj telefona*</label>
                         </span>
 						{getFormErrorMessage('phonenumber')}
 					</div>

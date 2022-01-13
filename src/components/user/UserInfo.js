@@ -5,14 +5,18 @@ import AuthService from "../../service/auth/auth.service";
 import {Button} from "primereact/button"
 import {useHistory} from "react-router-dom";
 import OfferList from "../offer/OfferList";
+import UserService from "../../service/user.service";
 
 const UserInfo = () => {
 	const [userData, setUserData] = useState();
 	const history = useHistory();
 
 	useEffect(() => {
-		AuthService.getCurrentLoggedInUser().then((user) => {
+		//UserService.getUserByUsername(AuthService.getCurrentUserToken().username) OVAJ POKUSAJ NE RADI JER CORS
+		AuthService.getCurrentLoggedInUser()
+			.then((user) => {
 			setUserData(user);
+			console.log(user);
 		})
 	}, []);
 
@@ -36,6 +40,7 @@ const UserInfo = () => {
 						<p>Prezime: <b>{userData.lastName}</b></p>
 						<p>Email: <b>{userData.email}</b></p>
 						<p>Adresa: <b>{userData.formattedAddress}</b></p>
+						<p>Broj telefona: <b>{userData.phonenumber}</b></p>
 
 						<hr/>
 						<OfferList mine={true} />

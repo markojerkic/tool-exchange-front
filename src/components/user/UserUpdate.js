@@ -22,6 +22,7 @@ const UserUpdate = () => {
         AuthService.getCurrentLoggedInUser().then((user) => {
             setValue('firstName', user.firstName);
             setValue('lastName', user.lastName);
+            setValue('phonenumber', user.phonenumber);
             setValue('id', user.id);
         })
     }, [setValue]);
@@ -49,7 +50,7 @@ const UserUpdate = () => {
                                                        className={classNames({'p-invalid': fieldState.invalid})} type="text"/>
                                         )}/>
                             <label htmlFor="firstName"
-                                   className={classNames({'p-error': errors.username})}>Ime *</label>
+                                   className={classNames({'p-error': errors.username})}>Ime*</label>
                         </span>
                     </div>
                     <div className="p-field col-12 mt-2">
@@ -61,7 +62,19 @@ const UserUpdate = () => {
                                                        className={classNames({'p-invalid': fieldState.invalid})} type="text"/>
                                         )}/>
                             <label htmlFor="lastName"
-                                   className={classNames({'p-error': errors.username})}>Prezime *</label>
+                                   className={classNames({'p-error': errors.username})}>Prezime*</label>
+                        </span>
+                    </div>
+                    <div className="p-field col-12 mt-2">
+                        <span className="p-float-label">
+                            <Controller name="phonenumber" control={control}
+                                        rules={{required: 'Broj mobitela je obavezan.'}}
+                                        render={({field, fieldState}) => (
+                                            <InputText id={field.name} {...field} autoFocus
+                                                       className={classNames({'p-invalid': fieldState.invalid})} type="text"/>
+                                        )}/>
+                            <label htmlFor="phonenumber"
+                                   className={classNames({'p-error': errors.phonenumber})}>Broj mobitela*</label>
                         </span>
                     </div>
 

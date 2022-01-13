@@ -21,6 +21,10 @@ const UserService = {
         })
     },
 
+    getUserByUsername: function (param) {
+        return instance.get(`user/username=${param}`);
+    },
+
     disableUser: function (id) {
         return instance.put(`user/block/id=${id}`);
     },
