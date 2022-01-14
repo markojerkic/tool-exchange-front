@@ -1,4 +1,5 @@
-.clickable {
+.clickable:hover {
     text-decoration: underline;
     cursor: pointer;
+    color: #64B5F6;
 }

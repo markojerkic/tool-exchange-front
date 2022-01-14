@@ -117,7 +117,7 @@ const Registration = () => {
 					</div>
 
 					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
-                        <span className="p-float-label">
+                        <span className="p-float-label mt-2">
                             <Controller name="formattedAddress" control={control}
 										rules={{required: 'Adresa je obavezna.'}}
 										render={({field, fieldState}) => (
@@ -135,7 +135,7 @@ const Registration = () => {
 					</div>
 
 					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
-                        <span className="p-float-label">
+                        <span className="p-float-label mt-2">
                             <Controller name="phonenumber" control={control}
 										rules={{required: 'Broj mobitela je obavezan.'}}
 										render={({field, fieldState}) => (
@@ -149,7 +149,7 @@ const Registration = () => {
 					</div>
 
 					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
-                        <span className="p-float-label">
+                        <span className="p-float-label mt-2">
                             <Controller name="email" control={control}
 										rules={{
 											required: 'E-mail je obavezan.',
@@ -169,7 +169,7 @@ const Registration = () => {
 					</div>
 
 					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
-                        <span className="p-float-label">
+                        <span className="p-float-label mt-2">
                             <Controller name="password" control={control} rules={{required: 'Password je obavezan.'}}
 										render={({field, fieldState}) => (
 											<Password id={field.name} {...field} toggleMask
@@ -182,7 +182,7 @@ const Registration = () => {
 					</div>
 
 					<div className="p-field col-12 md:col-6 lg:col-6 sm:col-12">
-                            <span className="p-float-label">
+                            <span className="p-float-label mt-2">
                                 <Controller name="username" control={control}
 											rules={{required: 'Korisničko ime je obavezno.'}}
 											render={({field, fieldState}) => (

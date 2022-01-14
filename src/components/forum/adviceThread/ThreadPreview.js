@@ -22,11 +22,11 @@ const ThreadPreview = ({adv}) => {
 			{/*	<img src="default_picture.jpg" className="advertPicture" alt="Slika"/>*/}
 			{/*</div>*/}
 
-			<div className="col-12 lg:col-5 sm:col-12">
+			<div className="col-12 lg:col-4 sm:col-12">
 				<b>{advice?.title} </b>
             </div>
-			<div className='col-12 lg:col-3 sm:col-12'>Objavio: <UserLink username={advice?.userCreated}
-																		  isBest={advice?.isBest} /></div>
+			<div className='col-12 lg:col-4 sm:col-12'>Objavio: <span style={{display: "inline-block"}}><UserLink username={advice?.userCreated}
+																		  isBest={advice?.isBest} /></span></div> 
 			<div className='col-12 lg:col-3 sm:col-12'>Datum: {Moment(advice?.lastModified).format('DD.MM.yyyy.')}</div>
 			<div className='col-12 lg:col-1 sm:col-12 pi pi-comments'> {advice?.numComments}</div>
 			

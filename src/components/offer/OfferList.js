@@ -64,8 +64,8 @@ const OfferList = ({mine}) => {
 					...offer,
 					suggestedTimeframe: new Date(offer.suggestedTimeframe),
 					status: mapStatus(offer.status),
-					from: <span id="txt" onClick={()=> history.push(`/user/${offer.from}`)} style={{cursor:"pointer"}}>{offer.from}</span>,
-					advertTitle: <span id="txt" onClick={()=> history.push(`/advert/${offer.id}`)} style={{cursor:"pointer"}}>{offer.advertTitle}</span>
+					from: <span id="txt" className="font-italic" onClick={()=> history.push(`/user/${offer.from}`)} style={{cursor:"pointer"}}>{offer.from}</span>,
+					advertTitle: <span id="txt" className="font-italic" onClick={()=> history.push(`/advert/${offer.id}`)} style={{cursor:"pointer"}}>{offer.advertTitle}</span>
 
 				}
 			});

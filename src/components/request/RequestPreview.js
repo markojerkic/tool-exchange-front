@@ -21,8 +21,8 @@ const RequestPreview = ({req}) => {
 			<div className="col">
 				<p className="advertTitle">{request?.title}</p>
 				<p>Opis: <b>{request?.details}</b></p>
-				<p>Objavio korisnik: <UserLink username={request?.userCreated}
-											   isBest={request?.isBest} /></p>
+				<p>Objavio korisnik: <span style={{display: "inline-block"}}><UserLink username={request?.userCreated}
+											   isBest={request?.isBest} /></span></p>
 			</div>
 		</div>
 	);

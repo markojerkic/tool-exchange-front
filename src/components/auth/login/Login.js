@@ -70,7 +70,7 @@ const Login = () => {
 						{getFormErrorMessage('username')}
 					</div>
 					<div className="p-field col-12">
-              <span className="p-float-label">
+              <span className="p-float-label mt-2">
                     <Controller name="password" control={control} rules={{required: 'Zaporka je obavezna.'}}
 								render={({field, fieldState}) => (
 									<Password id={field.name} {...field} toggleMask

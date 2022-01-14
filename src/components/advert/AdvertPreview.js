@@ -24,8 +24,8 @@ const AdvertPreview = ({ad}) => {
 					<p className="advertTitle">{advert.title}</p>
 					<p className="desc pb-2">{advert.details}</p>
 				</div>
-				<p className='col-12 absolute bottom-0 left-30'>Objavio korisnik: <UserLink username={advert.userCreated}
-																							isBest={!!advert.isBest} /></p>
+				<p className='col-12 absolute bottom-0 left-30'>Objavio korisnik: <span style={{display: "inline-block"}}><UserLink username={advert.userCreated}
+																							isBest={!!advert.isBest} /></span></p>
 			</div>
 		</div>
 	);
