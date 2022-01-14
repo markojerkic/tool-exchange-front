@@ -33,8 +33,8 @@ const Main = () => {
 				<PublicRoute restricted={false} exact path="/login" component={Login}/>
 				<PublicRoute restricted={false} exact path="/register" component={Registration}/>
 				<PublicRoute restricted={false} exact path="/requests" component={RequestList}/>
-				<PublicRoute restricted={false} exact path="/tools" component={AdvertList}/>
-				<PublicRoute exact path="/advert/:id" component={AdView}/>
+				<PrivateRoute restricted={false} exact path="/tools" component={AdvertList}/>
+				<PrivateRoute exact path="/advert/:id" component={AdView}/>
 				<PublicRoute restricted={false} exact path="/req/:id" component={ReqView}/>
 				<PrivateRoute exact path="/user" component={UserInfo}/>
 				<PrivateRoute exact path="/user/update" component={UserUpdate}/>
@@ -45,11 +45,11 @@ const Main = () => {
 				<PrivateRoute exact path="/new-ad" component={Category}/>
 				<PrivateRoute exact path="/new-ad/tool" component={NewAd}/>
 				<PrivateRoute exact path="/new-ad/request" component={NewRequest}/>
-				<PublicRoute exaxt path="/advert" component={AdvertList}/>
+				<PrivateRoute exaxt path="/advert" component={AdvertList}/>
 				<PublicRoute exaxt path="/req" component={RequestList}/>
-				<PublicRoute exact path="/forum" component={Forum}/>
+				<PrivateRoute exact path="/forum" component={Forum}/>
 				<PrivateRoute exact path="/forum/new-advice" component={NewThread}/>
-				<PublicRoute exact path="/forum/:id" component={ThreadView}/>
+				<PrivateRoute exact path="/forum/:id" component={ThreadView}/>
 				<PublicRoute component={Error404}/>
 
 			</Switch>
