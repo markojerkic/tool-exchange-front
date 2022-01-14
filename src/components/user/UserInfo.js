@@ -40,7 +40,7 @@ const UserInfo = () => {
 						<p>Prezime: <b>{userData.lastName}</b></p>
 						<p>Email: <b>{userData.email}</b></p>
 						<p>Adresa: <b>{userData.formattedAddress}</b></p>
-						<p>Broj telefona: <b>{userData.phonenumber}</b></p>
+						<p>Broj telefona: <b>{userData.phoneNumber}</b></p>
 
 						<hr/>
 						<OfferList mine={true} />
